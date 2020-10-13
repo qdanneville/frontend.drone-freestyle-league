@@ -1,0 +1,46 @@
+//CSS Arrows
+
+.arrow-top,
+.arrow-left,
+.arrow-right,
+.arrow-bottom {
+  &:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+  }
+}
+
+.arrow-top {
+  &:after {
+    .pop-top-center;
+    top: 1px;
+    border-bottom-color: @blue-dark;
+  }
+}
+
+.arrow-left {
+  &:after {
+    .pop-left-center;
+    left: 1px;
+    border-right-color: @blue-dark;
+  }
+}
+
+.arrow-right {
+  &:after {
+    .pop-right-center;
+    right: 1px;
+    border-left-color: @blue-dark;
+  }
+}
+
+.arrow-bottom {
+  &:after {
+    .pop-bottom-center;
+    bottom: 1px;
+    border-top-color: @blue-dark;
+  }
+}

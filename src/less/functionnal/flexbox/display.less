@@ -1,0 +1,19 @@
+.flex  {
+  display: flex;
+}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+@media screen and (max-width: @breakpoint-md) {
+  .flex-md {
+    .flex;
+  }
+}
+
+@media screen and (max-width: @breakpoint-xs) {
+  .flex-xs {
+    .flex;
+  }
+}

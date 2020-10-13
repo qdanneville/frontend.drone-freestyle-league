@@ -1,0 +1,30 @@
+@light: 300;
+@normal: 400;
+@bold: 700;
+@black: 900;
+
+@basefont: 1;
+@font-size: @basefont + 0em;
+@font-family: "Lato", sans-serif;
+
+/* Google fonts */
+@import url("https://fonts.googleapis.com/css?family=Lato:300,400,700,900.css");
+@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Mono&display=swap.css");
+
+html {
+  font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
+body {
+  font-size: @font-size;
+  font-family: @font-family;
+  font-weight: @normal;
+  color: #333;
+}
+
+.font-ibm-plex-mono {
+  font-family: "IBM Plex Mono", monospace;
+}

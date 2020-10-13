@@ -1,0 +1,20 @@
+.common-container {
+    max-width: @container-width;
+    .my-auto;
+    padding: 0 10px;
+    width: 100%;
+
+    @media screen and (max-width: @container-width) {
+        padding: 0 20px;
+      }
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  main {
+    flex:1;
+    display: flex;
+  }
+}

@@ -1,0 +1,19 @@
+/* prettier-ignore */
+
+.for(@colorsValues, {
+    .fill-@{value} {
+
+        * {
+            fill : @@value
+        }
+    }
+  });
+
+  .for(@colorsValues, {
+    .stroke-@{value} {
+
+        * {
+            stroke : @@value
+        }
+    }
+  });

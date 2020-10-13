@@ -1,0 +1,33 @@
+{
+  "name": "dfl-dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx parcel ./src/index.html",
+    "dev": "npx parcel ./src/index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.qdan.io:quentin/dfl-dashboard.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@svgr/parcel-plugin-svgr": "^5.4.0",
+    "axios": "^0.20.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.1",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "less": "^3.12.2"
+  }
+}

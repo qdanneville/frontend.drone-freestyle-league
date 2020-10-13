@@ -1,0 +1,19 @@
+/* prettier-ignore */
+
+.for(@colorsValues, {
+      .text-@{value} {color: @@value;}
+    });
+
+/* prettier-ignore */
+.for(
+    @colorsValues,
+    {
+      .hover\:text-@{value}:hover {
+        color: @@value;
+      }
+});
+
+// font color
+.text-white {
+  color: white;
+}

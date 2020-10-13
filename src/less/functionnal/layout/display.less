@@ -1,0 +1,47 @@
+.inline-block {
+  display: inline-block;
+}
+
+.block {
+  display: block;
+}
+
+.grid {
+  display: grid;
+}
+
+.inline-grid  {
+  display: inline-grid;
+}
+
+.display-none  {
+  display: none;
+}
+
+@media screen and (max-width: @breakpoint-md) {
+  .display-none-md {
+    .display-none;
+  }
+
+  .block-md {
+    .block !important;
+  }
+}
+
+@media screen and (max-width: @breakpoint-xs) {
+  .display-xs {
+    .block !important;
+  }
+
+  .block-xs {
+    .block !important;
+  }
+
+  .display-none-xs {
+    .display-none !important;
+  }
+
+  .inline-block-xs {
+    .inline-block;
+  }
+}

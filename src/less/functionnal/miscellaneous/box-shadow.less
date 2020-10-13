@@ -1,0 +1,44 @@
+.shadow {
+  box-shadow: 0 2px 9px 0 #c8d4d5;
+}
+
+.shadow-0 {
+  box-shadow: none;
+}
+
+.shadow-1 {
+  box-shadow: 0 2px 12px 0 rgba(27, 72, 82, 0.1);
+}
+
+.shadow-2 {
+  box-shadow: 0 2px 4px 0 rgba(27, 72, 82, 0.1);
+}
+
+.shadow-3 {
+  box-shadow: 4px 4px 9px rgb(59, 79, 190);
+}
+
+.shadow-4  {
+  box-shadow: 0 40px 90px 0 rgba(29, 68, 85, 0.1);
+}
+.shadow-5 {
+  box-shadow: 0 40px 90px 0 rgba(29, 68, 85, 0.1);
+}
+
+.hover\:shadow:hover {
+  .shadow;
+}
+
+.hover\:shadow-2:hover {
+  .shadow-2;
+}
+
+.focus\:shadow-1:focus {
+  .shadow-1;
+}
+
+@media screen and (max-width: @breakpoint-xs) {
+  .shadow-0-xs {
+    .shadow-0;
+  }
+}

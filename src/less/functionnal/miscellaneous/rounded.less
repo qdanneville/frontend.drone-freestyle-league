@@ -1,0 +1,55 @@
+.border-generator(50);
+
+.border-generator(@counter) when (@counter >= 0) {
+  .border-generator((@counter - 1));
+  .br-@{counter} {
+    border-radius: @counter*1px;
+  }
+}
+
+.rounded,
+.br-20 {
+  border-radius: 20px;
+}
+
+.rounded-full,
+.br-full {
+  border-radius: 50%;
+}
+
+.rounded-small,
+.br-4 {
+  border-radius: 4px;
+}
+
+.rounded-medium,
+.br-10 {
+  border-radius: 10px;
+}
+
+.br-35  {
+  border-radius: 35px;
+}
+
+.br-bottom {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.br-top {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.br-right {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.br-left {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+@media screen and (max-width: @breakpoint-xs) {
+  .br-0-xs {
+    border-radius: 0 !important;
+  }
+}
