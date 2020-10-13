@@ -1,0 +1,23 @@
+image: node:13
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
+stages:
+  - build
+
+build_parcel_master:
+  stage: build
+  script:
+    - npm install
+    - npm install -g parcel-bundler
+    - node -v
+    - parcel build ./src/index.html --public-url ./
+  artifacts:
+    expire_in: 20 mins
+    paths:
+      - dist
+  only:
+    - master
