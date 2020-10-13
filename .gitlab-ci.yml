@@ -7,6 +7,7 @@ cache:
 
 stages:
   - build
+  - deploy
 
 build_parcel_master:
   stage: build
@@ -19,5 +20,15 @@ build_parcel_master:
     expire_in: 20 mins
     paths:
       - dist
+  only:
+    - master
+
+deploy_master:
+  stage: deploy
+  variables:
+    CHEMIN: "/var/www/dev/dfl-dashboard/dist/"
+  script:
+    - which rsync || ( apt update -y && apt install rsync -y )
+    - /usr/bin/rsync -rKzlvhq --stats --delete-after --ignore-errors --force --itemize-changes ./dist/ ${CHEMIN}. --exclude-from="exclude.build"
   only:
     - master
