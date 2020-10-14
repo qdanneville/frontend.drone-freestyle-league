@@ -1,7 +1,11 @@
 image: node:13
 
 before_script:
-  - chmod 600 $SSH_PRIVATE_KEY
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
+  - eval $(ssh-agent -s)
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  - ssh-add <(echo "$SSH_PRIVATE_KEY" | base64 -d)
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
@@ -34,8 +38,7 @@ deploy_master:
   script:
     - which rsync || ( apt update -y && apt install rsync -y )
     - ls -la
-    - cat $SSH_PRIVATE_KEY
-    - /sbin/ip route|awk '/default/ { print $3 }'
-    - /usr/bin/rsync -rKzlvhq -e "ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no" --stats --delete-after --ignore-errors --force --itemize-changes ./dist/ ${SERVEUR}:${CHEMIN}. --exclude-from="exclude.build"
+    - ssh -p22 quentin@85.208.144.169
+    - mv ./dist /var/www/dev/dfl-dashboard/dist
   only:
     - master
