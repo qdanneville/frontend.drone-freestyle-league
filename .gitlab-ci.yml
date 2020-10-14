@@ -38,7 +38,6 @@ deploy_master:
   script:
     - which rsync || ( apt update -y && apt install rsync -y )
     - ls -la
-    - ssh -p22 quentin@85.208.144.169
-    - mv ./dist /var/www/dev/dfl-dashboard/dist
+    - /usr/bin/rsync -rKzlvhq --stats --delete-after --ignore-errors --force --itemize-changes ./dist/ ${SERVEUR}:${CHEMIN}. --exclude-from="exclude.build"
   only:
     - master
