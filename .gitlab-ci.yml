@@ -44,6 +44,7 @@ deploy_master:
     - which rsync || ( apt update -y && apt install rsync -y )
     - ls -la
     - /sbin/ip route|awk '/default/ { print $3 }'
-    - /usr/bin/rsync ./dist/ ${SERVEUR}:${CHEMIN}. --exclude-from="exclude.build"
+    - ls ./dist/
+    - /usr/bin/rsync -r ./dist/ ${SERVEUR}:${CHEMIN}. --exclude-from="exclude.build"
   only:
     - master
