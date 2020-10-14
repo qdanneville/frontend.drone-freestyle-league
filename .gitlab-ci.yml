@@ -1,7 +1,7 @@
 image: node:13
 
-# before_script:
-#   - chmod 600 $SSH_PRIVATE_KEY
+before_script:
+  - chmod 600 $SSH_PRIVATE_KEY
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
@@ -35,6 +35,6 @@ deploy_master:
     - which rsync || ( apt update -y && apt install rsync -y )
     - ls -la
     - cat $SSH_PRIVATE_KEY
-    - /usr/bin/rsync -rKzlvhq -e "ssh -i $SSH_PRIVATE_KEY" --stats --delete-after --ignore-errors --force --itemize-changes ./dist/ ${SERVEUR}:${CHEMIN}. --exclude-from="exclude.build"
+    - /usr/bin/rsync -rKzlvhq -e "ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no" --stats --delete-after --ignore-errors --force --itemize-changes ./dist/ ${SERVEUR}:${CHEMIN}. --exclude-from="exclude.build"
   only:
     - master
