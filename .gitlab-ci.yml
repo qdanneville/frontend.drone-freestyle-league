@@ -1,7 +1,7 @@
 image: node:13
 
-before_script:
-  - chmod 600 $SSH_PRIVATE_KEY
+# before_script:
+#   - chmod 600 $SSH_PRIVATE_KEY
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
