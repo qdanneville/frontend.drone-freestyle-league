@@ -1,4 +1,12 @@
 image: node:13
+
+before_script:
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
+  - eval $(ssh-agent -s)
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
@@ -30,6 +38,7 @@ deploy_master:
   script:
     - which rsync || ( apt update -y && apt install rsync -y )
     - ls -la
-    - ssh quentin@85.208.144.169
+    - ssh -p22 quentin@85.208.144.169
+    - mv ./dist /var/www/dev/dfl-dashboard/dist
   only:
     - master
