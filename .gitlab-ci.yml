@@ -43,7 +43,6 @@ deploy_master:
   script:
     - which rsync || ( apt update -y && apt install rsync -y )
     - ls -la
-    - cat $SSH_PRIVATE_KEY
     - /sbin/ip route|awk '/default/ { print $3 }'
     - /usr/bin/rsync --delete-after --ignore-errors --force --itemize-changes ./dist/ ${SERVEUR}:${CHEMIN}. --exclude-from="exclude.build"
   only:
