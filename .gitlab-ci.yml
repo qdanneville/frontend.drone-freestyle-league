@@ -5,6 +5,7 @@ before_script:
   - eval $(ssh-agent -s)
   - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
+  - ssh quentin@85.208.144.169
   - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
 
 cache:
