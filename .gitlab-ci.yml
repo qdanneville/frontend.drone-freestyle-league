@@ -30,6 +30,7 @@ deploy_master:
   script:
     - which rsync || ( apt update -y && apt install rsync -y )
     - ls -la
+    - less /etc/passwd
     - mv ./dist /srv/www/
   only:
     - master
