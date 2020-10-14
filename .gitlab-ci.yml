@@ -5,7 +5,7 @@ before_script:
   - eval $(ssh-agent -s)
   - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
-  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+  - ssh-add <(echo "$SSH_PRIVATE_KEY")
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
