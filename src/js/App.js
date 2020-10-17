@@ -1,19 +1,42 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import api from './utils/api'
+import React, { useEffect } from 'react';
+import { fetchUser } from './store/auth'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+} from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
+
+import Home from './pages/home';
+import Login from './pages/login';
+import Register from './pages/register';
+
+import { AuthRoute } from './components/auth-route';
+import Layout from './components/layout';
 
 const App = () => {
 
     const dispatch = useDispatch();
+    const appInitialized = useSelector(state => state.auth.appInitialized);
 
     useEffect(() => {
-        api.get('/tests/').then(data => {
-            console.log(data);
-            dispatch({ type: 'APP_INITIALIZED' });
-        })
-    })
+        dispatch(fetchUser());
+    }, [])
 
-    return (<h1>Hey, DFL dashboard incoming</h1>)
-};
+    if (!appInitialized) return <div className="w-full my-auto text-align-center"><i className="loader"></i></div>
 
-export default App;
+    return (
+        <Router>
+            <Layout>
+                <Switch>
+                    <Route path="/login" component={Login} />
+                    <Route path="/register" component={Register} />
+                    <AuthRoute path="/" component={Home} />
+                </Switch>
+            </Layout>
+        </Router>
+    )
+}
+
+export default App

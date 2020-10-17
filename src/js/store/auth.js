@@ -24,7 +24,8 @@ export const fetchUser = () => {
         api
             .get('users/me')
             .then(response => {
-                let user = response.data.data.user
+                let user = response.data
+                console.log(response.data);
 
                 if (user) {
                     dispatch({ type: "SET_AUTH_USER", payload: user })
@@ -37,19 +38,19 @@ export const fetchUser = () => {
     }
 }
 
-export const doLogin = (username, password) => {
+export const doLogin = (identifier, password) => {
     return dispatch => {
         dispatch({ type: "DOING_LOGIN" })
 
         return api
-            .post('/users/authenticate', { username, password })
+            .post('/auth/local', { identifier, password })
             .then(response => {
-                let result = response.data.data;
+                let result = response.data;
 
-                if (result && result.token) {
-                    addAuth(result.token);
-                    setStorageToken(result.token);
-                    dispatch({ type: "SET_AUTH_TOKEN", payload: result.token })
+                if (result && result.jwt) {
+                    addAuth(result.jwt);
+                    setStorageToken(result.jwt);
+                    dispatch({ type: "SET_AUTH_TOKEN", payload: result.jwt })
                 }
                 if (result && result.user) {
                     dispatch({ type: "SET_AUTH_USER", payload: result.user })
@@ -58,10 +59,35 @@ export const doLogin = (username, password) => {
             })
             .catch(error => {
                 dispatch({ type: "LOGIN_FAILED" })
+                console.log(Array.isArray(error.response.data.message))
 
-                if (error.response.data.message) throw error.response.data.message
+                if (Array.isArray(error.response.data.message)) {
+                    throw error.response.data.message[0].messages[0]
+                }
 
-                throw new Error({ message: "Login failed, retry" });
+                throw ({ message: "Login failed, retry" });
+            })
+    }
+}
+
+export const doRegister = (body) => {
+    return dispatch => {
+        dispatch({ type: "DOING_REGISTER" })
+
+        return api
+            .post('/auth/local/register', body)
+            .then(response => {
+                dispatch({ type: "REGISTER_SUCCESS" })
+                return ('lol');
+            })
+            .catch(error => {
+                dispatch({ type: "REGISTER_FAILED" })
+
+                if (Array.isArray(error.response.data.message)) {
+                    throw error.response.data.message[0].messages[0]
+                }
+                
+                throw ({ message: "Register failed, retry" });
             })
     }
 }
@@ -92,11 +118,15 @@ const isLoading = (state = null, action) => {
     switch (action.type) {
         case "DOING_LOGIN":
             return true;
+        case "DOING_REGISTER":
+            return true;
         case "FETCH_STORAGE":
             return true;
         case "FETCH_USER":
             return true;
         case "LOGIN_FAILED":
+        case "REGISTER_FAILED":
+        case "REGISTER_SUCCESS":
         case "SET_AUTH_USER":
         case "SET_AUTH_TOKEN":
         case "SET_STORAGE":
