@@ -17,7 +17,6 @@ const Login = (props) => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
 
-
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -30,7 +29,7 @@ const Login = (props) => {
 
     return (
         <div className="flex flex-col justify-center my-auto">
-            <Dfl className="stroke-teal" />
+            <Dfl className="stroke-teal dfl-logo" />
             <header className="flex justify-center align-items">
                 <h1 className="text-white f1">Login page</h1>
             </header>
@@ -39,7 +38,7 @@ const Login = (props) => {
                     ? <i className="loader"></i>
                     :
                     <div>
-                        <form onSubmit={handleSubmit} className={error ? "form-error bc-teal bw-2 bs-solid py-8 px-6 br-6 shadow-3 bg-white" : "bc-teal bw-2 bs-solid py-8 px-6 br-6 shadow-2 bg-white"}>
+                        <form onSubmit={handleSubmit} className={error ? "form-error bc-teal bw-2 bs-solid py-8 px-6 br-6 shadow-3 bg-white" : "form-appear bc-teal bw-2 bs-solid py-8 px-6 br-6 shadow-2 bg-white"}>
                             {error && <span className="font-bold text-white f6 block bc-red bg-pink py-2 px-2 br-4 text-align-center mb-2">{error}</span>}
                             <div className="flex flex-col">
                                 <label className="font-normal f4 mb-1">Username or email</label>

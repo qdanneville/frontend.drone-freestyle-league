@@ -5,11 +5,18 @@
 
 @basefont: 1;
 @font-size: @basefont + 0em;
-@font-family: "Lato", sans-serif;
+@font-family: "Roboto", sans-serif;
 
 /* Google fonts */
-@import url("https://fonts.googleapis.com/css?family=Lato:300,400,700,900.css");
-@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Mono&display=swap.css");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap.css");
+
+@font-face {
+  font-family: "good_timesregular";
+  src: url("../../../assets/fonts/good_times_rg-webfont.woff2") format("woff2"),
+    url("../../../assets//fonts/good_times_rg-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 
 html {
   font-smoothing: antialiased;
@@ -23,6 +30,10 @@ body {
   font-family: @font-family;
   font-weight: @normal;
   color: #333;
+}
+
+.good-times {
+  font-family: "good_timesregular";
 }
 
 .font-ibm-plex-mono {
