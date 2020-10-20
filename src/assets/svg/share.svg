@@ -1,41 +1,10 @@
-<svg width="77" height="77" viewBox="0 0 77 77" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g filter="url(#filter0_d)">
-<path opacity="0.91" d="M41.6566 30.9551L30.7454 34.5762C30.9049 35.0867 38.9288 37.639 34.7493 46.0936L41.6566 30.9551Z" fill="#FF00B1"/>
-<path opacity="0.91" d="M43.0125 31.657L46.7453 42.4566C46.2348 42.648 39.3435 37.8145 35.1641 46.2691L43.0125 31.657Z" fill="#FF00B1"/>
-<g filter="url(#filter1_d)">
-<path d="M40.7633 31.7527L36.4243 41.2602C36.3765 40.0159 36.0096 38.8673 35.3236 37.8304C34.2867 36.2352 32.7553 35.2622 31.8142 34.7038L40.7633 31.7527ZM41.6566 30.9551L30.7454 34.5762C30.8889 35.0707 38.3864 37.4795 35.1322 45.2482L41.6566 30.9551ZM35.1322 45.2482L34.7493 46.0936C34.8929 45.8065 35.0205 45.5194 35.1322 45.2482Z" fill="#FF00B1"/>
-</g>
-<g filter="url(#filter2_d)">
-<path d="M42.9168 32.8534L45.9796 41.6909C45.0863 41.324 43.6027 40.7816 41.9278 40.7816C40.4761 40.7816 39.168 41.1804 38.0035 41.994L42.9168 32.8534ZM43.0125 31.657L35.6426 45.3758C37.5409 42.1375 39.8859 41.2602 41.9278 41.2602C44.3365 41.2602 46.3306 42.4725 46.7134 42.4725C46.7294 42.4725 46.7453 42.4725 46.7453 42.4725L43.0125 31.657ZM35.6426 45.3758C35.4831 45.6629 35.3236 45.9501 35.1641 46.2691L35.6426 45.3758Z" fill="#FF00B1"/>
-</g>
-</g>
-<defs>
-<filter id="filter0_d" x="0.745361" y="0.955078" width="75.9999" height="75.3141" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
-<feOffset/>
-<feGaussianBlur stdDeviation="15"/>
-<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 0 0 0 0 0 0.694118 0 0 0 1 0"/>
-<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
-</filter>
-<filter id="filter1_d" x="26.7454" y="28.9551" width="18.9113" height="23.1386" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
-<feOffset dy="2"/>
-<feGaussianBlur stdDeviation="2"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0.410667 0 0 0 0 0 0 0 0 0 0.933333 0 0 0 1 0"/>
-<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
-</filter>
-<filter id="filter2_d" x="31.1641" y="29.657" width="19.5812" height="22.6121" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
-<feOffset dy="2"/>
-<feGaussianBlur stdDeviation="2"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0.410667 0 0 0 0 0 0 0 0 0 0.933333 0 0 0 1 0"/>
-<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
-</filter>
-</defs>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Share" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 60 60" style="enable-background:new 0 0 60 60;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FF00B1;}
+</style>
+<path id="ShareR" class="st0" d="M43.6,7.9l11.9,34.4c-1.6,0.6-22.8-14.4-36.9,12.1L43.6,7.9z"/>
+<path id="ShareL" class="st0" d="M39.3,5.6L4.5,17.1C5,18.8,29.7,27,17.3,53.8L39.3,5.6z"/>
 </svg>

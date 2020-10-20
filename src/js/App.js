@@ -12,6 +12,8 @@ import Home from './pages/home';
 import Login from './pages/login';
 import Register from './pages/register';
 
+import Map from './pages/map'
+
 import { AuthRoute } from './components/auth-route';
 import Layout from './components/layout';
 
@@ -28,13 +30,13 @@ const App = () => {
 
     return (
         <Router>
-            <Layout>
-                <Switch>
-                    <Route path="/login" component={Login} />
-                    <Route path="/register" component={Register} />
+            <Switch>
+                <Route path="/login" component={Login} />
+                <Route path="/register" component={Register} />
+                <Layout>
                     <AuthRoute path="/" component={Home} />
-                </Switch>
-            </Layout>
+                </Layout>
+            </Switch>
         </Router>
     )
 }

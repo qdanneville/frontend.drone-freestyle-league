@@ -32,7 +32,7 @@ const Header = (props) => {
         <header className="text-white">
             <nav className="common-container py-3">
                 <ul className="flex justify-between">
-                    <li className="w-20"><img src={DflPng} alt="DFL | Logo" /></li>
+                    <li className="w-20"><DflSvg /></li>
                     {
                         user ?
                             (
