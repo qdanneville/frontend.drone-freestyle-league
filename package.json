@@ -17,9 +17,11 @@
   "dependencies": {
     "@svgr/parcel-plugin-svgr": "^5.4.0",
     "axios": "^0.20.0",
+    "leaflet": "^1.7.1",
     "parcel-bundler": "^1.12.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-leaflet": "^2.7.0",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",

@@ -35,6 +35,7 @@ const App = () => {
                 <Route path="/register" component={Register} />
                 <Layout>
                     <AuthRoute path="/" component={Home} />
+                    <AuthRoute path="/map" component={Map} />
                 </Layout>
             </Switch>
         </Router>
