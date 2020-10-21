@@ -8,14 +8,18 @@ import {
 
 import { useDispatch, useSelector } from "react-redux";
 
-import Home from './pages/home';
+import { AuthRoute } from './components/auth-route';
+import Layout from './components/layout';
+
 import Login from './pages/login';
 import Register from './pages/register';
 
-import Map from './pages/map'
+//Main nav routes
+import Home from './pages/home';
+import Profile from './pages/profile';
+import Features from './pages/features';
 
-import { AuthRoute } from './components/auth-route';
-import Layout from './components/layout';
+
 
 const App = () => {
 
@@ -34,8 +38,9 @@ const App = () => {
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
                 <Layout>
-                    <AuthRoute path="/" component={Home} />
-                    <AuthRoute path="/map" component={Map} />
+                    <AuthRoute path="/profile" component={Profile} />
+                    <AuthRoute path="/features" component={Features} />
+                    <AuthRoute path="/map" component={Home} />
                 </Layout>
             </Switch>
         </Router>

@@ -52,7 +52,7 @@ const Register = (props) => {
     }
 
     return (
-        <div className="app-wrapper bg-dark-2">
+        <div className="app-wrapper bg-dark-2 flex-col">
             <header className="common-container py-3">
                 <Dfl className="" />
             </header>

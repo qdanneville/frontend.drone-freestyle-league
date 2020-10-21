@@ -35,10 +35,10 @@ const Login = (props) => {
         })
     }
 
-    if (isLogged) return <Redirect to="/" />
+    if (isLogged) return <Redirect to="/map" />
 
     return (
-        <div className="app-wrapper bg-radial-green">
+        <div className="app-wrapper bg-radial-green flex-col">
             <main className="flex justify-center align-center my-auto common-container relative">
                 <div className="absolute l-0 display-none-md">
                     <h1 className="features text-white f45 good-times mt-0 uppercase text-shadow-1 ml-4 mr-3 pt-4 text-align-right">For pilots</h1>

@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom'
 import { clearToken } from '../utils/local-storage'
 
 import { Link } from 'react-router-dom';
-import DflPng from '../../assets/dfl-logo.png';
 import DflSvg from '../../assets/svg/dfl-logo.svg';
 
 const user = null
