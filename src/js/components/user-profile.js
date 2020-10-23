@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { clearToken } from '../utils/local-storage'
+import { clearAuth } from '../utils/api'
 
 const user = null
 
@@ -20,6 +21,8 @@ const UserProfile = (props) => {
         dispatch({
             type: 'CLEAR_AUTH_TOKEN'
         })
+
+        clearAuth();
 
         history.replace({ pathname: "/login" })
     }
