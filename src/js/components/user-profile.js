@@ -29,14 +29,18 @@ const UserProfile = (props) => {
 
     return (
         <div>
-            <div className="flex flex-col justify-center items-center mt-10">
-                <i className="w-20 h-20 br-50 bg-white shadow-1"></i>
-                <div className="flex flex-col ml-2 items-center justify-center text-white">
-                    <span className="font-bold f4 my-2">{user.username}</span>
-                    <span className="font-bold f4 my-2">{user.role.name}</span>
-                    <a className="underline f6 mt-1 cursor-pointer" onClick={signout}>Sign out</a>
+            { user
+                ?
+                <div className="flex flex-col justify-center items-center mt-10">
+                    <i className="w-20 h-20 br-50 bg-white shadow-1"></i>
+                    <div className="flex flex-col ml-2 items-center justify-center text-white">
+                        <span className="font-bold f4 my-2">{user.username}</span>
+                        <span className="font-bold f4 my-2">{user.role.name}</span>
+                        <a className="underline f6 mt-1 cursor-pointer" onClick={signout}>Sign out</a>
+                    </div>
                 </div>
-            </div>
+                : <div>loading user</div>
+            }
         </div>
     )
 }
