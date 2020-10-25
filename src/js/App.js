@@ -19,8 +19,6 @@ import Home from './pages/home';
 import Profile from './pages/profile';
 import Features from './pages/features';
 
-
-
 const App = () => {
 
     const dispatch = useDispatch();
@@ -41,6 +39,7 @@ const App = () => {
                     <AuthRoute path="/profile" component={Profile} />
                     <AuthRoute path="/features" component={Features} />
                     <AuthRoute path="/map" component={Home} />
+                    <AuthRoute exact path="/" component={Home} />
                 </Layout>
             </Switch>
         </Router>

@@ -20,7 +20,7 @@ export const fetchSettings = () => {
     }
 }
 
-const navColor = (state = null, action) => {
+const navColor = (state = 'nav-blue', action) => {
     switch (action.type) {
         case "CHANGE_NAV_COLOR":
             return action.payload

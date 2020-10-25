@@ -25,7 +25,6 @@ export const fetchUser = () => {
             .get('users/me')
             .then(response => {
                 let user = response.data
-                console.log(response.data);
 
                 if (user) {
                     dispatch({ type: "SET_AUTH_USER", payload: user })
@@ -59,7 +58,6 @@ export const doLogin = (identifier, password) => {
             })
             .catch(error => {
                 dispatch({ type: "LOGIN_FAILED" })
-                console.log(Array.isArray(error.response.data.message))
 
                 if (Array.isArray(error.response.data.message)) {
                     throw error.response.data.message[0].messages[0]
