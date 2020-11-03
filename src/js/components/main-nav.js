@@ -28,17 +28,17 @@ const MainNav = (props) => {
             <UserProfile />
             <nav className="flex-1 flex flex-col justify-center align-start">
                 <li className="flex my-2 w-full">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-blue' }))} activeClassName="text-white" className="transition relative px-10 py-4 w-full text-align-center" to="/map">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-blue' }))} activeClassName="text-white" className="transition relative px-10 w-full text-align-center" to="/map">
                         <span className="good-times f4 text-shadow-2 px-10">Home</span>
                     </NavLink>
                 </li>
                 <li className="flex my-2 w-full">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-pink' }))} activeClassName="text-white" className="transition relative px-10 py-4 w-full text-align-center" to="/profile">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-pink' }))} activeClassName="text-white" className="transition relative px-10 w-full text-align-center" to="/profile">
                         <span className="good-times f4 text-shadow-2 px-10">Profile</span>
                     </NavLink>
                 </li>
                 <li className="flex my-2 w-full">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-orange' }))} activeClassName="text-white" className="transition relative px-10 py-4 w-full text-align-center" to="/features">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-orange' }))} activeClassName="text-white" className="transition relative px-10 w-full text-align-center" to="/features">
                         <span className="good-times f4 text-shadow-2 px-10">Features</span>
                     </NavLink>
                 </li>
