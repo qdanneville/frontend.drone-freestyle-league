@@ -2,8 +2,6 @@ import React, { useRef, useState, useEffect } from 'react'
 import config from '../../../config'
 import mapboxgl from 'mapbox-gl';
 import spotsData from '../../../data/features.json';
-import spotIcon from '../../assets/spot.svg';
-import spotPng from '../../assets/spot.png';
 
 mapboxgl.accessToken = config.MAPBOX_ACCESS_TOKEN
 
@@ -15,8 +13,6 @@ const DflMap = (props) => {
     const [lat, setLat] = useState(46.6430)
     const [zoom, setZoom] = useState(5.54)
     const [spots, setSpots] = useState(spotsData);
-
-    console.log(spots);
 
     useEffect(() => {
 
@@ -134,7 +130,7 @@ const createPopUp = (currentFeature, map) => {
     const popup = new mapboxgl.Popup({ closeOnClick: true })
         .setLngLat(currentFeature.geometry.coordinates)
         .setHTML(
-            '<h3>'+currentFeature.properties.title+'</h3>' +
+            '<h3>' + currentFeature.properties.title + '</h3>' +
             '<h4>' +
             currentFeature.properties.description +
             '</h4>'

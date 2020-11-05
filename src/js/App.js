@@ -15,9 +15,13 @@ import Login from './pages/login';
 import Register from './pages/register';
 
 //Main nav routes
-import Home from './pages/home';
-import Profile from './pages/profile';
-import Features from './pages/features';
+import Dashboard from './pages/dashboard';
+import Map from './pages/map';
+import MyFleet from './pages/my-fleet';
+import MySpots from './pages/my-spots';
+import MyCommunity from './pages/my-community';
+import MyForms from './pages/my-forms';
+import Settings from './pages/settings';
 
 const App = () => {
 
@@ -36,10 +40,13 @@ const App = () => {
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
                 <Layout>
-                    <AuthRoute path="/profile" component={Profile} />
-                    <AuthRoute path="/features" component={Features} />
-                    <AuthRoute path="/map" component={Home} />
-                    <AuthRoute exact path="/" component={Home} />
+                    <AuthRoute path="/dashboard" component={Dashboard} />
+                    <AuthRoute path="/map" component={Map} />
+                    <AuthRoute path="/myfleet" component={MyFleet} />
+                    <AuthRoute path="/myspots" component={MySpots} />
+                    <AuthRoute path="/mycommunity" component={MyFleet} />
+                    <AuthRoute path="/myforms" component={MyForms} />
+                    <AuthRoute path="/settings" component={Settings} />
                 </Layout>
             </Switch>
         </Router>

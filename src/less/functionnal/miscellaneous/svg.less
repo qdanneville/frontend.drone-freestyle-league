@@ -4,16 +4,35 @@
     .fill-@{value} {
 
         * {
-            fill : @@value
+            fill : @@value !important;
         }
     }
   });
 
-  .for(@colorsValues, {
+.for(@colorsValues, {
     .stroke-@{value} {
 
         * {
-            stroke : @@value
+            stroke : @@value !important;
         }
     }
   });
+
+.fill-dashboard {
+
+  .dashboard_svg__orange {
+    stroke: @orange;
+  }
+  .dashboard_svg__pink {
+    stroke: @pink;
+  }
+  .dashboard_svg__teal {
+    stroke: @teal;
+  }
+}
+
+.svg-transition {
+    * {
+        .transition;
+    }
+}
