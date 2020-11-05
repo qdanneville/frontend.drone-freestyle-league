@@ -1,0 +1,38 @@
+{
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Elliot's spot",
+        "description": "A northside park that is home to the Lincoln Park Zoo"
+      },
+      "geometry": {
+        "coordinates": [1.0202, 47.70019],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Qdan's spot",
+        "description": "A lakefront park on Chicago's south side"
+      },
+      "geometry": {
+        "coordinates": [-0.0414, 47.60019],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Harold's spot",
+        "description": "A lakefront park on Chicago's south side"
+      },
+      "geometry": {
+        "coordinates": [1.1251, 45.5641],
+        "type": "Point"
+      }
+    }
+  ],
+  "type": "FeatureCollection"
+}

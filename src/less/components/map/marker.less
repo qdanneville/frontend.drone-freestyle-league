@@ -1,0 +1,44 @@
+.marker {
+  box-shadow: 0px 2px 10px rgba(1, 255, 255, 0.5);
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+
+  .cursor-pointer;
+}
+
+.mapboxgl-marker,
+.mapboxgl-popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+
+.mapboxgl-popup-content {
+  .bg-dark;
+  .px-4;
+  .py-2;
+  .text-white;
+}
+
+//Default mapbox style to correctly display the popup
+
+.mapboxgl-popup-anchor-top > .mapboxgl-popup-content {
+  margin-top: 10px;
+}
+
+.mapboxgl-popup {
+  padding-bottom: 40px;
+}
+
+.mapboxgl-popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+  pointer-events: none;
+}
