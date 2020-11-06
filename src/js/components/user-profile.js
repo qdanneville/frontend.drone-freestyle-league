@@ -10,6 +10,8 @@ const UserProfile = (props) => {
 
     console.log(user);
 
+    console.log(config.API_BASE_URL);
+
     return (
         <div className="w-full">
             { user
