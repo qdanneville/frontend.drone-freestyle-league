@@ -35,7 +35,7 @@ const Login = (props) => {
         })
     }
 
-    if (isLogged) return <Redirect to="/map" />
+    if (isLogged) return <Redirect to="/dashboard" />
 
     return (
         <div className="app-wrapper bg-radial-green flex-col">

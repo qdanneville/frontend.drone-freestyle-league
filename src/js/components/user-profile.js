@@ -1,43 +1,29 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
-import { clearToken, clearSettings } from '../utils/local-storage'
-import { clearAuth } from '../utils/api'
+import { Link } from 'react-router-dom'
+import config from '../../../config';
 
-const user = null
+import UserLevel from './user-level'
 
 const UserProfile = (props) => {
-    const history = useHistory();
-    const dispatch = useDispatch();
     const user = useSelector(state => state.auth.user)
 
-    const signout = () => {
-        clearToken();
-
-        dispatch({
-            type: 'CLEAR_AUTH_USER'
-        })
-
-        dispatch({
-            type: 'CLEAR_AUTH_TOKEN'
-        })
-
-        clearAuth();
-        clearSettings();
-
-        history.replace({ pathname: "/login" })
-    }
+    console.log(user);
 
     return (
-        <div>
+        <div className="w-full">
             { user
                 ?
-                <div className="flex flex-col justify-center items-center mt-10">
-                    <i className="w-20 h-20 br-50 bg-white shadow-1"></i>
-                    <div className="flex flex-col ml-2 items-center justify-center text-white">
-                        <span className="font-bold f4 my-2">{user.username}</span>
-                        <span className="font-bold f4 my-2">{user.role.name}</span>
-                        <a className="underline f6 mt-1 cursor-pointer" onClick={signout}>Sign out</a>
+                <div className="flex flex-col mt-10 align-center">
+                    <i className="w-20 h-20 br-50 bg-white shadow-1 mb-8 overflow-hidden bs-solid bc-white bw-2">
+                        {
+                            user.profile.profile.avatar && <img src={config.API_BASE_URL + user.profile.profile.avatar.url} />
+                        }
+                    </i>
+                    <div className="flex flex-col ml-2 justify-start text-white w-full">
+                        <Link className="underline f7 text-grey" to="/settings">edit profile</Link>
+                        <span className="font-black f45 uppercase italic my-2">{user.profile.profile.display_name}</span>
+                        { user.profile.level && <UserLevel level={user.profile.level} currentPoints={user.profile.current_points}/>}
                     </div>
                 </div>
                 : <div>loading user</div>

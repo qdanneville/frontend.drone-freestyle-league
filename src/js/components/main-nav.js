@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { NavLink } from "react-router-dom";
+import { useHistory, NavLink } from "react-router-dom";
+import { clearToken, clearSettings } from '../utils/local-storage'
+import { clearAuth } from '../utils/api'
 
 import { setSettings, fetchSettings } from '../store/settings'
 
@@ -14,7 +16,7 @@ import MySpotsIcon from '../../assets/svg/my-spots.svg';
 import MyCommunityIcon from '../../assets/svg/my-community.svg';
 import MyFormsIcon from '../../assets/svg/my-forms.svg';
 import SettingsIcon from '../../assets/svg/settings.svg';
-import Dashboard from '../pages/dashboard';
+import LogoutIcon from '../../assets/svg/logout.svg';
 
 const MainNav = (props) => {
 
@@ -25,55 +27,83 @@ const MainNav = (props) => {
     const dispatch = useDispatch();
     const settings = useSelector(state => state.settings);
     const navColor = useSelector(state => state.settings.navColor);
+    const history = useHistory();
+
+    const signout = () => {
+        clearToken();
+
+        dispatch({
+            type: 'CLEAR_AUTH_USER'
+        })
+
+        dispatch({
+            type: 'CLEAR_AUTH_TOKEN'
+        })
+
+        clearAuth();
+        clearSettings();
+
+        history.replace({ pathname: "/login" })
+    }
 
     return (
-        <div className={`main-nav py-10 px-10 ${navColor}`}>
-            <DflSvg />
+        <div className={`main-nav py-10 pl-7 pr-12 ${navColor}`}>
+            <div className="flex justify-center align-center">
+                <DflSvg />
+                <div className="flex flex-col pl-6 -mt-2">
+                    <span className="f5 good-times italic uppercase text-white font-black">Drone</span>
+                    <span className="f5 good-times italic uppercase text-white font-black -ml-2">Freestyle</span>
+                    <span className="f5 good-times italic uppercase text-white font-black -ml-4">League</span>
+                </div>
+            </div>
             <UserProfile />
-            <nav className="flex-1 flex flex-col align-start py-10">
+            <nav className="flex-1 flex flex-col align-start py-10 w-full">
                 <li className="flex my-2 w-full justify-start text-align-left">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-blue' }))} activeClassName="text-white transition svg-transition fill-dashboard" className="flex justify-start align-center transition relative w-full text-align-left" to="/dashboard">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-dashboard' }))} activeClassName="text-white transition svg-transition fill-dashboard" className="flex justify-start align-center transition relative w-full text-align-left" to="/dashboard">
                         <DashboardIcon className="w-6 h-6" />
                         <span className="f4 capitalize pl-3">dashboard</span>
                     </NavLink>
                 </li>
                 <li className="flex my-2 w-full justify-start text-align-left">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-blue' }))} activeClassName="text-white transition svg-transition fill-teal" className="flex justify-start align-center transition relative w-full text-align-left" to="/map">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-teal' }))} activeClassName="text-white transition svg-transition fill-teal" className="flex justify-start align-center transition relative w-full text-align-left" to="/map">
                         <MapIcon className="w-6 h-6" />
                         <span className="f4 capitalize pl-3">Map</span>
                     </NavLink>
                 </li>
                 <li className="flex my-2 w-full justify-start text-align-left">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-blue' }))} activeClassName="text-white transition svg-transition fill-yellow" className="flex justify-start align-center transition relative w-full text-align-left" to="/myfleet">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-green' }))} activeClassName="text-white transition svg-transition fill-green" className="flex justify-start align-center transition relative w-full text-align-left" to="/myfleet">
                         <MyFleetIcon className="w-6 h-6" />
                         <span className="f4 capitalize pl-3">my fleet</span>
                     </NavLink>
                 </li>
                 <li className="flex my-2 w-full justify-start text-align-left">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-blue' }))} activeClassName="text-white transition svg-transition fill-green" className="flex justify-start align-center transition relative w-full text-align-left" to="/myspots">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-yellow' }))} activeClassName="text-white transition svg-transition fill-yellow" className="flex justify-start align-center transition relative w-full text-align-left" to="/myspots">
                         <MySpotsIcon className="w-6 h-6" />
                         <span className="f4 capitalize pl-3">my spots</span>
                     </NavLink>
                 </li>
                 <li className="flex my-2 w-full justify-start text-align-left">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-blue' }))} activeClassName="text-white transition svg-transition fill-orange" className="flex justify-start align-center transition relative w-full text-align-left" to="/mycommunity">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-orange' }))} activeClassName="text-white transition svg-transition fill-orange" className="flex justify-start align-center transition relative w-full text-align-left" to="/mycommunity">
                         <MyCommunityIcon className="w-6 h-6" />
                         <span className="f4 capitalize pl-3">my community</span>
                     </NavLink>
                 </li>
                 <li className="flex my-2 w-full justify-start text-align-left">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-blue' }))} activeClassName="text-white transition svg-transition stroke-pink" className="flex justify-start align-center transition relative w-full text-align-left" to="/myforms">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-pink' }))} activeClassName="text-white transition svg-transition stroke-pink" className="flex justify-start align-center transition relative w-full text-align-left" to="/myforms">
                         <MyFormsIcon className="w-6 h-6" />
                         <span className="f4 capitalize pl-3">my forms</span>
                     </NavLink>
                 </li>
                 <li className="flex my-2 w-full justify-start text-align-left">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-blue' }))} activeClassName="text-white transition svg-transition fill-white" className="flex justify-start align-center transition relative w-full text-align-left" to="/settings">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-white' }))} activeClassName="text-white transition svg-transition fill-white" className="flex justify-start align-center transition relative w-full text-align-left" to="/settings">
                         <SettingsIcon className="w-6 h-6" />
                         <span className="f4 capitalize pl-3">settings</span>
                     </NavLink>
                 </li>
             </nav>
+            <div className="flex justify-start align-center w-full">
+                <LogoutIcon /> <span className="underline f7 text-grey pl-2 cursor-pointer" onClick={signout}>Log out</span>
+            </div>
         </div>
     )
 }

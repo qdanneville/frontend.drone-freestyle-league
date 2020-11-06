@@ -24,15 +24,24 @@ export const fetchUser = () => {
         api
             .get('users/me')
             .then(response => {
-                let user = response.data
+                const user = response.data
 
-                if (user) {
-                    dispatch({ type: "SET_AUTH_USER", payload: user })
-                }
                 if (token) dispatch({ type: "SET_AUTH_TOKEN", payload: token })
-            })
-            .finally(() => {
-                dispatch({ type: "APP_INITIALIZED" })
+
+                if (user && user.id) {
+                    api.get(`profiles/?user=${user.id}`)
+                        .then(response => {
+                            const profile = response.data
+
+                            if (profile) {
+                                user.profile = profile
+                                dispatch({ type: "SET_AUTH_USER", payload: user })
+                            }
+                        })
+                        .finally(() => {
+                            dispatch({ type: "APP_INITIALIZED" })
+                        })
+                }
             })
     }
 }
@@ -44,16 +53,27 @@ export const doLogin = (identifier, password) => {
         return api
             .post('/auth/local', { identifier, password })
             .then(response => {
-                let result = response.data;
+                const result = response.data;
 
                 if (result && result.jwt) {
                     addAuth(result.jwt);
                     setStorageToken(result.jwt);
                     dispatch({ type: "SET_AUTH_TOKEN", payload: result.jwt })
                 }
-                if (result && result.user) {
-                    dispatch({ type: "SET_AUTH_USER", payload: result.user })
-                    dispatch({ type: "APP_INITIALIZED" })
+
+                if (result && result.user && result.user.id) {
+                    api.get(`profiles/?user=${result.user.id}`)
+                        .then(response => {
+                            const profile = response.data
+
+                            if (profile) {
+                                result.user.profile = profile
+                                dispatch({ type: "SET_AUTH_USER", payload: result.user })
+                            }
+                        })
+                        .finally(() => {
+                            dispatch({ type: "APP_INITIALIZED" })
+                        })
                 }
             })
             .catch(error => {
@@ -84,7 +104,7 @@ export const doRegister = (body) => {
                 if (Array.isArray(error.response.data.message)) {
                     throw error.response.data.message[0].messages[0]
                 }
-                
+
                 throw ({ message: "Register failed, retry" });
             })
     }
