@@ -5,6 +5,54 @@
   border-radius: 50%;
 
   .cursor-pointer;
+
+  &.marker-draggable {
+    cursor: move;
+    box-shadow: none;
+    z-index: 10010101010;
+
+    &:before,
+    &:after {
+      content: "";
+      .absolute;
+      top: 50%;
+      left: 50%;
+
+      width: 150%;
+      height: 150%;
+      border-radius: 50%;
+
+      .bg-yellow;
+      transform: translate3d(-50%, -50%, 0) scale(1);
+      transform-origin: center;
+      animation: bounce 1s ease infinite;
+
+      z-index: -1;
+    }
+
+    &::before {
+      opacity: 0.5;
+    }
+
+    &::after {
+      opacity: 0.3;
+      animation-delay: 0.2s;
+    }
+
+    svg {
+      transform: scale(1.2);
+    }
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: translate3d(-50%, -50%, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(-50%, -50%, 0) scale(2);
+    opacity: 0;
+  }
 }
 
 .mapboxgl-marker,

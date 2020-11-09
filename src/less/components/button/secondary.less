@@ -1,0 +1,124 @@
+.btn-secondary {
+  .relative;
+
+  .py-3;
+  .px-15;
+
+  .no-appearance;
+
+  .bw-1;
+  .bc-teal;
+  .bs-solid;
+  .br-5;
+
+  .cursor-pointer;
+  .good-times;
+  .f7;
+  .uppercase;
+  .font-bold;
+
+  background-color: transparent;
+  background-image: url("../../../assets/btn-secondary-bg.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &:hover {
+    &:before {
+      .opacity-03;
+    }
+  }
+
+  &:before {
+    content: "";
+    .absolute;
+
+    .w-full;
+    .h-full;
+
+    .t-0;
+    .l-0;
+
+    .bg-teal;
+    .opacity-01;
+    .transition;
+  }
+
+  &.teal {
+    .text-teal;
+    .bc-teal;
+  }
+
+  &.orange {
+    .text-orange-dark;
+    .bc-orange;
+
+    &:before {
+      .bg-orange;
+    }
+  }
+
+  &.disabled {
+    user-select: none;
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.2;
+  }
+
+  span {
+    .transition;
+  }
+
+  &:after {
+    content: "";
+    transform-origin: center;
+    .absolute;
+    width: 25px;
+    height: 25px;
+
+    top: calc(50% - 12.5px);
+    left: calc(50% - 12.5px);
+
+    border-radius: 6px;
+
+    background-color: rgb(167 167 167);
+
+    z-index: -1;
+    opacity: 0;
+  }
+
+  &.loading {
+    user-select: none;
+    pointer-events: none;
+    cursor: not-allowed;
+
+    .bc-dark;
+    .bg-grey-dark-light;
+    &:before {
+      opacity: 0;
+    }
+
+    span {
+      opacity: 0;
+    }
+    &:after {
+      opacity: 1;
+      animation: loading-btn 1s cubic-bezier(0.46, 0.03, 0.52, 0.96) infinite;
+    }
+  }
+}
+
+@keyframes loading-btn {
+  0% {
+    transform: scale(0.3) rotate(0deg);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(0.8) rotate(360deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.3) rotate(0deg);
+    opacity: 0.3;
+  }
+}

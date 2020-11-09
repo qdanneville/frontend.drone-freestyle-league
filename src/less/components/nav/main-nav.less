@@ -1,0 +1,100 @@
+.main-nav {
+  .flex;
+  .flex-col;
+  .justify-center;
+  .align-center;
+  .relative;
+  z-index: 1000001230012301200;
+
+  &:before {
+    content: "";
+    .absolute;
+    .t-0;
+    left: -40%;
+    width: 150%;
+    .h-full;
+
+    z-index: -1;
+
+    transform: skew(7deg);
+
+    .bg-dark;
+  }
+
+  &:after {
+    content: "";
+    .absolute;
+    .t-0;
+    left: 110%;
+    width: 2px;
+    .h-full;
+
+    z-index: -1;
+
+    transform: skew(7deg);
+    .bg-teal;
+  }
+
+  &.nav-dashboard {
+    &::before {
+      box-shadow: 8px 0px 32px rgb(60 27 38);
+    }
+    &::after {
+      background: linear-gradient(to bottom, @teal 0%, @orange 50%, @pink 100%);
+    }
+  }
+
+  &.nav-teal {
+    &::before {
+      box-shadow: 8px 0px 32px rgba(1, 255, 255, 0.35);
+    }
+    &::after {
+      background: linear-gradient(to bottom, @white 0%, @teal 50%);
+    }
+  }
+
+  &.nav-pink {
+    &::before {
+      box-shadow: 8px 0px 32px rgb(60 27 38);
+    }
+    &::after {
+      background: linear-gradient(to bottom, @white 0%, @pink 50%);
+    }
+  }
+
+  &.nav-yellow {
+    &::before {
+      box-shadow: 8px 0px 32px rgba(249, 241, 51, 0.21);
+    }
+    &::after {
+      background: linear-gradient(to bottom, @white 0%, @yellow 50%);
+    }
+  }
+
+  &.nav-orange {
+    &::before {
+      box-shadow: 8px 0px 32px rgba(255, 175, 68, 0.26);
+    }
+    &::after {
+      background: linear-gradient(to bottom, @white 0%, @orange 50%);
+    }
+  }
+
+  &.nav-green {
+    &::before {
+      box-shadow: 8px 0px 32px rgba(55, 252, 74, 0.24);
+    }
+    &::after {
+      background: linear-gradient(to bottom, @white 0%, @green 50%);
+    }
+  }
+
+  &.nav-white {
+    &::before {
+      box-shadow: 8px 0px 32px rgba(255, 255, 255, 0.18);
+    }
+    &::after {
+      background: linear-gradient(to bottom, @white 60%, @grey 100%);
+    }
+  }
+}

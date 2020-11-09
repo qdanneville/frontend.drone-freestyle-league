@@ -8,10 +8,6 @@ import UserLevel from './user-level'
 const UserProfile = (props) => {
     const user = useSelector(state => state.auth.user)
 
-    console.log(user);
-
-    console.log(config.API_BASE_URL);
-
     return (
         <div className="w-full">
             { user
@@ -25,7 +21,7 @@ const UserProfile = (props) => {
                     <div className="flex flex-col ml-2 justify-start text-white w-full">
                         <Link className="underline f7 text-grey" to="/settings">edit profile</Link>
                         <span className="font-black f45 uppercase italic my-2">{user.profile.profile.display_name}</span>
-                        { user.profile.level && <UserLevel level={user.profile.level} currentPoints={user.profile.current_points}/>}
+                        {user.profile.level && <UserLevel level={user.profile.level} currentPoints={user.profile.current_points} />}
                     </div>
                 </div>
                 : <div>loading user</div>

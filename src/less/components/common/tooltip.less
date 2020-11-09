@@ -1,0 +1,36 @@
+.tooltip {
+  position: absolute;
+  .bg-dark;
+  .text-yellow;
+  .good-times;
+  .font-bold;
+  .f6;
+
+  top: -50px;
+  min-width: 120px;
+  padding: 8px 15px;
+  border-radius: 4px;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  text-align: center;
+
+  span {
+      .my-auto;
+  }
+
+  &:after {
+    content: "";
+
+    .absolute;
+    top: 99%;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0);
+
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+
+    border-top: 10px solid @dark;
+  }
+}

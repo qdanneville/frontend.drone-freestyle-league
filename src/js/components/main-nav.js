@@ -47,7 +47,7 @@ const MainNav = (props) => {
     }
 
     return (
-        <div className={`main-nav py-10 pl-7 pr-12 ${navColor}`}>
+        <div className={`main-nav py-10 pl-9 pr-15 ${navColor}`}>
             <div className="flex justify-center align-center">
                 <DflSvg />
                 <div className="flex flex-col pl-6 -mt-2">
@@ -59,43 +59,43 @@ const MainNav = (props) => {
             <UserProfile />
             <nav className="flex-1 flex flex-col align-start py-10 w-full">
                 <li className="flex my-2 w-full justify-start text-align-left">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-dashboard' }))} activeClassName="text-white transition svg-transition fill-dashboard" className="flex justify-start align-center transition relative w-full text-align-left" to="/dashboard">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-dashboard' }))} activeClassName="text-white fill-dashboard" className="flex justify-start align-center relative w-full text-align-left" to="/dashboard">
                         <DashboardIcon className="w-6 h-6" />
                         <span className="f4 capitalize pl-3">dashboard</span>
                     </NavLink>
                 </li>
                 <li className="flex my-2 w-full justify-start text-align-left">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-teal' }))} activeClassName="text-white transition svg-transition fill-teal" className="flex justify-start align-center transition relative w-full text-align-left" to="/map">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-teal' }))} activeClassName="text-white fill-teal" className="flex justify-start align-center relative w-full text-align-left" to="/map">
                         <MapIcon className="w-6 h-6" />
                         <span className="f4 capitalize pl-3">Map</span>
                     </NavLink>
                 </li>
                 <li className="flex my-2 w-full justify-start text-align-left">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-green' }))} activeClassName="text-white transition svg-transition fill-green" className="flex justify-start align-center transition relative w-full text-align-left" to="/myfleet">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-green' }))} activeClassName="text-white fill-green" className="flex justify-start align-center relative w-full text-align-left" to="/myfleet">
                         <MyFleetIcon className="w-6 h-6" />
                         <span className="f4 capitalize pl-3">my fleet</span>
                     </NavLink>
                 </li>
                 <li className="flex my-2 w-full justify-start text-align-left">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-yellow' }))} activeClassName="text-white transition svg-transition fill-yellow" className="flex justify-start align-center transition relative w-full text-align-left" to="/myspots">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-yellow' }))} activeClassName="text-white fill-yellow" className="flex justify-start align-center relative w-full text-align-left" to="/myspots">
                         <MySpotsIcon className="w-6 h-6" />
                         <span className="f4 capitalize pl-3">my spots</span>
                     </NavLink>
                 </li>
                 <li className="flex my-2 w-full justify-start text-align-left">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-orange' }))} activeClassName="text-white transition svg-transition fill-orange" className="flex justify-start align-center transition relative w-full text-align-left" to="/mycommunity">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-orange' }))} activeClassName="text-white fill-orange" className="flex justify-start align-center relative w-full text-align-left" to="/mycommunity">
                         <MyCommunityIcon className="w-6 h-6" />
                         <span className="f4 capitalize pl-3">my community</span>
                     </NavLink>
                 </li>
                 <li className="flex my-2 w-full justify-start text-align-left">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-pink' }))} activeClassName="text-white transition svg-transition stroke-pink" className="flex justify-start align-center transition relative w-full text-align-left" to="/myforms">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-pink' }))} activeClassName="text-white stroke-pink" className="flex justify-start align-center relative w-full text-align-left" to="/myforms">
                         <MyFormsIcon className="w-6 h-6" />
                         <span className="f4 capitalize pl-3">my forms</span>
                     </NavLink>
                 </li>
                 <li className="flex my-2 w-full justify-start text-align-left">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-white' }))} activeClassName="text-white transition svg-transition fill-white" className="flex justify-start align-center transition relative w-full text-align-left" to="/settings">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-white' }))} activeClassName="text-white fill-white" className="flex justify-start align-center relative w-full text-align-left" to="/settings">
                         <SettingsIcon className="w-6 h-6" />
                         <span className="f4 capitalize pl-3">settings</span>
                     </NavLink>
