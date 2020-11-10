@@ -10,6 +10,7 @@
 import { combineReducers } from "redux";
 import api, { addAuth } from '../utils/api'
 import { setStorageToken, getStorageToken } from '../utils/local-storage'
+import { toast } from 'react-toastify';
 
 export const fetchUser = () => {
     return dispatch => {
@@ -36,6 +37,7 @@ export const fetchUser = () => {
                             if (profile) {
                                 user.profile = profile
                                 dispatch({ type: "SET_AUTH_USER", payload: user })
+                                toast.success("Successfully connected");
                             }
                         })
                         .finally(() => {
@@ -69,6 +71,7 @@ export const doLogin = (identifier, password) => {
                             if (profile) {
                                 result.user.profile = profile
                                 dispatch({ type: "SET_AUTH_USER", payload: result.user })
+                                toast.success("Successfully connected");
                             }
                         })
                         .finally(() => {
@@ -96,7 +99,7 @@ export const doRegister = (body) => {
             .post('/auth/local/register', body)
             .then(response => {
                 dispatch({ type: "REGISTER_SUCCESS" })
-                return ('lol');
+                return toast.success("Successfully registered");
             })
             .catch(error => {
                 dispatch({ type: "REGISTER_FAILED" })

@@ -3,13 +3,15 @@ import mapboxgl from 'mapbox-gl';
 
 const AddSpot = ({ map, lng, lat, setMarkerCoords }) => {
 
+    if (!map) return <></>
+
     const [draggableMarker, setDraggableMarker] = useState(null);
     const [addSpotActive, setAddSpotActive] = useState(false);
     const [markerLng, setMarkerLng] = useState(lng);
     const [markerLat, setMarkerLat] = useState(lat);
 
     useEffect(() => {
-        setMarkerCoords({lng,lat});
+        setMarkerCoords({ lng, lat });
         if (draggableMarker) draggableMarker.on('dragend', onDragEnd)
     }, [draggableMarker])
 

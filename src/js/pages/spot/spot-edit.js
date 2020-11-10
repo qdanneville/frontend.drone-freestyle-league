@@ -4,6 +4,7 @@ import api from '../../utils/api';
 import Mapbox from '../../components/map/mapbox'
 import Advisories from '../../components/advisories/'
 import { useHistory } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { fetchRules, fetchAdvisories } from '../../utils/airmap'
 import EmptyIcon from '../../../assets/svg/empty.svg'
@@ -42,6 +43,7 @@ const SpotEdit = (props) => {
     const [spotIsPublic, setSpotIsPublic] = useState(false)
     const [spotPublicCanBeCreated, setSpotPublicCanBeCreated] = useState(false);
     const [checkLocationRequired, setCheckLocationRequired] = useState(false);
+    const [showPublicToastInfoOnce, setShowPublicToastInfoOnce] = useState(false);
 
     useEffect(() => {
         api
@@ -61,6 +63,7 @@ const SpotEdit = (props) => {
 
         setLocationCheckSubmitted(true);
         setCheckLocationRequired(false);
+        const checkToast = toast.info("Checking your spot location 🧐", { autoClose: false, className: "loading" });
 
         fetchRules(spotCoords.lng, spotCoords.lat)
             .then(rule => {
@@ -69,6 +72,7 @@ const SpotEdit = (props) => {
                         setSpotLocationColor(response.data.data.color);
                         setSpotLocationAdvisories(response.data.data.advisories)
                         setSpotPublicCanBeCreated(response.data.data.color !== "red")
+                        toast.dismiss(checkToast);
                     })
             })
             .finally(() => setLocationCheckSubmitted(false));
@@ -80,6 +84,15 @@ const SpotEdit = (props) => {
         setSpotLocationColor(null);
         setSpotLocationAdvisories(null)
         setSpotPublicCanBeCreated(false)
+    }
+
+    //Toaster
+    const handleShowPublicToastInfoOnce = () => {
+        if (!showPublicToastInfoOnce) {
+            toast.info("You must check your location spot before submitting a public spot");
+            //Won't be triggered again
+            setShowPublicToastInfoOnce(true)
+        };
     }
 
     const handleSpotSubmit = (e) => {
@@ -125,6 +138,7 @@ const SpotEdit = (props) => {
                         })
                         .then(response => {
                             history.replace({ pathname: "/map" })
+                            toast.success("Your spot has been successfully created");
                         })
                         .catch(err => {
                             console.log(err)
@@ -136,6 +150,7 @@ const SpotEdit = (props) => {
             .catch(err => {
                 console.log(err)
                 console.log(err.data)
+                toast.info("Ewww, something went wrong  🤔");
             })
     }
 
@@ -148,15 +163,6 @@ const SpotEdit = (props) => {
                     <div className="flex flex-col bg-grey-dark-light br-4 py-3 px-4 mb-3">
                         <input className="common-input mb-2 mt-0" type="text" required value={spotName} placeholder="Spot name" onChange={(e) => setSpotName(e.target.value)} />
                         <span className="text-grey f4">Creator <strong className="text-white font-bold italic">{user.profile.profile.display_name}</strong></span>
-                        <div className="flex align-center justify-between mt-2 mb-0">
-                            <span className="text-grey f4 mr-3">Show creator's name</span>
-                            <label className="common-toggle">
-                                <input type="checkbox" onChange={() => handleToggles(spotShowCreator, setSpotShowCreator)} />
-                                <span className="slider">
-                                    <i className="circle"></i>
-                                </span>
-                            </label>
-                        </div>
                     </div>
                     <div className="flex flex-col bg-grey-dark-light br-4 py-3 px-4">
                         <h3 className="text-orange f6 uppercase good-times font-normal mt-0 mb-2">Spot type</h3>
@@ -179,13 +185,22 @@ const SpotEdit = (props) => {
                         <ul className="flex align-center justify-even br-10 toggle-privacies">
                             {
                                 privacies.map((privacy, i) => (
-                                    <li key={i} className={`${privacy === spotPrivacy ? 'active' : ''} toggle-privacy flex-1 text-align-center`} onClick={() => { setSpotPrivacy(privacy); setSpotIsPublic(privacy === "public"); setCheckLocationRequired(privacy === "public") }}>
+                                    <li key={i} className={`${privacy === spotPrivacy ? 'active' : ''} toggle-privacy flex-1 text-align-center`} onClick={() => { setSpotPrivacy(privacy); setSpotIsPublic(privacy === "public"); setCheckLocationRequired(privacy === "public"); privacy === "public" ? handleShowPublicToastInfoOnce() : null }}>
                                         <span className="py-4 block">{privacy}</span>
                                     </li>
                                 ))
                             }
                         </ul>
                         <div className="flex align-center justify-between mt-4 mb-0">
+                            <span className="text-grey f5 italic mr-3">Show creator's name</span>
+                            <label className="common-toggle">
+                                <input type="checkbox" onChange={() => handleToggles(spotShowCreator, setSpotShowCreator)} />
+                                <span className="slider">
+                                    <i className="circle"></i>
+                                </span>
+                            </label>
+                        </div>
+                        <div className="flex align-center justify-between mt-2 mb-0">
                             <span className="text-grey f5 italic mr-3">Enable likes</span>
                             <label className="common-toggle">
                                 <input type="checkbox" onChange={() => handleToggles(enableLikes, setEnableLikes)} />
@@ -237,7 +252,7 @@ const SpotEdit = (props) => {
                                     : <Advisories advisories={spotLocationAdvisories} color={spotLocationColor} lng={spotCoords.lng} lat={spotCoords.lat} />
                             }
                         </div>
-                        <button type="button" className={`btn-secondary orange mt-3 ${locationCheckSubmitted ? 'loading' : ''} ${checkLocationRequired ? 'wiggle-animation' : ''}` } onClick={checkSpotLocation}>
+                        <button type="button" className={`btn-secondary orange mt-3 ${locationCheckSubmitted ? 'loading' : ''} ${checkLocationRequired ? 'wiggle-animation' : ''}`} onClick={checkSpotLocation}>
                             <span>Check location</span>
                         </button>
                     </div>

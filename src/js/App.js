@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { AuthRoute } from './components/auth-route';
 import Layout from './components/layout';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Login from './pages/login';
 import Register from './pages/register';
@@ -49,6 +51,7 @@ const App = () => {
                     <AuthRoute path="/settings" component={Settings} />
                 </Layout>
             </Switch>
+            <ToastContainer/>
         </Router>
     )
 }

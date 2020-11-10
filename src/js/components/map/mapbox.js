@@ -1,9 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react'
 import config from '../../../../config'
 import mapboxgl from 'mapbox-gl';
-import spotsData from '../../../../data/features.json';
 
 import AddSpot from './add-spot';
+import MapSpots from './map-spots';
 
 mapboxgl.accessToken = config.MAPBOX_ACCESS_TOKEN
 
@@ -11,13 +11,13 @@ const Mapbox = (props) => {
 
     const mapContainerRef = useRef(null);
 
+    //TODO get user location
     const [map, setMap] = useState(null);
     const [plugin, setPlugin] = useState(null);
     const [draggableMarker, setDraggableMarker] = useState(null);
     const [lng, setLng] = useState(2.5021)
     const [lat, setLat] = useState(46.6430)
     const [zoom, setZoom] = useState(5.54)
-    const [spots, setSpots] = useState(spotsData);
 
     useEffect(() => {
 
@@ -55,21 +55,20 @@ const Mapbox = (props) => {
             });
 
             //Creating an unique id for each spot
-            spots.features.forEach((spot, i) => {
-                spot.properties.id = i;
-            })
+            // spots.features.forEach((spot, i) => {
+            //     spot.properties.id = i;
+            // })
 
-            map.on('load', e => {
-                map.addSource('places', {
-                    type: 'geojson',
-                    data: spots,
-                });
+            // map.on('load', e => {
+            //     map.addSource('places', {
+            //         type: 'geojson',
+            //         data: spots,
+            //     });
 
-                addMarkers(spots, map);
-            })
+            //     addMarkers(spots, map);
+            // })
 
             setPlugin(plugin);
-
 
             plugin.on('jurisdictionChange', (data) => console.log('jurisdictionChange', data))
             plugin.on('airspaceLayerClick', (data) => console.log('airspaceLayerClick', data))
@@ -86,6 +85,7 @@ const Mapbox = (props) => {
                 <div className="uppercase f5 font-bold">
                     {lng},{lat}
                 </div>
+                <MapSpots map={map} />
                 {props.addSpot && <AddSpot map={map} lng={lng} lat={lat} setMarkerCoords={props.setMarkerCoords} />}
             </div>
             <div className='absolute t-0 l-0 r-0 b-0' ref={mapContainerRef} />

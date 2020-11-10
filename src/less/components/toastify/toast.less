@@ -1,0 +1,108 @@
+/** Used to define container behavior: width, position: fixed etc... **/
+.Toastify__toast-container {
+}
+
+/** Used to define the position of the ToastContainer **/
+.Toastify__toast-container--top-left {
+}
+.Toastify__toast-container--top-center {
+}
+.Toastify__toast-container--top-right {
+}
+.Toastify__toast-container--bottom-left {
+}
+.Toastify__toast-container--bottom-center {
+}
+.Toastify__toast-container--bottom-right {
+}
+
+/** Classes for the displayed toast **/
+.Toastify__toast {
+  font-family: @font-family !important;
+  min-height: auto !important;
+  .pr-4 !important;
+  .pl-12 !important;
+  .br-4 !important;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translate3d(0, -50%, 0);
+    left: 15px;
+  }
+
+  &.loading {
+    &:before {
+      content: "";
+      position: absolute;
+      top: 8px !important;
+      transform: translate3d(0, -50%, 0);
+      left: 15px;
+      width: 20px;
+      height: 20px;
+      
+      background-color: rgb(167 167 167);
+      animation: loading-btn 1s cubic-bezier(0.46, 0.03, 0.52, 0.96) infinite;
+    }
+  }
+}
+.Toastify__toast--rtl {
+}
+.Toastify__toast--dark {
+}
+.Toastify__toast--default {
+}
+.Toastify__toast--info {
+  .bg-grey-black !important;
+
+  &:before {
+    content: url("../../../assets/ui/info.png");
+  }
+}
+.Toastify__toast--success {
+  .bg-grey-black !important;
+
+  &:before {
+    content: url("../../../assets/ui/check.png");
+  }
+}
+.Toastify__toast--warning {
+  &:before {
+    content: url("../../../assets/ui/warning.png");
+  }
+}
+.Toastify__toast--error {
+  &:before {
+    content: url("../../../assets/ui/error.png");
+  }
+}
+.Toastify__toast-body {
+}
+
+/** Classes for the close button. Better use your own closeButton **/
+.Toastify__close-button {
+}
+.Toastify__close-button--default {
+}
+.Toastify__close-button > svg {
+}
+.Toastify__close-button:hover,
+.Toastify__close-button:focus {
+}
+
+/** Classes for the progress bar **/
+.Toastify__progress-bar {
+  background-color: rgb(210 210 210 / 75%) !important;
+  height: 2px !important;
+}
+.Toastify__progress-bar--animated {
+}
+.Toastify__progress-bar--controlled {
+}
+.Toastify__progress-bar--rtl {
+}
+.Toastify__progress-bar--default {
+}
+.Toastify__progress-bar--dark {
+}
