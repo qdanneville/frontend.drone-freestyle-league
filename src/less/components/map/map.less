@@ -1,0 +1,19 @@
+.mapboxgl-map {
+  .w-full;
+  .h-full;
+}
+
+.mapboxgl-map {
+  animation: map-appear 1s ease forwards;
+  animation-delay: 1.5s;
+  opacity: 0;
+}
+
+@keyframes map-appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

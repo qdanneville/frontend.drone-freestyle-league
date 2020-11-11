@@ -1,0 +1,18 @@
+.loader {
+  animation: loader 1s cubic-bezier(0.88, 0.06, 1, 1) infinite;
+}
+
+@keyframes loader {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}

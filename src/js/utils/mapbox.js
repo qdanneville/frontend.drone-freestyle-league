@@ -1,4 +1,7 @@
 import mapboxgl from 'mapbox-gl';
+import SpotPopup from '../components/map/spot-popup';
+import React from 'react';
+import ReactDOM from "react-dom";
 
 export const addPublicSpots = (spots, map) => {
     spots.forEach(marker => {
@@ -58,8 +61,6 @@ export const addPilotSpots = (spots, map) => {
     })
 }
 
-
-
 export const flyToSpot = (currentFeature, map) => {
     map.flyTo({
         center: currentFeature.geometry.coordinates,
@@ -71,13 +72,13 @@ export const createPopUp = (currentFeature, map) => {
     const popUps = document.getElementsByClassName('mapboxgl-popup');
     if (popUps[0]) popUps[0].remove();
 
-    const popup = new mapboxgl.Popup({ closeOnClick: true })
+    const popupNode = document.createElement("div");
+    popupNode.id = currentFeature.properties.id
+
+    ReactDOM.render(<SpotPopup spot={currentFeature.properties} />, popupNode);
+
+    new mapboxgl.Popup({ closeOnClick: true })
         .setLngLat(currentFeature.geometry.coordinates)
-        .setHTML(
-            '<h3>' + currentFeature.properties.name + '</h3>' +
-            '<h4>' +
-            currentFeature.properties.description +
-            '</h4>'
-        )
+        .setDOMContent(popupNode)
         .addTo(map);
 }

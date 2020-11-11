@@ -1,0 +1,51 @@
+//Overiding mapbox default style
+.mapboxgl-popup-close-button {
+  .absolute;
+  right: 10px;
+  top: 7px;
+  .appearance-0;
+  .no-border;
+  .text-white;
+  .f2;
+
+  background: transparent;
+}
+
+.mapboxgl-popup-content {
+  background: rgba(12, 12, 12, 0.9) !important;
+  .px-4 !important;
+  padding: 10px 10px 15px;
+  .text-white !important;
+  .br-4 !important;
+}
+
+//Default mapbox style to correctly display the popup
+
+.mapboxgl-popup-anchor-top > .mapboxgl-popup-content {
+  margin-top: 0 !important;
+}
+
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+  border-top-color: #0d0d0d !important;
+}
+
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
+    border-bottom-color: #0d0d0d !important;
+  }
+
+.mapboxgl-popup {
+  padding-bottom: 40px;
+  width: 240px;
+  z-index: 10000000000;
+}
+
+.mapboxgl-popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+  pointer-events: none;
+}

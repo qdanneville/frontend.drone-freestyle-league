@@ -71,25 +71,25 @@ const MainNav = (props) => {
                     </NavLink>
                 </li>
                 <li className="flex my-2 w-full justify-start text-align-left">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-green' }))} activeClassName="text-white fill-green" className="flex justify-start align-center relative w-full text-align-left" to="/myfleet">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-green' }))} activeClassName="text-white fill-green" className="flex justify-start align-center relative w-full text-align-left" to="/fleet">
                         <MyFleetIcon className="w-6 h-6" />
                         <span className="f4 capitalize pl-3">my fleet</span>
                     </NavLink>
                 </li>
                 <li className="flex my-2 w-full justify-start text-align-left">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-yellow' }))} activeClassName="text-white fill-yellow" className="flex justify-start align-center relative w-full text-align-left" to="/myspots">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-yellow' }))} activeClassName="text-white fill-yellow" className="flex justify-start align-center relative w-full text-align-left" to="/spots">
                         <MySpotsIcon className="w-6 h-6" />
                         <span className="f4 capitalize pl-3">my spots</span>
                     </NavLink>
                 </li>
                 <li className="flex my-2 w-full justify-start text-align-left">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-orange' }))} activeClassName="text-white fill-orange" className="flex justify-start align-center relative w-full text-align-left" to="/mycommunity">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-orange' }))} activeClassName="text-white fill-orange" className="flex justify-start align-center relative w-full text-align-left" to="/community">
                         <MyCommunityIcon className="w-6 h-6" />
                         <span className="f4 capitalize pl-3">my community</span>
                     </NavLink>
                 </li>
                 <li className="flex my-2 w-full justify-start text-align-left">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-pink' }))} activeClassName="text-white stroke-pink" className="flex justify-start align-center relative w-full text-align-left" to="/myforms">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-pink' }))} activeClassName="text-white stroke-pink" className="flex justify-start align-center relative w-full text-align-left" to="/forms">
                         <MyFormsIcon className="w-6 h-6" />
                         <span className="f4 capitalize pl-3">my forms</span>
                     </NavLink>
