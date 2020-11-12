@@ -5,35 +5,9 @@
   .align-center;
   .relative;
   z-index: 1000001230012301200;
-
-  &:before {
-    content: "";
-    .absolute;
-    .t-0;
-    left: -40%;
-    width: 150%;
-    .h-full;
-
-    z-index: -1;
-
-    transform: skew(7deg);
-
-    .bg-dark;
-  }
-
-  &:after {
-    content: "";
-    .absolute;
-    .t-0;
-    left: 110%;
-    width: 2px;
-    .h-full;
-
-    z-index: -1;
-
-    transform: skew(7deg);
-    .bg-teal;
-  }
+  min-width: 225px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  .bg-dark;
 
   &.nav-dashboard {
     &::before {

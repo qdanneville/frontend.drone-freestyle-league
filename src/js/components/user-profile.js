@@ -9,7 +9,7 @@ const UserProfile = (props) => {
     const user = useSelector(state => state.auth.user)
 
     return (
-        <div className="w-full">
+        <div className="w-full px-5">
             { user
                 ?
                 <div className="flex flex-col mt-10 align-center">
@@ -18,7 +18,7 @@ const UserProfile = (props) => {
                             user.profile.profile.avatar && <img src={config.API_BASE_URL + user.profile.profile.avatar.url} />
                         }
                     </i>
-                    <div className="flex flex-col ml-2 justify-start text-white w-full">
+                    <div className="flex flex-col justify-start text-white w-full">
                         <Link className="underline f7 text-grey" to="/settings">edit profile</Link>
                         <span className="font-black f45 uppercase italic my-2">{user.profile.profile.display_name}</span>
                         {user.profile.level && <UserLevel level={user.profile.level} currentPoints={user.profile.current_points} />}

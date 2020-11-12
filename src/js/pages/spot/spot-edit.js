@@ -13,7 +13,7 @@ import EmptyIcon from '../../../assets/svg/empty.svg'
 
 const privaciesData = [
     'private',
-    'friends only',
+    'friends',
     'public'
 ]
 
@@ -120,7 +120,6 @@ const SpotEdit = (props) => {
             showCreatorName: spotShowCreator
         }
 
-
         api
             .post('/spots/', body)
             .then(response => {
@@ -158,7 +157,7 @@ const SpotEdit = (props) => {
     }
 
     return (
-        <div className="common-container pt-4">
+        <div className="pt-4 px-10">
             <form onSubmit={handleSpotSubmit}>
                 <BackButton />
                 <h1 className="text-yellow good-times f2">Spot creation</h1>
