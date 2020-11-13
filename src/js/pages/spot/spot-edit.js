@@ -157,10 +157,9 @@ const SpotEdit = (props) => {
     }
 
     return (
-        <div className="pt-4 px-10">
+        <div className="w-full px-10">
             <form onSubmit={handleSpotSubmit}>
-                <BackButton />
-                <h1 className="text-yellow good-times f2">Spot creation</h1>
+                <h1 className="text-yellow good-times f2 mt-0">Spot creation</h1>
                 <div className="flex flex-col-md">
                     <div className="w-25-per w-full-md">
                         <div className="flex flex-col bg-grey-dark-light br-4 py-3 px-4 mb-3">

@@ -50,9 +50,6 @@ const Mapbox = (props) => {
             const plugin = new window.AirMap.ContextualAirspacePlugin(mapConfig);
             map.addControl(plugin, 'top-left')
 
-            console.log('map loaded', map.loaded());
-            console.log('style map loaded', map.isStyleLoaded());
-
             map.on('move', () => {
                 setLng(map.getCenter().lng.toFixed(4));
                 setLat(map.getCenter().lat.toFixed(4));

@@ -24,8 +24,6 @@ import MySpots from './pages/spot/my-spots';
 import MyCommunity from './pages/my-community';
 import MyForms from './pages/my-forms';
 import Settings from './pages/settings';
-import SpotEdit from './pages/spot/spot-edit'
-import SpotDetails from './pages/spot/spot-details';
 
 const App = () => {
 
@@ -44,16 +42,13 @@ const App = () => {
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
                 <Layout>
-                    <AuthRoute path="/dashboard" component={Dashboard} />
-                    <AuthRoute path="/map" component={Map} />
-                    <AuthRoute path="/fleet" component={MyFleet} />
-                    <AuthRoute exact path="/spots" component={MySpots} />
-                    <AuthRoute exact path="/spots/create/" component={SpotEdit} />
-                    <AuthRoute exact path="/spots/edit/:slug" component={SpotEdit} />
-                    <AuthRoute path="/spots/details/:slug/" component={SpotDetails} />
-                    <AuthRoute path="/community" component={MyCommunity} />
-                    <AuthRoute path="/forms" component={MyForms} />
-                    <AuthRoute path="/settings" component={Settings} />
+                    <AuthRoute path="/dashboard/" component={Dashboard} />
+                    <AuthRoute path="/map/" component={Map} />
+                    <AuthRoute path="/fleet/" component={MyFleet} />
+                    <AuthRoute path="/spots/" component={MySpots} />
+                    <AuthRoute path="/community/" component={MyCommunity} />
+                    <AuthRoute path="/forms/" component={MyForms} />
+                    <AuthRoute path="/settings/" component={Settings} />
                 </Layout>
             </Switch>
             <ToastContainer />

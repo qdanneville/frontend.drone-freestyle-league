@@ -59,43 +59,43 @@ const MainNav = (props) => {
             <UserProfile />
             <nav className="flex-1 flex flex-col align-start py-10 w-full px-2">
                 <li className="flex my-1 w-full justify-start text-align-left">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-dashboard' }))} activeClassName="active text-white bg-grey-dark-light fill-dashboard" className="nav-link py-2 px-3 flex justify-start align-center relative w-full text-align-left text-grey-black-2" to="/dashboard">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-dashboard' }))} activeClassName="active text-white bg-grey-dark-light fill-dashboard" className="nav-link py-2 px-3 flex justify-start align-center relative w-full text-align-left text-grey-black-2" to="/dashboard/">
                         <DashboardIcon className="w-5 h-5" />
                         <span className="f4 capitalize pl-3">dashboard</span>
                     </NavLink>
                 </li>
                 <li className="flex my-1 w-full justify-start text-align-left">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-teal' }))} activeClassName="active text-white bg-grey-dark-light fill-teal" className="nav-link py-2 px-3 flex justify-start align-center relative w-full text-align-left text-grey-black-2" to="/map">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-teal' }))} activeClassName="active text-white bg-grey-dark-light fill-teal" className="nav-link py-2 px-3 flex justify-start align-center relative w-full text-align-left text-grey-black-2" to="/map/">
                         <MapIcon className="w-5 h-5" />
                         <span className="f4 capitalize pl-3">Map</span>
                     </NavLink>
                 </li>
                 <li className="flex my-1 w-full justify-start text-align-left">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-green' }))} activeClassName="active text-white bg-grey-dark-light fill-green" className="nav-link py-2 px-3 flex justify-start align-center relative w-full text-align-left text-grey-black-2" to="/fleet">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-green' }))} activeClassName="active text-white bg-grey-dark-light fill-green" className="nav-link py-2 px-3 flex justify-start align-center relative w-full text-align-left text-grey-black-2" to="/fleet/">
                         <MyFleetIcon className="w-5 h-5" />
                         <span className="f4 capitalize pl-3">my fleet</span>
                     </NavLink>
                 </li>
                 <li className="flex my-1 w-full justify-start text-align-left">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-yellow' }))} activeClassName="active text-white bg-grey-dark-light fill-yellow" className="nav-link py-2 px-3 flex justify-start align-center relative w-full text-align-left text-grey-black-2" to="/spots">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-yellow' }))} activeClassName="active text-white bg-grey-dark-light fill-yellow" className="nav-link py-2 px-3 flex justify-start align-center relative w-full text-align-left text-grey-black-2" to="/spots/">
                         <MySpotsIcon className="w-5 h-5" />
                         <span className="f4 capitalize pl-3">my spots</span>
                     </NavLink>
                 </li>
                 <li className="flex my-1 w-full justify-start text-align-left">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-orange' }))} activeClassName="active text-white bg-grey-dark-light fill-orange" className="nav-link py-2 px-3 flex justify-start align-center relative w-full text-align-left text-grey-black-2" to="/community">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-orange' }))} activeClassName="active text-white bg-grey-dark-light fill-orange" className="nav-link py-2 px-3 flex justify-start align-center relative w-full text-align-left text-grey-black-2" to="/community/">
                         <MyCommunityIcon className="w-5 h-5" />
                         <span className="f4 capitalize pl-3">my community</span>
                     </NavLink>
                 </li>
                 <li className="flex my-1 w-full justify-start text-align-left">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-pink' }))} activeClassName="active text-white bg-grey-dark-light stroke-pink" className="nav-link py-2 px-3 flex justify-start align-center relative w-full text-align-left text-grey-black-2" to="/forms">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-pink' }))} activeClassName="active text-white bg-grey-dark-light stroke-pink" className="nav-link py-2 px-3 flex justify-start align-center relative w-full text-align-left text-grey-black-2" to="/forms/">
                         <MyFormsIcon className="w-5 h-5" />
                         <span className="f4 capitalize pl-3">my forms</span>
                     </NavLink>
                 </li>
                 <li className="flex my-1 w-full justify-start text-align-left">
-                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-white' }))} activeClassName="active text-white bg-grey-dark-light fill-white" className="nav-link py-2 px-3 flex justify-start align-center relative w-full text-align-left text-grey-black-2" to="/settings">
+                    <NavLink onClick={() => dispatch(setSettings({ ...settings, navColor: 'nav-white' }))} activeClassName="active text-white bg-grey-dark-light fill-white" className="nav-link py-2 px-3 flex justify-start align-center relative w-full text-align-left text-grey-black-2" to="/settings/">
                         <SettingsIcon className="w-5 h-5" />
                         <span className="f4 capitalize pl-3">settings</span>
                     </NavLink>

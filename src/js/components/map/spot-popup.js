@@ -71,7 +71,7 @@ const SpotPopup = ({ spot }) => {
                 <span className="">{spot.description}</span>
             </div>
             {/* //TODO use a link from react router */}
-            <a href={`/spots/details/${spot.slug}`} className="btn-secondary teal px-4 mt-4 text-align-center f5">Spot details</a>
+            <a href={`/spots/${spot.slug}`} className="btn-secondary teal px-4 mt-4 text-align-center f5">Spot details</a>
         </div>
     )
 }
