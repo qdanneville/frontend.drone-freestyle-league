@@ -47,7 +47,7 @@ const MainNav = (props) => {
     }
 
     return (
-        <div className={`main-nav py-10 ${navColor}`}>
+        <div className={`main-nav py-10 ${navColor} sticky t-0 h-100-vh`}>
             <div className="flex justify-center align-center">
                 <DflSvg />
                 {/* <div className="flex flex-col pl-6 -mt-2">

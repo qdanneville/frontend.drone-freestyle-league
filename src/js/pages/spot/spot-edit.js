@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import api from '../../utils/api';
-import { fetchRules, fetchAdvisories } from '../../utils/airmap'
 
 import Mapbox from '../../components/map/mapbox'
 import Advisories from '../../components/advisories/'
@@ -65,19 +64,18 @@ const SpotEdit = (props) => {
 
         setLocationCheckSubmitted(true);
         setCheckLocationRequired(false);
+
         const checkToast = toast.info("Checking your spot location 🧐", { autoClose: false, className: "loading" });
 
-        fetchRules(spotCoords.lng, spotCoords.lat)
-            .then(rule => {
-                fetchAdvisories(spotCoords.lng, spotCoords.lat, rule)
-                    .then(response => {
-                        setSpotLocationColor(response.data.data.color);
-                        setSpotLocationAdvisories(response.data.data.advisories)
-                        setSpotPublicCanBeCreated(response.data.data.color !== "red")
-                        toast.dismiss(checkToast);
-                    })
+        api
+            .get(`/airspaces?lng=${spotCoords.lng}&lat=${spotCoords.lat}`)
+            .then(response => {
+                setSpotLocationColor(response.data.color);
+                setSpotLocationAdvisories(response.data.advisories)
+                setSpotPublicCanBeCreated(response.data.color !== "red")
+                toast.dismiss(checkToast);
             })
-            .finally(() => setLocationCheckSubmitted(false));
+            .finally(() => setLocationCheckSubmitted(false))
     }
 
     //We want to reset the rules & advisories when the user drags the spot marker to a new location
@@ -124,6 +122,7 @@ const SpotEdit = (props) => {
             .post('/spots/', body)
             .then(response => {
 
+                //TODO OPTIMIZE SPOT CREATION
                 if (spotImage) {
                     const data = new FormData();
 

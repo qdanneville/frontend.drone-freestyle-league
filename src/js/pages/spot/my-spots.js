@@ -13,32 +13,33 @@ const routes = [
     {
         name: 'my spots',
         path: "/spots",
-        exact:true,
+        exact: true,
     },
 
     {
         name: 'spot details',
         path: "/spots/:slug/",
-        exact:false,
+        exact: false,
     },
     {
         name: 'spot edit',
         path: "/spots/:slug/edit",
-        exact:false,
+        exact: false,
     },
     {
         name: 'spot create',
         path: "/spots/create",
-        exact:false,
+        exact: false,
     },
 ]
 
 const MySpots = (props) => {
 
-    console.log('updated my spots')
     return (
-        <div className="w-full pt-17 relative">
-            <BreadCrumbs routes={routes} />
+        <div className="w-full relative">
+            <header className="flex align-center sticky t-0 w-full bg-dark z-index-8">
+                <BreadCrumbs routes={routes} />
+            </header>
             <Switch>
                 <Route exact path="/spots/" component={SpotList} />
                 <Route path="/spots/create/" component={SpotEdit} />

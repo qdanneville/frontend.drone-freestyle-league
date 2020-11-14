@@ -28,7 +28,7 @@ const BreadcrumbNav = ({ routes }) => {
     })
 
     return (
-        <nav className="breadcrumbs flex align-center mb-4 absolute l-0 t-3 bg-grey-black px-4 py-2 br-4">
+        <nav className="breadcrumbs flex align-center l-0 t-3 bg-grey-black px-4 py-2 br-4">
             {
                 breadCrumbs.map((route, i) => {
                     return <NavLink to={route.url} key={route.path} exact={route.exact} className={`text-grey lowercase flex align-center ${route.url === location.pathname ? 'text-white' : ''}`}>{<RightIcon className="w-4 h-4 fill-white mx-2" />}{route.slug ? route.slug : route.name}</NavLink>

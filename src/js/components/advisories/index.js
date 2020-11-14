@@ -30,7 +30,7 @@ const Advisories = ({ advisories, color, lng, lat }) => {
                             (
                                 <div className="flex flex-col flex-1 justify-center align-center px-2">
                                     <span className="text-white good-times f6 font-bold pt-4 text-align-center w-full px-4">It seems like you're good to go !</span>
-                                    <span className="text-grey f5 block pt-2">Remember: Do not fly over people. Respect other's privacy. And dont loose your craft!</span>
+                                    <span className="text-grey f5 block pt-2 pb-2">Remember: Do not fly over people. Respect other's privacy. And dont loose your craft!</span>
                                 </div>
                             )
                     }

@@ -53,7 +53,7 @@ const SpotsList = (props) => {
 
     return (
         <div className="w-full">
-            <header className="flex flex-col w-full px-10 pb-4 bb-w-1 bl-w-0 br-w-0 bt-w-0 bs-solid bc-dark-light-2">
+            <header className="flex flex-col w-full px-10 pb-4 bb-w-1 bl-w-0 br-w-0 bt-w-0 bs-solid bc-dark-light-2 sticky t-0 z-index-7 bg-dark pt-10">
                 <div className="flex justify-between align-center mb-3">
                     <h1 className="text-yellow good-times f2 mt-0 mb-0">My spots</h1>
                     <Link to="/spots/create" className="text-dark fill-dark f4 flex justify-center align-center bg-grey-light hover:bg-grey py-2 px-4 br-4 cursor-pointer"> <AddIcon className="stroke-15 w-4 h-4 mr-3" />Create spot</Link>
@@ -80,8 +80,8 @@ const SpotsList = (props) => {
                     </li> */}
                 </ul>
             </header>
-            <div className="flex flex-col w-full px-10 pt-5 relative">
-                <div className="flex align-center h-10 mb-3 overflow-hidden">
+            <div className="flex flex-col w-full px-10 relative">
+                <div className="flex align-center overflow-hidden sticky bg-dark py-3 z-index-8" style={{ top: '195px' }}>
                     <div className="w-20 mr-4">
                         <span className="text-grey uppercase f6">Image</span>
                     </div>
@@ -109,10 +109,12 @@ const SpotsList = (props) => {
                         </div>
                     </div>
                 </div>
-                {spotsLoading
-                    ? <Loader />
-                    : spots && spots.map((spot) => <SpotItem key={spot.id} spot={spot} />)
-                }
+                <div className="">
+                    {spotsLoading
+                        ? <Loader />
+                        : spots && spots.map((spot) => <SpotItem key={spot.id} spot={spot} />)
+                    }
+                </div>
             </div>
 
         </div>
