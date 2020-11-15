@@ -1,13 +1,7 @@
 import React, { useEffect } from 'react';
 import { fetchUser } from './store/auth'
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-} from "react-router-dom";
-
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
 import { AuthRoute } from './components/auth-route';
 import Layout from './components/layout';
 import { ToastContainer } from 'react-toastify';

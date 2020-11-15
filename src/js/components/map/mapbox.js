@@ -1,4 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserGeoLocation } from '../../store/map'
 import config from '../../../../config'
 import mapboxgl from 'mapbox-gl';
 
@@ -10,18 +12,36 @@ mapboxgl.accessToken = config.MAPBOX_ACCESS_TOKEN
 
 const Mapbox = (props) => {
 
+    const dispatch = useDispatch();
+    const userGeoLocation = useSelector(state => state.map.userGeoLocation)
     const mapContainerRef = useRef(null);
-    // const popUpRef = useRef(new mapboxgl.Popup({ offset: 15 }));
 
     //TODO get user location
     const [map, setMap] = useState(null);
     const [plugin, setPlugin] = useState(null);
-    const [lng, setLng] = useState(2.5021)
-    const [lat, setLat] = useState(46.6430)
+    const [lng, setLng] = useState(userGeoLocation ? userGeoLocation.lng : 2.5021)
+    const [lat, setLat] = useState(userGeoLocation ? userGeoLocation.lat : 46.6430)
     const [zoom, setZoom] = useState(5.54)
     const [loading, setLoading] = useState(true)
+    const [flyToUserLocation, setFlyToUserLocation] = useState(false)
+
+    if (userGeoLocation && !flyToUserLocation && map) {
+        map.flyTo({
+            center: userGeoLocation
+        });
+        setFlyToUserLocation(true);
+    }
+
+    if (!flyToUserLocation && props.editSpot && props.spotCoords && map) {
+        console.log('flyyyying');
+        map.flyTo({
+            center: props.spotCoords
+        });
+        setFlyToUserLocation(true);
+    }
 
     useEffect(() => {
+        dispatch(getUserGeoLocation());
 
         if (window !== undefined && typeof window !== "undefined") {
 
@@ -83,7 +103,7 @@ const Mapbox = (props) => {
                     {lng},{lat}
                 </div>
                 <MapSpots map={map} />
-                {props.addSpot && <AddSpot map={map} lng={lng} lat={lat} setMarkerCoords={props.setMarkerCoords} />}
+                {props.addSpot && <AddSpot map={map} lng={userGeoLocation ? userGeoLocation.lng : lng} lat={userGeoLocation ? userGeoLocation.lat : lat} setMarkerCoords={props.setMarkerCoords} />}
             </div>
             <div className='absolute t-0 l-0 r-0 b-0' ref={mapContainerRef} />
         </div>

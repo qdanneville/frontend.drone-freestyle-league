@@ -366,7 +366,7 @@ const SpotEdit = (props) => {
                                 {
                                     !slug
                                         ? <Mapbox addSpot setMarkerCoords={changeSpotCoords} />
-                                        : <Mapbox editSpot={spotId} />
+                                        : <Mapbox editSpot spotCoords={spotCoords} />
                                 }
 
                             </div>

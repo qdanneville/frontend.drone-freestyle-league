@@ -37,7 +37,7 @@ export const fetchUser = () => {
                             if (profile) {
                                 user.profile = profile
                                 dispatch({ type: "SET_AUTH_USER", payload: user })
-                                toast.success("Successfully connected");
+                                // toast.success("Successfully connected");
                             }
                         })
                         .finally(() => {
