@@ -20,7 +20,6 @@ const BreadcrumbNav = ({ routes }) => {
         if (match && match.params.slug === 'create') return
         if (match && match.params.slug && !slugUsed) {
             route.slug = match.params.slug
-            console.log(route.slug);
             slugUsed = true
         }
         if (match) route.url = match.url

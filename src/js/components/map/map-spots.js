@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import { addPublicSpots, addPilotSpots, addFriendSpots } from '../../utils/mapbox'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import api from '../../utils/api'
 
 const MapSpots = ({ map }) => {
+
 
     if (!map) return <></>
 
@@ -22,14 +23,22 @@ const MapSpots = ({ map }) => {
                 const pilotSpotsFeatures = response.data.pilotSpotsFeatures;
 
                 if (publicSpotsFeatures, pilotSpotsFeatures) {
+                    let markers = []
+
                     dispatch({ type: 'SET_PUBLIC_SPOTS', payload: publicSpotsFeatures })
-                    addPublicSpots(publicSpotsFeatures, map)
+                    let publicMarkers = addPublicSpots(publicSpotsFeatures, map)
 
                     dispatch({ type: 'SET_FRIENDS_SPOTS', payload: friendsSpotsFeatures })
-                    addFriendSpots(friendsSpotsFeatures, map)
+                    let friendMarkers = addFriendSpots(friendsSpotsFeatures, map)
 
                     dispatch({ type: 'SET_PILOT_SPOTS', payload: pilotSpotsFeatures })
-                    addPilotSpots(pilotSpotsFeatures, map)
+                    let pilotMarkers = addPilotSpots(pilotSpotsFeatures, map)
+
+                    publicMarkers.map(marker => markers.push(marker));
+                    friendMarkers.map(marker => markers.push(marker));
+                    pilotMarkers.map(marker => markers.push(marker));
+
+                    dispatch({ type: 'SET_MARKERS', payload: markers })
                 }
             })
     }, [])

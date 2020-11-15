@@ -38,7 +38,7 @@ const SpotDetails = (props) => {
                         setSpotAdvisories(response.data);
                     })
             })
-        // .catch(err => history.push('/spots/'))
+            .catch(err => history.push('/spots/'))
     }, [])
 
     console.log(spot);

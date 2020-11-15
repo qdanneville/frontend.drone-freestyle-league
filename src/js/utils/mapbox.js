@@ -4,6 +4,9 @@ import React from 'react';
 import ReactDOM from "react-dom";
 
 export const addPublicSpots = (spots, map) => {
+
+    let markers = []
+
     spots.forEach(marker => {
         const el = document.createElement('div');
         el.innerHTML = `<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -20,7 +23,7 @@ export const addPublicSpots = (spots, map) => {
         el.id = 'marker-' + marker.properties.id;
         el.className = 'marker public';
 
-        new mapboxgl.Marker(el, { offset: [0, -23] })
+        const markerEl = new mapboxgl.Marker(el, { offset: [0, -23] })
             .setLngLat(marker.geometry.coordinates)
             .addTo(map);
 
@@ -29,10 +32,17 @@ export const addPublicSpots = (spots, map) => {
             createPopUp(marker, map)
             e.stopPropagation();
         })
+
+        markers.push(markerEl);
     })
+
+    return markers;
 }
 
 export const addPilotSpots = (spots, map) => {
+
+    let markers = []
+
     spots.forEach(marker => {
         const el = document.createElement('div');
         el.innerHTML = `<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -49,7 +59,7 @@ export const addPilotSpots = (spots, map) => {
         el.id = 'marker-' + marker.properties.id;
         el.className = 'marker private';
 
-        new mapboxgl.Marker(el, { offset: [0, -23] })
+        const markerEl = new mapboxgl.Marker(el, { offset: [0, -23] })
             .setLngLat(marker.geometry.coordinates)
             .addTo(map);
 
@@ -58,10 +68,15 @@ export const addPilotSpots = (spots, map) => {
             createPopUp(marker, map)
             e.stopPropagation();
         })
+
+        markers.push(markerEl);
     })
+    return markers;
 }
 
 export const addFriendSpots = (spots, map) => {
+    let markers = []
+
     spots.forEach(marker => {
         const el = document.createElement('div');
         el.innerHTML = `<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -78,7 +93,7 @@ export const addFriendSpots = (spots, map) => {
         el.id = 'marker-' + marker.properties.id;
         el.className = 'marker friend';
 
-        new mapboxgl.Marker(el, { offset: [0, -23] })
+        const markerEl = new mapboxgl.Marker(el, { offset: [0, -23] })
             .setLngLat(marker.geometry.coordinates)
             .addTo(map);
 
@@ -87,7 +102,10 @@ export const addFriendSpots = (spots, map) => {
             createPopUp(marker, map)
             e.stopPropagation();
         })
+        markers.push(markerEl);
     })
+
+    return markers
 }
 
 export const flyToSpot = (currentFeature, map) => {
