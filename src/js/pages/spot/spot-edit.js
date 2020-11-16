@@ -207,7 +207,7 @@ const SpotEdit = (props) => {
                 .catch(err => {
                     console.log(err)
                     console.log(err.data)
-                    toast.info("Ewww, something went wrong  🤔");
+                    toast.error("Ewww, something went wrong  🤔");
                 })
 
         } else {

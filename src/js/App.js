@@ -17,7 +17,7 @@ import MyFleet from './pages/my-fleet';
 import MySpots from './pages/spot/my-spots';
 import MyCommunity from './pages/my-community';
 import MyForms from './pages/my-forms';
-import Settings from './pages/settings';
+import Settings from './pages/settings/my-settings';
 
 const App = () => {
 

@@ -3,7 +3,7 @@ import SearchIcon from '../../../assets/svg/search.svg';
 
 const Input = (props) => {
 
-    const { value, type, placeholder, className, name, icon, handleChange } = props;
+    const { value, type, required, placeholder, className, name, icon, handleChange } = props;
 
     const [onFocus, setOnFocus] = useState(false);
 
@@ -13,10 +13,10 @@ const Input = (props) => {
         <div className={`input w-full flex align-center ${className} ${onFocus ? 'on-focus' : ''} ${icon ? 'icon' : ''}`}>
             {iconComponent && iconComponent}
             <input
-                type={type}
                 value={value}
                 className="w-full"
-                type="text"
+                type={type ? type : 'text'}
+                required={required}
                 placeholder={placeholder}
                 name={name}
                 onChange={(e) => handleChange(e.target.value)}
