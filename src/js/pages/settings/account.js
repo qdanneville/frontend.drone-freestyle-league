@@ -145,7 +145,7 @@ const UserAccount = ({ user }) => {
                 <div className="flex">
                     <div className="w-half flex align-center">
                         {
-                            !avatarSrc ? <i className="w-20 h-20 br-50 bg-white shadow-1 overflow-hidden bs-solid bc-white bw-2 background-image" style={{ backgroundImage: `url(${config.API_BASE_URL + user.profile.profile.avatar.url})` }}></i>
+                            !avatarSrc ? <i className="w-20 h-20 br-50 bg-white shadow-1 overflow-hidden bs-solid bc-white bw-2 background-image bg-grey" style={{ backgroundImage: `url(${user.profile.profile.avatar && (config.API_BASE_URL + user.profile.profile.avatar.url)})` }}></i>
                                 : <i className="w-20 h-20 br-50 bg-white shadow-1 overflow-hidden bs-solid bc-white bw-2 background-image" style={{ backgroundImage: `url(${avatarSrc})` }}></i>
                         }
                         <input className="common-input-file overflow-hidden" type="file" id="avatar" name="avatar" placeholder="Avatar file" onChange={(e) => { setAvatarFile(e.target.files[0]); setAvatarSrc(URL.createObjectURL(e.target.files[0])) }} />

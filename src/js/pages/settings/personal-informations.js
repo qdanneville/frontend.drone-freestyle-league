@@ -85,22 +85,22 @@ const UserPersonalInformation = ({ user }) => {
                     <div className="flex">
                         <div className="w-half flex flex-col mr-1">
                             <label className="text-grey-light f4 mb-2 flex align-center">Full name</label>
-                            <CommonInput value={fullName} handleChange={setFullName} type="text" name="displayName" className="" placeholder="John doe" required />
+                            <CommonInput value={fullName} handleChange={setFullName} type="text" name="displayName" className="" placeholder="John doe" />
                         </div>
                         <div className="w-half flex flex-col ml-1">
                             <label className="text-grey-light f4 mb-2 flex align-center">Birth date</label>
-                            <CommonInput value={birthDate} handleChange={setBirthDate} type="date" name="birthdate" className="" placeholder="10/10/20" required />
+                            <CommonInput value={birthDate} handleChange={setBirthDate} type="date" name="birthdate" className="" placeholder="10/10/20" />
                         </div>
                     </div>
                     <div className="w-full flex mt-8">
 
                         <div className="w-half flex flex-col mr-1">
                             <label className="text-grey-light f4 mb-2 flex align-center">Country</label>
-                            <CommonInput value={country} handleChange={setCountry} type="text" name="country" className="" placeholder="France" required />
+                            <CommonInput value={country} handleChange={setCountry} type="text" name="country" className="" placeholder="France" />
                         </div>
                         <div className="w-half flex flex-col ml-1">
                             <label className="text-grey-light f4 mb-2 flex align-center">City</label>
-                            <CommonInput value={city} handleChange={setCity} type="text" name="city" className="" placeholder="Paris" required />
+                            <CommonInput value={city} handleChange={setCity} type="text" name="city" className="" placeholder="Paris" />
                         </div>
                     </div>
                     <i className="my-10 block bb-w-1 bl-w-0 br-w-0 bt-w-0 bs-solid bc-dark-light-2 w-full"></i>
@@ -108,21 +108,21 @@ const UserPersonalInformation = ({ user }) => {
                     <div className="w-full flex mt-8">
                         <div className="w-half flex flex-col mr-1">
                             <label className="text-grey-light f4 mb-2 flex align-center"><WebsiteIcon className="w-4 h-4 fill-white mr-2 strok-1" />  Website</label>
-                            <CommonInput value={website} handleChange={setWebsite} type="text" name="website" className="" placeholder="https://example.com" required />
+                            <CommonInput value={website} handleChange={setWebsite} type="text" name="website" className="" placeholder="https://example.com" />
                         </div>
                         <div className="w-half flex flex-col ml-1">
                             <label className="text-grey-light f4 mb-2 flex align-center"><YoutubeIcon className="w-4 h-4 fill-white mr-2 strok-1" />  Youtube channel</label>
-                            <CommonInput value={youtubeChannel} handleChange={setYoutubeChannel} type="text" name="youtube" className="" placeholder="https://youtube.com/example" required />
+                            <CommonInput value={youtubeChannel} handleChange={setYoutubeChannel} type="text" name="youtube" className="" placeholder="https://youtube.com/example" />
                         </div>
                     </div>
                     <div className="w-full flex mt-8">
                         <div className="w-half flex flex-col mr-1">
                             <label className="text-grey-light f4 mb-2 flex align-center"><InstagramIcon className="w-4 h-4 fill-white mr-2 strok-1" />  Instagram account</label>
-                            <CommonInput value={instragramAccount} handleChange={setInstragramAccount} type="text" name="instagram" className="" placeholder="https://instagram.com/example" required />
+                            <CommonInput value={instragramAccount} handleChange={setInstragramAccount} type="text" name="instagram" className="" placeholder="https://instagram.com/example" />
                         </div>
                         <div className="w-half flex flex-col ml-1">
                             <label className="text-grey-light f4 mb-2 flex align-center"><DroneIcon className="w-4 h-4 fill-white mr-2 strok-1" />  Airvuz account</label>
-                            <CommonInput value={airvuzAccount} handleChange={setAirvuzAccount} type="text" name="airvuz" className="" placeholder="https://airvuz.com/example" required />
+                            <CommonInput value={airvuzAccount} handleChange={setAirvuzAccount} type="text" name="airvuz" className="" placeholder="https://airvuz.com/example" />
                         </div>
                     </div>
                     <i className="my-10 block bb-w-1 bl-w-0 br-w-0 bt-w-0 bs-solid bc-dark-light-2 w-full"></i>
