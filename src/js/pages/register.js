@@ -19,10 +19,11 @@ const Register = (props) => {
     const dispatch = useDispatch();
     const isLoading = useSelector(state => state.auth.isLoading);
 
-    const [profile, setProfile] = useState('brand');
+    const [profile, setProfile] = useState('pilot');
 
     const [username, setUsername] = useState('');
     const [name, setName] = useState('');
+    const [displayName, setDisplayName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
@@ -35,7 +36,8 @@ const Register = (props) => {
         const body = {
             username,
             password,
-            name,
+            fullname: name,
+            display_name: displayName,
             email,
             role: profile
         }
@@ -61,19 +63,23 @@ const Register = (props) => {
                     <div>
                         <header className="flex justify-between">
                             <h1 className="text-white f45 max-width-50-percent good-times mt-0">{profile === "pilot" ? "Pilot registration" : "Brand registration"}</h1>
-                            <label className="toggle labels">
+                            {/* <label className="toggle labels">
                                 <input type="checkbox" onChange={handleProfileChange} />
                                 <span className="slider">
                                     <i className="circle"></i>
                                 </span>
-                            </label>
+                            </label> */}
                         </header>
-                        <div>
+                        <div style={{minWidth:'300px'}}>
                             <form onSubmit={handleSubmit} className={error ? "mt-4" : "mt-4"}>
                                 {error && <span className="font-bold text-white f6 block bc-red bg-pink py-2 px-2 br-4 text-align-center mb-2">{error}</span>}
                                 <div className="flex flex-col">
                                     <label className="font-normal f5 text-white mb-1">{profile === "pilot" ? "Username" : "Brand name"}</label>
                                     <input className="common-input" onChange={(event) => setUsername(event.target.value)} type="text" placeholder="Username" required />
+                                </div>
+                                <div className="flex flex-col mt-3">
+                                    <label className="font-normal f5 text-white mb-1">{profile === "pilot" ? "Pilot Name" : "Brand name"}</label>
+                                    <input className="common-input" onChange={(event) => setDisplayName(event.target.value)} type="text" placeholder="Username" required />
                                 </div>
                                 <div className="flex flex-col mt-3">
                                     <label className="font-normal f5 text-white mb-1">Full name</label>

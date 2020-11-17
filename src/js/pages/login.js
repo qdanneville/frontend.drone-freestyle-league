@@ -5,7 +5,7 @@ import { doLogin } from '../store/auth'
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuth } from '../components/auth-route';
 
-import Dfl from '../../assets/svg/dfl-drone-league.svg';
+import Dfl from '../../assets/svg/dfl-logo.svg';
 
 import Fly from '../../assets/svg/fly.svg';
 import FlyOrange from '../../assets/svg/fly-orange.svg';
@@ -65,10 +65,10 @@ const Login = (props) => {
                 </div>
                 <div>
                     <header className="flex justify-center align-items">
-                        <Dfl />
+                        <Dfl className="mb-4"/>
                     </header>
                     <div className="max-width-300-px my-auto">
-                        <form onSubmit={handleSubmit} className={error ? "" : ""}>
+                        <form onSubmit={handleSubmit} className={error ? "" : ""} style={{minWidth:"300px"}}>
                             {error && <span className="font-bold text-white f6 block bc-red bg-pink py-2 px-2 br-4 text-align-center mb-2">{error}</span>}
                             <div className="flex flex-col">
                                 <label className="font-normal f5 text-white mb-1">Username or email</label>
