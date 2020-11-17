@@ -63,7 +63,7 @@ const Settings = (props) => {
             <Switch>
                 <Redirect exact path="/settings/" to="/settings/account/" />
                 <Route path="/settings/account/" render={() => <UserAccount user={user} />} />
-                <Route path="/settings/personal-information/" component={UserPersonalInformation} />
+                <Route path="/settings/personal-information/" render={() => <UserPersonalInformation user={user} />} />
                 <Route path="/settings/privacy/" component={UserPrivacy} />
             </Switch>
         </div>
