@@ -128,9 +128,9 @@ const SpotEdit = (props) => {
             .then(response => {
                 setSpotAdvisories(response.data);
                 setSpotPublicCanBeCreated(response.data.color !== "red")
-                toast.dismiss(checkToast);
             })
-            .finally(() => setLocationCheckSubmitted(false))
+            .catch(err => toast.error("Ewww, something went wrong  🤔"))
+            .finally(() => { setLocationCheckSubmitted(false); toast.dismiss(checkToast); })
     }
 
     //We want to reset the rules & advisories when the user drags the spot marker to a new location

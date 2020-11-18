@@ -61,11 +61,7 @@ const SpotDetails = (props) => {
                             <div className="spot-profile z-index-1 flex flex-col justify-center align-center text-align-center py-4 px-10 bg-dark br-10">
                                 {spot.profile ?
                                     <div className="flex flex-col align-center">
-                                        <i className="w-20 h-20 br-50 bg-white shadow-1 overflow-hidden bs-solid bc-white bw-2">
-                                            {
-                                                spot.profile.avatar && spot.profile.avatar.url && <img src={config.API_BASE_URL + spot.profile.avatar.url} />
-                                            }
-                                        </i>
+                                        <i className="w-20 h-20 br-50 bg-white shadow-1 overflow-hidden bs-solid bc-white bw-2 background-image bg-grey" style={{ backgroundImage: `url(${spot.profile.avatar && (config.API_BASE_URL + spot.profile.avatar.url)})` }}></i>
                                     </div>
                                     :
                                     <div className="flex">

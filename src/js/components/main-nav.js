@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory, NavLink } from "react-router-dom";
-import { clearToken, clearSettings } from '../utils/local-storage'
+import { clearToken, clearSettings, clearProfile } from '../utils/local-storage'
 import { clearAuth } from '../utils/api'
 
 import { setSettings, fetchSettings } from '../store/settings'
@@ -31,6 +31,7 @@ const MainNav = (props) => {
 
     const signout = () => {
         clearToken();
+        clearProfile();
 
         dispatch({
             type: 'CLEAR_AUTH_USER'

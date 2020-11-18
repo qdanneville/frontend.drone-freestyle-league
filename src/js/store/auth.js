@@ -73,6 +73,7 @@ export const doLogin = (identifier, password) => {
                             if (profile) {
                                 result.user.profile = profile
                                 dispatch({ type: "SET_AUTH_USER", payload: result.user })
+                                setStorageProfile(profile.profile.id);
                                 toast.success("Successfully connected");
                             }
                         })
