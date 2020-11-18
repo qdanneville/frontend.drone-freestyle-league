@@ -149,6 +149,18 @@ const SpotEdit = (props) => {
         };
     }
 
+    const deletePost = (e) => {
+        console.log('DELETING');
+        e.preventDefault();
+
+        api.delete(`/spots/${spotId}`)
+            .then(response => {
+                history.replace({ pathname: "/spots/" })
+                toast.success("Your spot has been successfully deleted");
+            })
+            .catch(err => toast.error("Ewww, something went wrong  🤔"));
+    }
+
     const handleSpotSubmit = (e) => {
 
         e.preventDefault();
@@ -209,7 +221,6 @@ const SpotEdit = (props) => {
                     console.log(err.data)
                     toast.error("Ewww, something went wrong  🤔");
                 })
-
         } else {
             //CREATE
             api
@@ -248,7 +259,6 @@ const SpotEdit = (props) => {
                     toast.info("Ewww, something went wrong  🤔");
                 })
         }
-
     }
 
     return (
@@ -381,7 +391,7 @@ const SpotEdit = (props) => {
                                     <button className={`btn-secondary teal ${spotIsPublic && !spotPublicCanBeCreated ? 'disabled' : ''} ${spotSubmitted && 'loading'}`} ><span>Create Spot</span></button>
                                 </div> :
                                 <div className="flex align-center">
-                                    {/* <button type="button" className={`btn-secondary red`} ><span>Delete spot</span></button> */}
+                                    <button onClick={deletePost} type="button" className={`btn-secondary red`}><span>Delete spot</span></button>
                                     <button className={`btn-secondary teal ml-4${spotIsPublic && !spotPublicCanBeCreated ? 'disabled' : ''} ${spotSubmitted && 'loading'}`} ><span>Update Spot</span></button>
                                 </div>
                             }
