@@ -1,16 +1,10 @@
 import React from 'react';
 import SpotUserInteraction from '../spot/spot-user-interaction'
+import spotImage from '../spot/spot-image';
 import config from '../../../../config';
 
 
 const SpotPopup = ({ spot }) => {
-    let spotImage = null;
-
-    if (spot.image && spot.image.formats && spot.image.formats.small) {
-        spotImage = <img className="w-full" src={config.API_BASE_URL + spot.image.formats.small.url} />
-    } else if (spot.image && spot.image.url) {
-        spotImage = <img className="w-full" src={config.API_BASE_URL + spot.image.url} />
-    }
 
     //TODO link & popularity
     let difficultyProgression = (spot.difficulty / 100) * 100;
@@ -18,11 +12,7 @@ const SpotPopup = ({ spot }) => {
     return (
         <div className="flex flex-col py-2" id={`popup-${spot.id}`}>
             <h3 className="mt-0 mb-2 f3 italic font-bold text-overflow-ellipsis overflow-hidden max-width-90-percent">{spot.name}</h3>
-            <i className="w-full overflow-hidden br-4 flex">
-                {
-                    spotImage && spotImage
-                }
-            </i>
+            <i className="w-full h-30 overflow-hidden br-6 flex background-image" style={{ backgroundImage: `url(${spotImage(spot.image)})` }}></i>
             <SpotUserInteraction spotId={spot.id} />
             <div className="py-2 bs-solid bt-w-1 bb-w-1 bl-w-0 br-w-0 bc-grey-dark my-2 flex justify-between align-center">
                 <i className="w-10 h-10 br-50 bg-white shadow-1 overflow-hidden bs-solid bc-white bw-2 background-image bg-grey" style={{ backgroundImage: `url(${spot.profile.avatar && (config.API_BASE_URL + spot.profile.avatar.url)})` }}></i>
