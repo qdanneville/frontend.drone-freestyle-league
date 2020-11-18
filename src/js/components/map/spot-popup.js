@@ -1,12 +1,9 @@
 import React from 'react';
+import SpotUserInteraction from '../spot/spot-user-interaction'
 import config from '../../../../config';
 
-import ShareIcon from '../../../assets/svg/share-spot.svg';
-import HeartIcon from '../../../assets/svg/heart.svg';
-import ReportIcon from '../../../assets/svg/info.svg'
 
 const SpotPopup = ({ spot }) => {
-    console.log(spot)
     let spotImage = null;
 
     if (spot.image && spot.image.formats && spot.image.formats.small) {
@@ -26,20 +23,7 @@ const SpotPopup = ({ spot }) => {
                     spotImage && spotImage
                 }
             </i>
-            <ul className="flex justify-between align-center mt-3">
-                <li className="flex flex-col justify-center align-center cursor-pointer fill-grey">
-                    <ReportIcon />
-                    <span className="f5 text-grey">Report</span>
-                </li>
-                <li className="flex flex-col justify-center align-center cursor-pointer fill-grey">
-                    <ShareIcon />
-                    <span className="f5 text-grey">Share</span>
-                </li>
-                <li className="flex flex-col justify-center align-center cursor-pointer fill-grey">
-                    <HeartIcon />
-                    <span className="f5 text-grey">20 likes</span>
-                </li>
-            </ul>
+            <SpotUserInteraction spotId={spot.id} />
             <div className="py-2 bs-solid bt-w-1 bb-w-1 bl-w-0 br-w-0 bc-grey-dark my-2 flex justify-between align-center">
                 <i className="w-10 h-10 br-50 bg-white shadow-1 overflow-hidden bs-solid bc-white bw-2">
                     {

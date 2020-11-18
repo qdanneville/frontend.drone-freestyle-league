@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory, Link, useParams } from 'react-router-dom'
-
 import api from '../../utils/api'
 import config from '../../../../config'
 
@@ -8,13 +7,10 @@ import Loader from '../../components/loader'
 import EditIcon from '../../../assets/svg/edit.svg';
 
 import spotImage from '../../components/spot/spot-image';
+import SpotUserInteraction from '../../components/spot/spot-user-interaction'
 import UserLevel from '../../components/user-level';
 import Advisories from '../../components/advisories/'
 import BackButton from '../../components/back-button';
-
-import ShareIcon from '../../../assets/svg/share-spot.svg';
-import HeartIcon from '../../../assets/svg/heart.svg';
-import ReportIcon from '../../../assets/svg/info.svg';
 
 const SpotDetails = (props) => {
 
@@ -41,8 +37,6 @@ const SpotDetails = (props) => {
             .catch(err => history.push('/spots/'))
     }, [])
 
-    console.log(spot);
-
     const profileCreationDate = spot && spot.profile ? new Date(spot.profile.created_at).toLocaleDateString('en-US') : null
 
     let difficultyProgression = spot && (spot.difficulty / 100) * 100;
@@ -62,20 +56,7 @@ const SpotDetails = (props) => {
                         <div className="flex flex-col align-center w-full">
                             <div className="relative spot-image flex justify-center align-start w-full br-10 box-shadow-1 overflow-hidden background-image block" style={{ backgroundImage: `url(${spotImage(spot.image)})` }}>
                                 <h1 className="text-white good-times f2 my-0 uppercase pt-10">{spot.name}</h1>
-                                <ul className="absolute b-1 r-1 flex justify-between align-center mt-3 br-10 bg-grey-black px-4 py-3">
-                                    <li className="flex flex-col justify-center align-center cursor-pointer fill-grey">
-                                        <ReportIcon />
-                                        <span className="f5 text-grey mt-1">Report</span>
-                                    </li>
-                                    <li className="flex flex-col justify-center align-center cursor-pointer fill-grey mx-5">
-                                        <ShareIcon />
-                                        <span className="f5 text-grey mt-1">Share</span>
-                                    </li>
-                                    <li className="flex flex-col justify-center align-center cursor-pointer fill-grey">
-                                        <HeartIcon />
-                                        <span className="f5 text-grey mt-1">20 likes</span>
-                                    </li>
-                                </ul>
+                                <SpotUserInteraction spotId={spot.id} className="absolute b-1 r-1" />
                             </div>
                             <div className="spot-profile z-index-1 flex flex-col justify-center align-center text-align-center py-4 px-10 bg-dark br-10">
                                 {spot.profile ?

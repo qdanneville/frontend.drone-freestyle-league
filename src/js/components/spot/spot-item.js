@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { getSpotLikes } from '../../utils/spot'
 import { NavLink } from "react-router-dom";
 import config from '../../../../config';
 
@@ -8,6 +9,12 @@ import HeartIcon from '../../../assets/svg/heart.svg';
 
 
 const SpotItem = ({ spot, index }) => {
+
+    const [spotLikes, setSpotLikes] = useState(0)
+
+    useEffect(() => {
+        getSpotLikes(spot.id).then(likes => setSpotLikes(likes));
+    }, [])
 
     let spotImage = null;
 
@@ -46,7 +53,7 @@ const SpotItem = ({ spot, index }) => {
                     </div>
                 </div>
                 <div className="flex justify-center align-center cursor-pointer fill-grey py-2 px-5">
-                    <span className="f5 text-grey-light mr-1">20</span>
+                    <span className="f5 text-grey-light mr-1">{spotLikes}</span>
                     <HeartIcon />
                 </div>
                 <div className="flex justify-center align-center cursor-pointer fill-grey py-2 px-5 w-10">

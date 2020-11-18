@@ -31,12 +31,10 @@ const UserPersonalInformation = ({ user }) => {
     const profileCreationDate = new Date(user.profile.profile.created_at).toLocaleDateString('en-US')
 
     if (!contentChanged && (fullName !== userProfile.fullname || country !== userProfile.country || city !== userProfile.city || birthDate !== userProfile.birth_date || website !== userProfile.website || youtubeChannel !== userProfile.youtube_channel || instragramAccount !== userProfile.instagram_account || airvuzAccount !== userProfile.airvuz_account)) {
-        console.log('CONTENT HAS CHANGED');
         setContentChanged(true);
     }
 
     if (contentChanged && fullName === userProfile.fullname && country === userProfile.country && city === userProfile.city && birthDate === userProfile.birth_date && website === userProfile.website && youtubeChannel === userProfile.youtube_channel && instragramAccount === userProfile.instagram_account && airvuzAccount === userProfile.airvuz_account) {
-        console.log('CONTENT HAS NOT CHANGED');
         setContentChanged(false);
     }
 

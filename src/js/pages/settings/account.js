@@ -30,22 +30,18 @@ const UserAccount = ({ user }) => {
 
     //Form logic
     if (!passwordsMatching && passwordsRequired && password1.length > 0 && password2.length > 0 && password1 === password2) {
-        console.log('PASSWORD MATCHING');
         setPasswordsMatching(true)
     }
 
     if (passwordsMatching && passwordsRequired && (password1 !== password2 || password1.length === 0 || password2.length === 0)) {
-        console.log('PASSWORD NOT MATCHING');
         setPasswordsMatching(false)
     }
 
     if (!contentChanged && (email !== user.email || displayName !== user.profile.profile.display_name || username !== user.username || avatarSrc)) {
-        console.log('CONTENT HAS CHANGED');
         setContentChanged(true);
     }
 
     if (contentChanged && email === user.email && displayName === user.profile.profile.display_name && username === user.username && !avatarSrc) {
-        console.log('CONTENT HAS NOT CHANGED');
         setContentChanged(false);
     }
 
