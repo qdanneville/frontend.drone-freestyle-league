@@ -55,6 +55,7 @@ const SpotEdit = (props) => {
     const [spotPublicCanBeCreated, setSpotPublicCanBeCreated] = useState(false);
     const [checkLocationRequired, setCheckLocationRequired] = useState(false);
     const [showPublicToastInfoOnce, setShowPublicToastInfoOnce] = useState(false);
+    const [deleteSpotAsked, setDeleteSpotAsked] = useState(false);
 
     //Edit
     useEffect(() => {
@@ -206,7 +207,13 @@ const SpotEdit = (props) => {
                                 },
                             })
                             .then(response => {
-                                history.replace({ pathname: "/map" })
+                                history.replace({
+                                    pathname: "/map",
+                                    search: '?spot',
+                                    state: {
+                                        coords: spotCoords
+                                    }
+                                })
                                 toast.success("Your spot has been successfully updated");
                             })
                             .catch(err => {
@@ -214,7 +221,16 @@ const SpotEdit = (props) => {
                                 console.log(err.response)
                             })
                     }
-                    history.replace({ pathname: "/map" })
+                    else {
+                        history.replace({
+                            pathname: "/map",
+                            search: '?spot',
+                            state: {
+                                coords: spotCoords
+                            }
+                        })
+                        toast.success("Your spot has been successfully updated");
+                    }
                 })
                 .catch(err => {
                     console.log(err)
@@ -243,15 +259,29 @@ const SpotEdit = (props) => {
                                 },
                             })
                             .then(response => {
-                                history.replace({ pathname: "/map" })
+                                history.replace({
+                                    pathname: "/map",
+                                    search: '?spot',
+                                    state: {
+                                        coords: spotCoords
+                                    }
+                                })
                                 toast.success("Your spot has been successfully created");
                             })
                             .catch(err => {
                                 console.log(err)
                                 console.log(err.response)
                             })
+                    } else {
+                        history.replace({
+                            pathname: "/map",
+                            search: '?spot',
+                            state: {
+                                coords: spotCoords
+                            }
+                        })
+                        toast.success("Your spot has been successfully created");
                     }
-                    history.replace({ pathname: "/map" })
                 })
                 .catch(err => {
                     console.log(err)
@@ -390,10 +420,15 @@ const SpotEdit = (props) => {
                                 ? <div className="flex align-center">
                                     <button className={`btn-secondary teal ${spotIsPublic && !spotPublicCanBeCreated ? 'disabled' : ''} ${spotSubmitted && 'loading'}`} ><span>Create Spot</span></button>
                                 </div> :
-                                <div className="flex align-center">
-                                    <button onClick={deletePost} type="button" className={`btn-secondary red`}><span>Delete spot</span></button>
-                                    <button className={`btn-secondary teal ml-4${spotIsPublic && !spotPublicCanBeCreated ? 'disabled' : ''} ${spotSubmitted && 'loading'}`} ><span>Update Spot</span></button>
-                                </div>
+                                !deleteSpotAsked
+                                    ? <div className="flex align-center">
+                                        <button onClick={() => setDeleteSpotAsked(true)} type="button" className={`btn-secondary red`}><span>Delete spot</span></button>
+                                        <button className={`btn-secondary teal ml-4${spotIsPublic && !spotPublicCanBeCreated ? 'disabled' : ''} ${spotSubmitted && 'loading'}`} ><span>Update Spot</span></button>
+                                    </div>
+                                    : <div className="flex align-center">
+                                        <button onClick={() => setDeleteSpotAsked(false)} type="button" className={`btn-secondary red`}><span>No</span></button>
+                                        <button onClick={deletePost} className={`btn-secondary teal ml-4`}><span>Yes</span></button>
+                                    </div>
                             }
                         </div>
                     </form>

@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserGeoLocation } from '../../store/map'
 import config from '../../../../config'
@@ -13,6 +14,7 @@ mapboxgl.accessToken = config.MAPBOX_ACCESS_TOKEN
 const Mapbox = (props) => {
 
     const dispatch = useDispatch();
+    const location = useLocation();
     const userGeoLocation = useSelector(state => state.map.userGeoLocation)
     const mapContainerRef = useRef(null);
 
@@ -33,9 +35,15 @@ const Mapbox = (props) => {
     }
 
     if (!flyToUserLocation && props.editSpot && props.spotCoords && map) {
-        console.log('flyyyying');
         map.flyTo({
             center: props.spotCoords
+        });
+        setFlyToUserLocation(true);
+    }
+
+    if (location && location.search === "?spot" && location.state.coords && map && !flyToUserLocation) {
+        map.flyTo({
+            center: location.state.coords
         });
         setFlyToUserLocation(true);
     }
