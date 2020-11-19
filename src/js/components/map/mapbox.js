@@ -7,6 +7,7 @@ import mapboxgl from 'mapbox-gl';
 
 import AddSpot from './add-spot';
 import MapSpots from './map-spots';
+import MapFilter from './map-filters'
 import Loader from '../loader'
 
 mapboxgl.accessToken = config.MAPBOX_ACCESS_TOKEN
@@ -27,7 +28,7 @@ const Mapbox = (props) => {
     const [loading, setLoading] = useState(true)
     const [flyToUserLocation, setFlyToUserLocation] = useState(false)
 
-    if (userGeoLocation && !flyToUserLocation && map) {
+    if (!props.editSpot && userGeoLocation && !flyToUserLocation && map) {
         map.flyTo({
             center: userGeoLocation
         });
@@ -113,6 +114,7 @@ const Mapbox = (props) => {
                 <MapSpots map={map} />
                 {props.addSpot && <AddSpot map={map} lng={userGeoLocation ? userGeoLocation.lng : lng} lat={userGeoLocation ? userGeoLocation.lat : lat} setMarkerCoords={props.setMarkerCoords} />}
             </div>
+            <MapFilter map={map} />
             <div className='absolute t-0 l-0 r-0 b-0' ref={mapContainerRef} />
         </div>
     );

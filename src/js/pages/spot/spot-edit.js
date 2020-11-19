@@ -151,7 +151,6 @@ const SpotEdit = (props) => {
     }
 
     const deletePost = (e) => {
-        console.log('DELETING');
         e.preventDefault();
 
         api.delete(`/spots/${spotId}`)

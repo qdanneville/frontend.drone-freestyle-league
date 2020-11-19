@@ -5,7 +5,7 @@ import api from '../../utils/api'
 import CommonInput from '../../components/common/common-input'
 import { toast } from 'react-toastify'
 
-import DroneIcon from '../../../assets/svg/drone.svg'
+import DroneIcon from '../../../assets/svg/airvuz-logo.svg'
 import WebsiteIcon from '../../../assets/svg/website.svg'
 import InstagramIcon from '../../../assets/svg/logo-instagram.svg'
 import YoutubeIcon from '../../../assets/svg/logo-youtube.svg'
@@ -119,7 +119,7 @@ const UserPersonalInformation = ({ user }) => {
                             <CommonInput value={instragramAccount} handleChange={setInstragramAccount} type="text" name="instagram" className="" placeholder="https://instagram.com/example" />
                         </div>
                         <div className="w-half flex flex-col ml-1">
-                            <label className="text-grey-light f4 mb-2 flex align-center"><DroneIcon className="w-4 h-4 fill-white mr-2 strok-1" />  Airvuz account</label>
+                            <label className="text-grey-light f4 mb-2 flex align-center"><DroneIcon className="w-4 h-4 fill-white mr-2 strok-15" />  Airvuz account</label>
                             <CommonInput value={airvuzAccount} handleChange={setAirvuzAccount} type="text" name="airvuz" className="" placeholder="https://airvuz.com/example" />
                         </div>
                     </div>

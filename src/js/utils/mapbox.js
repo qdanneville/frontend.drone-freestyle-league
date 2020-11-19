@@ -33,6 +33,7 @@ export const addPublicSpots = (spots, map) => {
             e.stopPropagation();
         })
 
+        markerEl.type = 'public';
         markers.push(markerEl);
     })
 
@@ -69,6 +70,8 @@ export const addPilotSpots = (spots, map) => {
             e.stopPropagation();
         })
 
+        markerEl.type = 'private';
+
         markers.push(markerEl);
     })
     return markers;
@@ -102,6 +105,9 @@ export const addFriendSpots = (spots, map) => {
             createPopUp(marker, map)
             e.stopPropagation();
         })
+
+        markerEl.type = 'friend';
+
         markers.push(markerEl);
     })
 
