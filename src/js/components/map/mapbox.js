@@ -1,14 +1,18 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserGeoLocation } from '../../store/map'
 import config from '../../../../config'
 import mapboxgl from 'mapbox-gl';
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 import AddSpot from './add-spot';
 import MapSpots from './map-spots';
 import MapFilter from './map-filters'
 import Loader from '../loader'
+
+import AddIcon from '../../../assets/svg/add.svg';
 
 mapboxgl.accessToken = config.MAPBOX_ACCESS_TOKEN
 
@@ -98,6 +102,13 @@ const Mapbox = (props) => {
             plugin.on('jurisdictionChange', (data) => console.log('jurisdictionChange', data))
             plugin.on('airspaceLayerClick', (data) => console.log('airspaceLayerClick', data))
 
+            map.addControl(
+                new MapboxGeocoder({
+                    accessToken: config.MAPBOX_ACCESS_TOKEN,
+                    mapboxgl: mapboxgl
+                })
+            );
+
             // Clean up on unmount
             return () => map.remove();
         }
@@ -115,6 +126,7 @@ const Mapbox = (props) => {
                 {props.addSpot && <AddSpot map={map} lng={userGeoLocation ? userGeoLocation.lng : lng} lat={userGeoLocation ? userGeoLocation.lat : lat} setMarkerCoords={props.setMarkerCoords} />}
             </div>
             <MapFilter map={map} />
+            <NavLink to='/spots/create/' className="text-dark fill-dark f4 flex justify-center align-center bg-grey-light hover:bg-grey py-2 px-4 br-4 cursor-pointer absolute b-10 l-2 z-index-7 shadow-7"><AddIcon className="stroke-15 w-4 h-4 mr-3" />Add spot</NavLink>
             <div className='absolute t-0 l-0 r-0 b-0' ref={mapContainerRef} />
         </div>
     );

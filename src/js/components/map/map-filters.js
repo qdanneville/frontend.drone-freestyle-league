@@ -68,7 +68,7 @@ const MapFilters = ({ map }) => {
     }
 
     return (
-        <div className="absolute b-10 l-2 bg-dark z-index-9 br-6 shadow-7" style={{ width: '200px' }}>
+        <div className="absolute b-22 l-2 bg-dark z-index-7 br-6 shadow-7" style={{ width: '200px' }}>
             <span className="block text-grey f4 font-normal pt-2 px-2">Layers selection</span>
             <i className="my-2 block bb-w-2 bl-w-0 br-w-0 bt-w-0 bs-solid bc-dark-light-2 w-full"></i>
             <ul className="w-full">
@@ -77,7 +77,7 @@ const MapFilters = ({ map }) => {
                         <PublicMarkerIcon />
                         <span className="ml-2 text-grey-black-2 f5 font-normal">Public spots</span>
                     </div>
-                    <label className="checkbox-default inline-flex items-center -mt-1 ml-2">
+                    <label className="checkbox-default inline-flex items-center -mt-2 ml-2">
                         <input checked={publicFilter} type="checkbox" name="public" onChange={handleFilter} />
                         <span className="checkmark"></span>
                     </label>
@@ -85,9 +85,9 @@ const MapFilters = ({ map }) => {
                 <li className="flex align-center justify-between py-2 px-2 -mr-2">
                     <div className="flex align-center">
                         <FriendMarkerIcon />
-                        <span className="ml-2 text-grey-black-2 f5 font-normal">Friend spots</span>
+                        <span className="ml-2 text-grey-black-2 f5 font-normal">Followed spots</span>
                     </div>
-                    <label className="checkbox-default inline-flex items-center -mt-1 ml-2">
+                    <label className="checkbox-default inline-flex items-center -mt-2 ml-2">
                         <input checked={friendFilter} type="checkbox" name="friend" onChange={handleFilter} />
                         <span className="checkmark"></span>
                     </label>
@@ -97,7 +97,7 @@ const MapFilters = ({ map }) => {
                         <PrivateMarkerIcon />
                         <span className="ml-2 text-grey-black-2 f5 font-normal">Private spots</span>
                     </div>
-                    <label className="checkbox-default inline-flex items-center -mt-1 ml-2">
+                    <label className="checkbox-default inline-flex items-center -mt-2 ml-2">
                         <input checked={privateFilter} type="checkbox" name="private" onChange={handleFilter} />
                         <span className="checkmark"></span>
                     </label>

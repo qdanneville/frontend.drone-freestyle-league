@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@mapbox/mapbox-gl-geocoder": "^4.7.0",
     "@svgr/parcel-plugin-svgr": "^5.4.0",
     "axios": "^0.20.0",
     "mapbox-gl": "^1.12.0",
