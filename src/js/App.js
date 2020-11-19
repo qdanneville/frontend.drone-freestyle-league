@@ -18,6 +18,7 @@ import MySpots from './pages/spot/my-spots';
 import MyCommunity from './pages/my-community';
 import MyForms from './pages/my-forms';
 import Settings from './pages/settings/my-settings';
+import ProfileDetails from './pages/profile/profile-details';
 
 const App = () => {
 
@@ -43,6 +44,7 @@ const App = () => {
                     <AuthRoute path="/community/" component={MyCommunity} />
                     <AuthRoute path="/forms/" component={MyForms} />
                     <AuthRoute path="/settings/" component={Settings} />
+                    <AuthRoute path="/profile/:slug" component={ProfileDetails} />
                 </Layout>
             </Switch>
             <ToastContainer />
