@@ -37,7 +37,7 @@ const Settings = (props) => {
 
     return (
         <div className="w-full relative">
-            <header className="w-full pb-4 bb-w-1 bl-w-0 br-w-0 bt-w-0 bs-solid bc-dark-light-2">
+            <header className="w-full pb-4 bb-w-1 bl-w-0 br-w-0 bt-w-0 bs-solid bc-dark-light-2 mb-6">
                 <div className="flex align-center">
                     <BreadCrumbs routes={routes} />
                 </div>
@@ -45,7 +45,7 @@ const Settings = (props) => {
                     <div className="flex justify-between align-center mb-3">
                         <h1 className="text-grey-light good-times f2 mt-0 mb-0">User settings</h1>
                     </div>
-                    <ul className="flex align-center justify-even common-tabs center-line">
+                    <ul className="flex align-center justify-even common-tabs center-line w-half w-full-md">
                         {
                             routes.map((route, i) => {
                                 if (route.dontShow) return

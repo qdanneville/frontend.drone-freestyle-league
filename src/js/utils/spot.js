@@ -14,3 +14,8 @@ export const getUserHasLikedThisSpot = (spotId, profileId) => {
     const request = api.get(`/profile-likes-spots/count/?spot=${spotId}&profile=${profileId}`)
     return request.then(response => response.data > 0 ? true : false)
 }
+
+export const getPilotSpotsCount = (pilotId) => {
+    const request = api.get(`/spots/count/?pilot=${pilotId}`)
+    return request.then(response => response.data)
+}

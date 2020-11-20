@@ -8,6 +8,7 @@ import ProfilePublications from './profile-publications';
 import ProfileInformations from './profile-informations';
 
 import BreadCrumbs from '../../components/breadcrumb-nav'
+import Loader from '../../components/loader'
 
 const routes = [
     {
@@ -60,38 +61,42 @@ const ProfileDetails = (props) => {
             .catch(err => history.push('/dashboard/'))
     }, [])
 
-    console.log('PROFILE', profile);
-
     return (
         <section className="w-full">
-            <header className="w-full">
-                <div className="flex align-center">
-                    <BreadCrumbs routes={routes} />
-                </div>
-                <ProfileInformations profile={profile} />
-                {slug && <ul className="flex align-center justify-even common-tabs center-line">
-                    {
-                        routes.map((route, i) => {
-                            if (route.dontShow) return
-                            if (route.path.includes(':slug')) {
-                                route.path = route.path.replace(':slug', slug)
-                            }
+            {   isLoading ? <Loader />
+                : <div>
+                    <header className="w-full">
+                        <div className="flex align-center">
+                            <BreadCrumbs routes={routes} />
+                        </div>
+                    </header>
+                    <ProfileInformations profile={profile} />
+                    <div className="common-container">
+                        {slug && <ul className="flex align-center justify-even common-tabs w-half w-full-md" style={{ transform: 'translate3d(0, -26px, 0)' }}>
+                            {
+                                routes.map((route, i) => {
+                                    if (route.dontShow) return
+                                    if (route.path.includes(':slug')) {
+                                        route.path = route.path.replace(':slug', slug)
+                                    }
 
-                            return (
-                                <NavLink to={route.path} key={route.path} className='common-tab flex-1 text-align-center'>
-                                    <span className="py-3 block">{route.name}</span>
-                                </NavLink>
-                            )
-                        })
-                    }
-                </ul>}
-            </header>
-            <Switch>
-                <Route path="/profile/:slug/spots/" render={() => <ProfileSpots profile={profile} />} />
-                <Route path="/profile/:slug/drones/" render={() => <ProfileDrones profile={profile} />} />
-                <Route path="/profile/:slug/publications/" render={() => <ProfilePublications profile={profile} />} />
-                <Redirect path="/profile/:slug/" to='/profile/:slug/spots/' />
-            </Switch>
+                                    return (
+                                        <NavLink to={route.path} key={route.path} className='common-tab flex-1 text-align-center'>
+                                            <span className="py-3 block">{route.name}</span>
+                                        </NavLink>
+                                    )
+                                })
+                            }
+                        </ul>}
+                        <Switch>
+                            <Route path="/profile/:slug/spots/" render={() => <ProfileSpots profile={profile} />} />
+                            <Route path="/profile/:slug/drones/" render={() => <ProfileDrones profile={profile} />} />
+                            <Route path="/profile/:slug/publications/" render={() => <ProfilePublications profile={profile} />} />
+                            <Redirect path="/profile/:slug/" to='/profile/:slug/spots/' />
+                        </Switch>
+                    </div>
+                </div>
+            }
         </section>
     )
 }

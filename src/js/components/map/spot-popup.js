@@ -18,7 +18,7 @@ const SpotPopup = ({ spot }) => {
                 <i className="w-10 h-10 br-50 bg-white shadow-1 overflow-hidden bs-solid bc-white bw-2 background-image bg-grey" style={{ backgroundImage: `url(${spot.profile.avatar && (config.API_BASE_URL + spot.profile.avatar.url)})` }}></i>
                 <div className="flex flex-col justify-end text-align-right">
                     <span className="f4 text-white font-bold uppercase">{spot.profile.display_name}</span>
-                    <span className="underline f4 font-bold text-teal-dark cursor-pointer">See profile</span>
+                    {spot && spot.profile && spot.profile.slug && <a href={`/profile/${spot.profile.slug}`} className="underline f5 font-bold text-teal-dark cursor-pointer mt-2">See profile</a>}
                 </div>
             </div>
             {spot.spot_type && spot.spot_type.name && <div className="flex align-center justify-between mt-2">
