@@ -1,7 +1,7 @@
 import api from './api'
 
 export const getProfileFollowsProfile = (followProfileId) => {
-    const request = api.get(`/profiles/count/?followees=${followProfileId}`)
+    const request = api.get(`/profiles/follows/profile?profile=${followProfileId}`)
     return request.then(response => response.data > 0 ? true : false)
 }
 
