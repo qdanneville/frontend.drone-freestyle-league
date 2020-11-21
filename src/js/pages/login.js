@@ -35,7 +35,7 @@ const Login = (props) => {
         })
     }
 
-    if (isLogged) return <Redirect to="/dashboard" />
+    if (isLogged) return <Redirect to="/map" />
 
     return (
         <div className="app-wrapper bg-radial-green flex-col">
@@ -65,10 +65,10 @@ const Login = (props) => {
                 </div>
                 <div>
                     <header className="flex justify-center align-items">
-                        <Dfl className="mb-4"/>
+                        <Dfl className="mb-4" />
                     </header>
                     <div className="max-width-300-px my-auto">
-                        <form onSubmit={handleSubmit} className={error ? "" : ""} style={{minWidth:"300px"}}>
+                        <form onSubmit={handleSubmit} className={error ? "" : ""} style={{ minWidth: "300px" }}>
                             {error && <span className="font-bold text-white f6 block bc-red bg-pink py-2 px-2 br-4 text-align-center mb-2">{error}</span>}
                             <div className="flex flex-col">
                                 <label className="font-normal f5 text-white mb-1">Username or email</label>
