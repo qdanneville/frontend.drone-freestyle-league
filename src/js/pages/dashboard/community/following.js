@@ -6,11 +6,13 @@ import config from '../../../../../config'
 
 const CommunityFollowers = () => {
 
-    const { profile } = useSelector(state => state.auth.user)
+    const user = useSelector(state => state.auth.user)
     const [profiles, setProfiles] = useState([])
 
     useEffect(() => {
-        getProfileFollowees(profile.profile.slug).then(followees => setProfiles(followees))
+        if (user && user.profile && user.profile.profile) {
+            getProfileFollowees(user.profile.profile.slug).then(followees => setProfiles(followees))
+        }
     }, [])
 
     return (

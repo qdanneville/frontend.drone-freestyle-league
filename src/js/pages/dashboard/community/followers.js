@@ -5,12 +5,14 @@ import { Link } from 'react-router-dom';
 import config from '../../../../../config'
 
 const CommunityFollowers = () => {
-
-    const { profile } = useSelector(state => state.auth.user)
+    
+    const user = useSelector(state => state.auth.user)
     const [profiles, setProfiles] = useState([])
 
     useEffect(() => {
-        getProfileFollowers(profile.profile.slug).then(followers => setProfiles(followers))
+        if (user && user.profile && user.profile.profile) {
+            getProfileFollowers(user.profile.profile.slug).then(followers => setProfiles(followers))
+        }
     }, [])
 
     return (
