@@ -11,7 +11,7 @@ import Login from './pages/login';
 import Register from './pages/register';
 
 //Main nav routes
-import Dashboard from './pages/dashboard';
+import Dashboard from './pages/dashboard/index';
 import Map from './pages/map';
 import MyFleet from './pages/my-fleet';
 import MySpots from './pages/spot/my-spots';
