@@ -40,12 +40,6 @@ const SpotDetails = (props) => {
 
     let difficultyProgression = spot && (spot.difficulty / 100) * 100;
 
-    console.log(spot);
-
-    if (spot && spot.profile) {
-        console.log(spot.profile.slug);
-    }
-
     if (isLoading) return <Loader className="relative" />
 
     return (

@@ -66,7 +66,7 @@ const Dashboard = (props) => {
                 </div>
             </header>
             <div className="common-container mt-20">
-                <ul className="flex align-center justify-even common-tabs w-half w-full-md" style={{ transform: 'translate3d(0, -26px, 0)' }}>
+                {/* <ul className="flex align-center justify-even common-tabs w-half w-full-md" style={{ transform: 'translate3d(0, -26px, 0)' }}>
                     {
                         routes.map((route, i) => {
                             if (route.dontShow) return
@@ -77,11 +77,11 @@ const Dashboard = (props) => {
                             )
                         })
                     }
-                </ul>
+                </ul> */}
                 <Switch>
                     <Route path="/dashboard/activity/" render={() => <Activity />} />
                     <Route path="/dashboard/community/" render={() => <Community />} />
-                    <Redirect path="/dashboard/" to="/dashboard/activity/" />
+                    <Redirect path="/dashboard/" to="/dashboard/community/" />
                 </Switch>
             </div>
         </section>
