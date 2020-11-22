@@ -10,6 +10,7 @@ import spotImageUtils from '../../components/spot/spot-image'
 import Loader from '../../components/loader'
 
 import EmptyIcon from '../../../assets/svg/empty.svg'
+import SpotImagePlaceholder from '../../../assets/spot-placeholder.jpg'
 
 const privaciesData = [
     'private',
@@ -36,7 +37,7 @@ const SpotEdit = (props) => {
     const [spotName, setSpotName] = useState('');
     const [spotId, setSpotId] = useState(null);
     const [spotImage, setSpotImage] = useState(null);
-    const [spotImageSrc, setSpotImageSrc] = useState(null);
+    const [spotImageSrc, setSpotImageSrc] = useState(SpotImagePlaceholder);
     const [spotImageFile, setSpotImageFile] = useState(null);
     const [spotDescription, setSpotDescription] = useState("");
     const [spotAccessibility, setSpotAccessibility] = useState(1);
@@ -384,8 +385,9 @@ const SpotEdit = (props) => {
                                             ? <i className="relative flex h-40 justify-center align-start w-full br-4 overflow-hidden background-image block" style={{ backgroundImage: `url(${spotImageUtils(spotImage)})` }}></i>
                                             : <i className="relative flex h-40 justify-center align-start w-full br-4 overflow-hidden background-image block" style={{ backgroundImage: `url(${spotImageSrc})` }}></i>
                                     }
-                                    <input className="common-input mt-0 mb-2 overflow-hidden" type="file" placeholder="Spot image" onChange={(e) => { setSpotImageFile(e.target.files[0]); setSpotImageSrc(URL.createObjectURL(e.target.files[0])); setSpotImage(null) }} />
-                                    <textarea className="flex-1 common-input mt-2 mb-0 resize-0" placeholder="Spot description" value={spotDescription} onChange={(e) => setSpotDescription(e.target.value)} />
+                                    <input className="common-input-file  mt-0 mb-2 overflow-hidden" id="avatar" name="avatar" type="file" placeholder="Spot image" onChange={(e) => { setSpotImageFile(e.target.files[0]); setSpotImageSrc(URL.createObjectURL(e.target.files[0])); setSpotImage(null) }} />
+                                    <label className="mt-2 text-align-center" htmlFor="avatar">Choose a file</label>
+                                    <textarea className="flex-1 common-input mt-2 mb-0 resize-0 common-outline" placeholder="Spot description" value={spotDescription} onChange={(e) => setSpotDescription(e.target.value)} />
                                 </div>
                                 <div className="flex-1 flex flex-col bg-grey-dark-light br-4 py-3 px-4 mx-3">
                                     <h3 className="text-yellow-darker f6 uppercase good-times font-normal mt-0">Spot location advisories</h3>

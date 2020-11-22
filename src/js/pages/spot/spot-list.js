@@ -61,23 +61,23 @@ const SpotsList = (props) => {
                 <div className="w-full mt-4">
                     <CommonInput value={searchNameFilter} handleChange={setSearchNameFilter} type="text" name="search" className="search" placeholder="Search spots..." icon="search" />
                 </div>
-                <ul className="flex align-center mt-2">
-                    <li tabIndex="0" onClick={() => setFilter('')} className={`common-active-ui py-2 px-4 br-4 text-grey-light cursor-pointer mr-2 ${filter === '' ? 'active' : ''}`}>
-                        <span>All</span>
-                    </li>
-                    <li tabIndex="0" onClick={() => setFilter(filter === 'public' ? '' : 'public')} className={`common-active-ui py-2 px-4 br-4 text-grey-light cursor-pointer mr-2 ${filter === 'public' ? 'active' : ''}`}>
-                        <span>Publics</span>
-                    </li>
-                    <li tabIndex="0" onClick={() => setFilter(filter === 'private' ? '' : 'private')} className={`common-active-ui py-2 px-4 br-4 text-grey-light cursor-pointer mr-2 ${filter === 'private' ? 'active' : ''}`}>
-                        <span>Private</span>
-                    </li>
-                    <li tabIndex="0" onClick={() => setFilter(filter === 'friends' ? '' : 'friends')} className={`common-active-ui py-2 px-4 br-4 text-grey-light cursor-pointer mr-2 ${filter === 'friends' ? 'active' : ''}`}>
-                        <span>Followed</span>
-                    </li>
-                    {/* TODO LIKED SPOTS */}
-                    {/* <li className="bg-grey-black py-2 px-4 br-4 text-grey-light cursor-pointer hover:bg-grey-dark mr-2">
-                        <span>Liked</span>
-                    </li> */}
+                <ul className="flex align-center mt-2 justify-between">
+                    <ul className="w-half flex align-center">
+                        <li tabIndex="0" onClick={() => setFilter('')} className={`common-active-ui py-2 px-4 br-4 text-grey-light cursor-pointer mr-2 common-outline ${filter === '' ? 'active' : ''}`}>
+                            <span>All</span>
+                        </li>
+                        <li tabIndex="0" onClick={() => setFilter(filter === 'public' ? '' : 'public')} className={`common-active-ui py-2 px-4 br-4 text-grey-light cursor-pointer mr-2 common-outline ${filter === 'public' ? 'active' : ''}`}>
+                            <span>Publics</span>
+                        </li>
+                        <li tabIndex="0" onClick={() => setFilter(filter === 'private' ? '' : 'private')} className={`common-active-ui py-2 px-4 br-4 text-grey-light cursor-pointer mr-2 common-outline ${filter === 'private' ? 'active' : ''}`}>
+                            <span>Private</span>
+                        </li>
+                    </ul>
+                    <ul className="w-half flex align-center">
+                        <li tabIndex="0" onClick={() => setFilter(filter === 'friends' ? '' : 'friends')} className={`common-active-ui py-2 px-4 br-4 text-grey-light cursor-pointer mr-2 common-outline ${filter === 'friends' ? 'active' : ''}`}>
+                            <span>Spots of your following</span>
+                        </li>
+                    </ul>
                 </ul>
             </header>
             <div className="flex flex-col w-full px-10 relative">
@@ -93,10 +93,10 @@ const SpotsList = (props) => {
                             <span className="text-grey uppercase f6 font-normal">type</span>
                         </div>
                         <div className="flex align-center justify-center w-20">
-                            <span className="text-grey uppercase f6 font-normal text-align-center">Share with followers</span>
+                            <span className="text-grey uppercase f6 font-normal text-align-center">Privacy</span>
                         </div>
                         <div className="flex align-center justify-center w-20">
-                            <span className="text-grey uppercase f6 font-normal">Popularity</span>
+                            <span className="text-grey uppercase f6 font-normal mr-2">Difficulty</span>
                         </div>
                         <div className="flex flex-col justify-center align-center cursor-pointer fill-grey py-2 px-5">
                             <span className="text-grey uppercase f6 font-normal">Like</span>
@@ -109,7 +109,7 @@ const SpotsList = (props) => {
                         </div>
                     </div>
                 </div>
-                <div className="">
+                <div className="mt-2">
                     {spotsLoading
                         ? <Loader />
                         : spots && spots.map((spot) => <SpotItem key={spot.id} spot={spot} />)

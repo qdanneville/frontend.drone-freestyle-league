@@ -27,14 +27,14 @@ const SpotPopup = ({ spot }) => {
             </div>}
             <div className="flex align-center justify-between">
                 <span className="text-grey f5 italic pr-4">Difficulty</span>
-                <div className="bg-grey-dark width-90-px h-3 relative br-50 overflow-hidden">
-                    <span className="bg-orange absolute t-0 l-0 h-full" style={{ width: difficultyProgression + '%' }}></span>
+                <div className="bg-grey-dark width-90-px h-3 relative br-50 overflow-hidden flex align-center justify-start px-1">
+                    <span className="bg-orange h-2 br-50" style={{ width: difficultyProgression + '%' }}></span>
                 </div>
             </div>
             <div className="flex align-center justify-between">
                 <span className="text-grey f5 italic pr-4">Popularity</span>
-                <div className="bg-grey-dark width-90-px h-3 relative br-50 overflow-hidden">
-                    <span className="bg-pink-light absolute t-0 l-0 h-full" style={{ width: difficultyProgression + '%' }}></span>
+                <div className="bg-grey-dark width-90-px h-3 relative br-50 overflow-hidden flex align-center justify-start px-1">
+                    <span className="bg-pink h-2 br-50" style={{ width: difficultyProgression + '%' }}></span>
                 </div>
             </div>
             <div className="mt-4 max-height-100-px overflow-y-scroll">

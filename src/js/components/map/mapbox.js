@@ -125,8 +125,10 @@ const Mapbox = (props) => {
                 <MapSpots map={map} />
                 {props.addSpot && <AddSpot map={map} lng={userGeoLocation ? userGeoLocation.lng : lng} lat={userGeoLocation ? userGeoLocation.lat : lat} setMarkerCoords={props.setMarkerCoords} />}
             </div>
-            <MapFilter map={map} />
-            <NavLink to='/spots/create/' className="text-dark fill-dark f4 flex justify-center align-center bg-grey-light hover:bg-grey py-2 px-4 br-4 cursor-pointer absolute b-10 l-2 z-index-7 shadow-7"><AddIcon className="stroke-15 w-4 h-4 mr-3" />Add spot</NavLink>
+            <div className="absolute z-index-7 b-9 l-3">
+                {!props.editSpot && !props.addSpot && <NavLink to='/spots/create/' className="mb-3 text-dark fill-dark f4 flex justify-center align-center bg-grey-light hover:bg-grey py-2 px-4 br-4 cursor-pointer shadow-7"><AddIcon className="stroke-15 w-4 h-4 mr-3" />Add spot</NavLink>}
+                <MapFilter map={map} />
+            </div>
             <div className='absolute t-0 l-0 r-0 b-0' ref={mapContainerRef} />
         </div>
     );

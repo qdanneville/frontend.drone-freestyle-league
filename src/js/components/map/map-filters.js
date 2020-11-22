@@ -68,7 +68,7 @@ const MapFilters = ({ map }) => {
     }
 
     return (
-        <div className="absolute b-22 l-2 bg-dark z-index-7 br-6 shadow-7" style={{ width: '200px' }}>
+        <div className="bg-dark br-6 shadow-7" style={{ width: '200px' }}>
             <span className="block text-grey f4 font-normal pt-2 px-2">Layers selection</span>
             <i className="my-2 block bb-w-2 bl-w-0 br-w-0 bt-w-0 bs-solid bc-dark-light-2 w-full"></i>
             <ul className="w-full">

@@ -30,7 +30,7 @@ const SpotItem = ({ spot, index }) => {
     date = date.toLocaleDateString('en-US')
 
     return (
-        <NavLink className="flex align-center h-12 bg-grey-dark-light br-4 mb-3 overflow-hidden hover:bg-grey-black" to={`/spots/${spot.slug}`} tabIndex={0} >
+        <NavLink className="flex align-center h-12 bg-grey-dark-light br-4 mb-3 overflow-hidden hover:bg-grey-black shadow-material-2 common-outline" to={`/spots/${spot.slug}`} tabIndex={0} >
             <i className="h-full w-20 overflow-hidden flex relative bg-grey background-image mr-4" style={{ backgroundImage: `url('${spotImage}` }}>
             </i>
             <div className="text-white mr-4 w-40">
@@ -41,15 +41,16 @@ const SpotItem = ({ spot, index }) => {
                     <span className="text-grey-light f4 font-normal uppercase">{spot.spot_type ? spot.spot_type.name : '...'}</span>
                 </div>
                 <div className="flex align-center justify-center w-20">
-                    {
+                    <span className="text-grey-light f4 font-normal text-orange">{spot.privacy}</span>
+                    {/* {
                         spot.privacy === 'friends'
                             ? <div className="flex align-center"><i className="w-5 h-5 block bg-pink br-50 bw-2 bc-dark bs-solid"></i><span className="ml-3 f5 font-normal text-grey-light">yes</span></div>
                             : <div className="flex align-center"><i className="w-5 h-5 block bg-grey-dark br-50 bw-2 bc-dark bs-solid"></i><span className="ml-3 f5 font-normal text-grey-light">no</span></div>
-                    }
+                    } */}
                 </div>
                 <div className="flex align-center justify-center w-20">
-                    <div className="bg-grey-dark w-full h-3 relative br-50 overflow-hidden flex align-center justify-center">
-                        <span className="bg-pink absolute h-2 br-50" style={{ width: difficultyProgression + '%', left: '3px' }}></span>
+                    <div className="bg-grey-dark w-full h-3 relative br-50 overflow-hidden flex align-center justify-start px-1">
+                        <span className="bg-pink h-2 br-50" style={{ width: difficultyProgression + '%' }}></span>
                     </div>
                 </div>
                 <div className="flex justify-center align-center cursor-pointer fill-grey py-2 px-5">
