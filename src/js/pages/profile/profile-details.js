@@ -76,12 +76,11 @@ const ProfileDetails = (props) => {
                             {
                                 routes.map((route, i) => {
                                     if (route.dontShow) return
-                                    if (route.path.includes(':slug')) {
-                                        route.path = route.path.replace(':slug', slug)
-                                    }
+
+                                    const newRoute = route.path.replace(':slug', slug)
 
                                     return (
-                                        <NavLink to={route.path} key={route.path} className='common-tab flex-1 text-align-center'>
+                                        <NavLink to={newRoute} key={newRoute} className='common-tab flex-1 text-align-center'>
                                             <span className="py-3 block">{route.name}</span>
                                         </NavLink>
                                     )
