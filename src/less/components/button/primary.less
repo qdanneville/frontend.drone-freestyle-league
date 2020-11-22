@@ -1,18 +1,73 @@
 .btn {
-    .py-3;
-    .px-15;
+  .py-3;
+  .px-15;
 
-    .outline-none;
-    .no-appearance;
-    .no-border;
+  .outline-none;
+  .no-appearance;
+  .no-border;
+  .transition;
 
-    box-shadow: inset 0px 3px 4px rgba(1, 255, 255, 0.5), inset 0px -3px 5px rgba(51, 118, 249, 0.44);
-    background: rgba(241, 170, 87, 0.05);
-    border-radius: 23px;
+  .shadow-material-2;
+  // border: solid 1px transparent;
+  border: solid 1px @teal;
+  background: rgba(241, 170, 87, 0.05);
+  .br-6;
 
-    .good-times;
-    .text-white;
-    .f6;
+  .good-times;
+  .text-white;
+  .f6;
 
-    .cursor-pointer;
+  .cursor-pointer;
+  transform: scale(1);
+  will-change: transform;
+
+  &:focus {
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60,66,87,0.95) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+  }
+  &:hover {
+    background: rgba(3, 169, 244, 0.11);
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:after {
+    content: "";
+    transform-origin: center;
+    .absolute;
+    width: 25px;
+    height: 25px;
+
+    top: calc(50% - 12.5px);
+    left: calc(50% - 12.5px);
+
+    border-radius: 6px;
+
+    background-color: rgb(1 252 252);
+
+    z-index: -1;
+    opacity: 0;
+  }
+
+  &.loading {
+    user-select: none;
+    pointer-events: none;
+    // cursor: not-allowed;
+    .cursor-disable;
+    color: transparent;
+
+    .bc-dark;
+    .bg-grey-dark-light;
+    &:before {
+      opacity: 0;
+    }
+
+    span {
+      opacity: 0;
+    }
+    &:after {
+      opacity: 1;
+      animation: loading-btn 1s cubic-bezier(0.46, 0.03, 0.52, 0.96) infinite;
+    }
+  }
 }

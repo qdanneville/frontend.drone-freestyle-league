@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { fetchUser } from './store/auth'
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AuthRoute } from './components/auth-route';
 import Layout from './components/layout';
@@ -19,6 +19,7 @@ import MyCommunity from './pages/my-community';
 import MyForms from './pages/my-forms';
 import Settings from './pages/settings/my-settings';
 import ProfileDetails from './pages/profile/profile-details';
+import TermsOfUse from './pages/terms-of-use';
 
 const App = () => {
 
@@ -36,6 +37,7 @@ const App = () => {
             <Switch>
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
+                <Route path="/terms-of-use" component={TermsOfUse} />
                 <Layout>
                     <AuthRoute path="/dashboard/" component={Dashboard} />
                     <AuthRoute path="/map/" component={Map} />

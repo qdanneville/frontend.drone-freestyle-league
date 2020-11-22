@@ -18,7 +18,7 @@ const CommunityFollowers = () => {
     return (
         <div>
             <header className="flex flex-col bb-w-1 bl-w-0 br-w-0 bt-w-0 bs-solid bc-dark-light-2">
-                <h1 className="text-orange f1 font-normal mb-2">Your following</h1>
+                <h1 className="text-orange f1 font-normal">Your following</h1>
                 <div className="px-1 flex align-center overflow-hidden sticky bg-dark py-3 z-index-8 mt-6" style={{ top: '195px' }}>
                     <div className="w-25-per text-align-left">
                         <span className="text-grey uppercase f6">Avatar</span>

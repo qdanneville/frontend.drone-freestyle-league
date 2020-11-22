@@ -7,6 +7,8 @@ import { useAuth } from '../components/auth-route';
 
 import Dfl from '../../assets/svg/dfl-logo.svg';
 
+import CommonInput from '../components/common/common-input'
+
 import Fly from '../../assets/svg/fly.svg';
 import FlyOrange from '../../assets/svg/fly-orange.svg';
 import Advertize from '../../assets/svg/instagram.svg';
@@ -38,7 +40,10 @@ const Login = (props) => {
     if (isLogged) return <Redirect to="/map" />
 
     return (
-        <div className="app-wrapper bg-radial-green flex-col">
+        <div className="app-wrapper flex-col">
+            <header className="common-container py-3">
+                <Dfl className="" />
+            </header>
             <main className="flex justify-center align-center my-auto common-container relative">
                 <div className="absolute l-0 display-none-md">
                     <h1 className="features text-white f45 good-times mt-0 uppercase text-shadow-1 ml-4 mr-3 pt-4 text-align-right">For pilots</h1>
@@ -64,27 +69,25 @@ const Login = (props) => {
                     </ul>
                 </div>
                 <div>
-                    <header className="flex justify-center align-items">
-                        <Dfl className="mb-4" />
+                    <header className="flex justify-center align-items mb-6">
+                        <h1 className="text-white f45 max-width-50-percent good-times mt-0">Log in</h1>
                     </header>
                     <div className="max-width-300-px my-auto">
                         <form onSubmit={handleSubmit} className={error ? "" : ""} style={{ minWidth: "300px" }}>
-                            {error && <span className="font-bold text-white f6 block bc-red bg-pink py-2 px-2 br-4 text-align-center mb-2">{error}</span>}
+                            {error && <span className="font-bold text-white f6 block bc-red bg-red py-2 px-2 br-4 text-align-center mb-2">{error}</span>}
                             <div className="flex flex-col">
-                                <label className="font-normal f5 text-white mb-1">Username or email</label>
-                                <input className="common-input" onChange={(event) => setidentifier(event.target.value)} type="text" placeholder="identifier" required />
+                                <label className="text-teal f4 mb-2 flex align-center">Username or email</label>
+                                <CommonInput value={identifier} handleChange={setidentifier} type="text" name="identifier" className="" placeholder="Identifier" required />
                             </div>
                             <div className="flex flex-col mt-3">
-                                <label className="font-normal f5 text-white mb-1">Password</label>
-                                <input className="common-input" onChange={(event) => setPassword(event.target.value)} type="password" placeholder="*****" required />
+                                <label className="text-teal f4 mb-2 flex align-center">Password</label>
+                                <CommonInput value={password} handleChange={setPassword} type="password" name="identifier" className="" placeholder="*********" required />
                             </div>
-                            <br />
-                            <button className="btn w-full" type="submit">Log in</button>
-                            <br />
+                            <button className={`mt-6 btn w-full ${isLoading && 'loading'}`} type="submit">Log in</button>
                         </form>
                         <footer className="flex justify-center align-center flex-col mt-4">
-                            <span className="f7 text-grey-dark">Not yet registred ?</span>
-                            <Link to="/register" className="underline text-white f6 good-times mt-2">Register</Link>
+                            <span className="f6 text-grey">Not yet registred ?</span>
+                            <Link to="/register" className="underline text-white f6 good-times mt-2 common-outline p-2">Register</Link>
                         </footer>
                     </div>
                 </div>

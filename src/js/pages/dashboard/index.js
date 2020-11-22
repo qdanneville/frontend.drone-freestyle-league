@@ -65,7 +65,7 @@ const Dashboard = (props) => {
                     <BreadCrumbs routes={routes} />
                 </div>
             </header>
-            <div className="common-container mt-20">
+            <div className="common-container mt-10">
                 {/* <ul className="flex align-center justify-even common-tabs w-half w-full-md" style={{ transform: 'translate3d(0, -26px, 0)' }}>
                     {
                         routes.map((route, i) => {
@@ -78,6 +78,16 @@ const Dashboard = (props) => {
                         })
                     }
                 </ul> */}
+                <div className="flex align-center justify-center text-align-center mb-10">
+                    <p className="text-white font-normal w-half w-full-md f4 lh-4 br-6 p-4 bc-teal bs-solid bw-1"><strong>Hello fellow pilot, welcome to DFL V.0 !</strong><br /><br />
+                    You are amongst the very few to have access to our platform.
+                    We process step by step to bring DFL to the whole FPV community.
+                    This DFL V.0 platform includes several features for you to discover,
+                    you can give us your feedback on your experience with this version
+                    so we can build the future of DFL together.
+                    Thank you for participating, and happy (and safe) flying!
+                    </p>
+                </div>
                 <Switch>
                     <Route path="/dashboard/activity/" render={() => <Activity />} />
                     <Route path="/dashboard/community/" render={() => <Community />} />

@@ -4,6 +4,8 @@ import { Link, useHistory } from "react-router-dom";
 import { doRegister } from '../store/auth'
 import { useDispatch, useSelector } from 'react-redux';
 
+import CommonInput from '../components/common/common-input'
+
 import Fly from '../../assets/svg/fly.svg';
 import FlyOrange from '../../assets/svg/fly-orange.svg';
 import Advertize from '../../assets/svg/instagram.svg';
@@ -12,6 +14,7 @@ import Win from '../../assets/svg/win.svg';
 import BlueRectangles from '../../assets/svg/blue-rectangles.svg';
 import OrangeRectangles from '../../assets/svg/orange-rectangles.svg';
 import PinkRectangles from '../../assets/svg/pink-rectangles.svg';
+
 import Dfl from '../../assets/svg/dfl-logo.svg';
 
 const Register = (props) => {
@@ -22,7 +25,6 @@ const Register = (props) => {
     const [profile, setProfile] = useState('pilot');
 
     const [username, setUsername] = useState('');
-    const [name, setName] = useState('');
     const [displayName, setDisplayName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -36,7 +38,6 @@ const Register = (props) => {
         const body = {
             username,
             password,
-            fullname: name,
             display_name: displayName,
             email,
             role: profile
@@ -54,7 +55,7 @@ const Register = (props) => {
     }
 
     return (
-        <div className="app-wrapper bg-dark-2 flex-col">
+        <div className="app-wrapper flex-col">
             <header className="common-container py-3">
                 <Dfl className="" />
             </header>
@@ -62,7 +63,7 @@ const Register = (props) => {
                 <div className="flex justify-between align-start">
                     <div>
                         <header className="flex justify-between">
-                            <h1 className="text-white f45 max-width-50-percent good-times mt-0">{profile === "pilot" ? "Pilot registration" : "Brand registration"}</h1>
+                            <h1 className="text-white f45 max-width-50-percent good-times mt-0">Registration</h1>
                             {/* <label className="toggle labels">
                                 <input type="checkbox" onChange={handleProfileChange} />
                                 <span className="slider">
@@ -70,36 +71,37 @@ const Register = (props) => {
                                 </span>
                             </label> */}
                         </header>
-                        <div style={{minWidth:'300px'}}>
+                        <div style={{ minWidth: '300px' }}>
                             <form onSubmit={handleSubmit} className={error ? "mt-4" : "mt-4"}>
-                                {error && <span className="font-bold text-white f6 block bc-red bg-pink py-2 px-2 br-4 text-align-center mb-2">{error}</span>}
+                                {error && <span className="font-bold text-white f6 block bc-red bg-red py-2 px-2 br-4 text-align-center mb-2">{error}</span>}
                                 <div className="flex flex-col">
-                                    <label className="font-normal f5 text-white mb-1">{profile === "pilot" ? "Username" : "Brand name"}</label>
-                                    <input className="common-input" onChange={(event) => setUsername(event.target.value)} type="text" placeholder="Username" required />
+                                    <label className="text-teal f4 mb-2 flex align-center">Username <strong className="text-grey f5 font-normal ml-1">(Can be used to log in)</strong></label>
+                                    <CommonInput value={username} handleChange={setUsername} type="text" name="username" className="" placeholder="@best fpv pilot" required />
                                 </div>
                                 <div className="flex flex-col mt-3">
-                                    <label className="font-normal f5 text-white mb-1">{profile === "pilot" ? "Pilot Name" : "Brand name"}</label>
-                                    <input className="common-input" onChange={(event) => setDisplayName(event.target.value)} type="text" placeholder="Username" required />
+                                    <label className="text-teal f4 mb-2 flex align-center">Displayed name <strong className="text-grey f5 font-normal ml-1">(What other pilot or brand sees)</strong></label>
+                                    <CommonInput value={displayName} handleChange={setDisplayName} type="text" name="displayName" className="" placeholder="Johnny" required />
                                 </div>
                                 <div className="flex flex-col mt-3">
-                                    <label className="font-normal f5 text-white mb-1">Full name</label>
-                                    <input className="common-input" onChange={(event) => setName(event.target.value)} type="text" placeholder="Full name" required />
+                                    <label className="text-teal f4 mb-2 flex align-center">Email <strong className="text-grey f5 font-normal ml-1">(Can also be used to log in)</strong></label>
+                                    <CommonInput value={email} handleChange={setEmail} type="email" name="email" className="" placeholder="johnny@example.com" required />
                                 </div>
                                 <div className="flex flex-col mt-3">
-                                    <label className="font-normal f5 text-white mb-1">email</label>
-                                    <input className="common-input" onChange={(event) => setEmail(event.target.value)} type="email" placeholder="example@example.com" required />
-                                </div>
-                                <div className="flex flex-col mt-3">
-                                    <label className="font-normal f5 text-white mb-1">password</label>
-                                    <input className="common-input" onChange={(event) => setPassword(event.target.value)} type="password" placeholder="*********" required />
+                                    <label className="text-teal f4 mb-2 flex align-center">Password</label>
+                                    <CommonInput value={password} handleChange={setPassword} type="password" name="password" className="" placeholder="**********" required />
                                 </div>
                                 <br />
-                                <button className="btn" type="submit">Register</button>
+                                <div className="flex mt-0 mb-3">
+                                    <span className="text-grey font-normal f5">By signing up, I agree to the <Link className="text-teal common-outline" to="/terms-of-use">Terms of Use</Link></span>
+                                </div>
+                                <button className={`btn ${isLoading && 'loading'}`} type="submit">Register</button>
                                 <br />
                             </form>
                             <footer className="flex justify-start flex-col mt-4">
-                                <span className="f7 text-grey-dark">Already registred ?</span>
-                                <Link to="/login" className="underline text-white f6 good-times mt-2">Login</Link>
+                                <span className="f6 text-grey">Already registred ?</span>
+                                <div className="flex">
+                                    <Link to="/login" className="flex underline text-white f6 good-times mt-2 common-outline p-2">Login</Link>
+                                </div>
                             </footer>
                         </div>
                     </div>
@@ -108,7 +110,6 @@ const Register = (props) => {
                             ?
                             <div className="pl-40 display-none-md">
                                 <h1 className="features text-white f45 good-times mt-0 uppercase text-shadow-1 ml-4 mb-14">For pilots</h1>
-
                                 <ul className="flex flex-col features">
                                     <li className="relative flex align-center my-2 py-1 pr-3">
                                         <i className="absolute w-full h-full bw-1 bc-teal bs-solid t-0 l-0 common-skew"></i>
