@@ -18,7 +18,7 @@ const FollowProfile = ({ profile, className, handleUpdate }) => {
                 getProfileFollowsProfile(profile.id)
                     .then(response => {
                         setIsFollowed(response)
-                        handleUpdate();
+                        if (handleUpdate) handleUpdate();
                     })
             });
     }
@@ -27,7 +27,7 @@ const FollowProfile = ({ profile, className, handleUpdate }) => {
 
     return (
         <div className={`${className}`}>
-            <span onClick={handleClick} role="button" className={`py-2 px-4 br-4 cursor-pointer outline-0 border-none ${isFollowed ? 'bg-white text-pink hover:bg-grey' : 'bg-pink text-white hover:bg-pink-dark'}`}>{isFollowed ? 'Unfollow' : 'Follow'}</span>
+            <span onClick={handleClick} role="button" className={`follow-profile py-2 px-4 br-4 cursor-pointer outline-0 border-none ${isFollowed ? 'bg-white text-pink hover:bg-grey' : 'bg-pink text-white hover:bg-pink-dark'}`}>{isFollowed ? 'Unfollow' : 'Follow'}</span>
         </div>
     )
 }

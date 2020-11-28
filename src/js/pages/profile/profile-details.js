@@ -53,13 +53,15 @@ const ProfileDetails = (props) => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        if(!isLoading) setIsLoading(true);
+
         api.get(`/profiles/slug/${slug}`)
             .then(response => {
                 if (response.data) setProfile(response.data)
                 setIsLoading(false);
             })
             .catch(err => history.push('/dashboard/'))
-    }, [])
+    }, [slug])
 
     return (
         <section className="w-full">

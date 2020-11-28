@@ -102,7 +102,7 @@ const UserPersonalInformation = ({ user }) => {
                         </div>
                     </div>
                     <i className="my-10 block bb-w-1 bl-w-0 br-w-0 bt-w-0 bs-solid bc-dark-light-2 w-full"></i>
-                    <h4 className="f3 text-white font-bold mt-0 mb-1">Other informations</h4>
+                    <h4 className="f3 text-white font-bold mt-0 mb-1">Social media (links)</h4>
                     <div className="w-full flex mt-8">
                         <div className="w-half flex flex-col mr-1">
                             <label className="text-grey-light f4 mb-2 flex align-center"><WebsiteIcon className="w-4 h-4 fill-white mr-2 strok-1" />  Website</label>

@@ -21,6 +21,10 @@ import Settings from './pages/settings/my-settings';
 import ProfileDetails from './pages/profile/profile-details';
 import TermsOfUse from './pages/terms-of-use';
 
+//Components
+
+import Modal from './components/modal/modal'
+
 const App = () => {
 
     const dispatch = useDispatch();
@@ -47,6 +51,7 @@ const App = () => {
                     <AuthRoute path="/forms/" component={MyForms} />
                     <AuthRoute path="/settings/" component={Settings} />
                     <AuthRoute path="/profile/:slug" component={ProfileDetails} />
+                    <Modal />
                 </Layout>
             </Switch>
             <ToastContainer />
