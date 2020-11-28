@@ -38,7 +38,7 @@ const BasicInformations = ({ profile, className, update }) => {
         if (showCommunity) {
 
             const modalContent = {
-                component: <ProfileCommunity type={showCommunity} slug={profile.slug} name={profile.display_name} avatar={profile.avatar} />
+                component: <ProfileCommunity fromModal={true} type={showCommunity} slug={profile.slug} name={profile.display_name} avatar={profile.avatar} />
             }
 
             dispatch({ type: 'SET_MODAL_OPTIONS', payload: modalContent })
