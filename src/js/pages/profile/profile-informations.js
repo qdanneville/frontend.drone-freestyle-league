@@ -38,7 +38,8 @@ const ProfileInformations = ({ profile }) => {
                             <i className="w-20 h-20 br-50 bg-white shadow-1 overflow-hidden bs-solid bc-white bw-2 background-image bg-grey" style={{ backgroundImage: `url(${profile.avatar && (config.API_BASE_URL + profile.avatar.url)})` }}></i>
                         </div>
                         <div className="flex flex-col align-center mt-2">
-                            <span className="text-grey f2 uppercase mb-2"><strong className="text-white font-bold">{profile.display_name}</strong></span>
+                            <span className="text-grey f3 uppercase mb-1"><strong className="text-white font-bold">{profile.display_name}</strong></span>
+                            <span className="text-grey f4 uppercase mb-4 lowercase">@{profile.slug}</span>
                             <UserLevel level={profile.type.level} currentPoints={profile.type.current_points} displayFirst={'level'} />
                             <span className="text-grey f4 my-1">Member since  <strong className="text-white font-bold">{profileCreationDate ? profileCreationDate : 'Unknown'}</strong></span>
                             <ul className="flex justify-evenly w-40 mt-4">
