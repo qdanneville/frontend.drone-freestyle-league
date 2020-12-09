@@ -56,6 +56,13 @@ const SpotDetails = (props) => {
                         <div className="relative spot-image flex justify-center align-start w-full br-10 box-shadow-1 overflow-hidden background-image block" style={{ backgroundImage: `url(${spotImage(spot.image)})` }}>
                             <h1 className="text-white good-times f2 my-0 uppercase pt-10">{spot.name}</h1>
                             <SpotUserInteraction spotId={spot.id} className="absolute b-1 r-1" />
+                            <span className="absolute b-4 l-5 br-6 text-yellow py-4 px-4 bg-dark shadow-7 underline cursor-pointer"  onClick={() => history.push({
+                                pathname: "/map",
+                                search: '?spot',
+                                state: {
+                                    coords: { lng: spot.longitude, lat: spot.latitude }
+                                }
+                            })}>show on map</span>
                         </div>
                         <div className="spot-profile z-index-1 flex flex-col justify-center align-center text-align-center py-4 px-10 bg-dark br-10">
                             {spot.profile ?
@@ -70,6 +77,7 @@ const SpotDetails = (props) => {
                             }
                             <div className="flex flex-col align-center mt-2">
                                 <span className="text-grey f2 uppercase mb-2"><strong className="text-white font-bold">{spot.profile ? spot.profile.display_name : 'Unknown'}</strong></span>
+                                <span className="text-grey f4 uppercase mb-4 lowercase">@{spot.profile.slug}</span>
                                 <UserLevel level={spot.pilot.level} currentPoints={spot.pilot.current_points} displayFirst={'level'} />
                                 <span className="text-grey f4 my-1">Member since  <strong className="text-white font-bold">{profileCreationDate ? profileCreationDate : 'Unknown'}</strong></span>
                                 {spot && spot.profile && spot.profile.slug && <Link to={`/profile/${spot.profile.slug}`} className="underline f5 font-bold text-teal-dark cursor-pointer mt-2">See profile</Link>}
@@ -112,21 +120,14 @@ const SpotDetails = (props) => {
                                         <textarea className="w-full common-input mt-2 mb-0 resize-0 outline-0 py-2 px-2 h-200px overflow-y-scroll" placeholder="Spot description" readOnly="readonly" value={spot.description} />
                                     </div>
                                 </div>
-                                <div className="bg-grey-dark-light mr-2 br-4 py-4 px-4 mt-4">
-                                    <header className="w-full flex justify-start">
-                                        <h3 className="text-yellow-dark f6 uppercase good-times font-normal mt-0">Spot location advisories</h3>
-                                    </header>
-                                    <div className="flex-1 bg-dark-3 br-5 relative">
-                                        {spotAdvisories && <Advisories advisories={spotAdvisories.advisories} color={spotAdvisories.color} lng={spot.longitude} lat={spot.latitude} />}
-                                    </div>
-                                </div>
-
                             </div>
                             <div className="w-half bg-grey-dark-light ml-2 br-4 py-4 px-4">
-                                <header className="w-full flex align-center justify-start">
-                                    <h3 className="text-pink f6 uppercase good-times font-normal my-0">Spot wall</h3>
-                                    <span className="text-grey f4 uppercase good-times font-normal my-0 ml-1"> - Coming soon</span>
+                                <header className="w-full flex justify-start">
+                                    <h3 className="text-yellow-dark f6 uppercase good-times font-normal mt-0">Spot location advisories</h3>
                                 </header>
+                                <div className="flex-1 bg-dark-3 br-5 relative">
+                                    {spotAdvisories && <Advisories advisories={spotAdvisories.advisories} color={spotAdvisories.color} lng={spot.longitude} lat={spot.latitude} />}
+                                </div>
                             </div>
                         </div>
                     </div>
