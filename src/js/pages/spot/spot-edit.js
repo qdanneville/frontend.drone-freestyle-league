@@ -156,7 +156,7 @@ const SpotEdit = (props) => {
 
         api.delete(`/spots/${spotId}`)
             .then(response => {
-                history.replace({ pathname: "/spots/" })
+                history.push({ pathname: "/spots/" })
                 toast.success("Your spot has been successfully deleted");
             })
             .catch(err => toast.error("Ewww, something went wrong  🤔"));
@@ -207,7 +207,7 @@ const SpotEdit = (props) => {
                                 },
                             })
                             .then(response => {
-                                history.replace({
+                                history.push({
                                     pathname: "/map",
                                     search: '?spot',
                                     state: {
@@ -222,7 +222,7 @@ const SpotEdit = (props) => {
                             })
                     }
                     else {
-                        history.replace({
+                        history.push({
                             pathname: "/map",
                             search: '?spot',
                             state: {
@@ -259,7 +259,7 @@ const SpotEdit = (props) => {
                                 },
                             })
                             .then(response => {
-                                history.replace({
+                                history.push({
                                     pathname: "/map",
                                     search: '?spot',
                                     state: {
@@ -273,7 +273,7 @@ const SpotEdit = (props) => {
                                 console.log(err.response)
                             })
                     } else {
-                        history.replace({
+                        history.push({
                             pathname: "/map",
                             search: '?spot',
                             state: {
@@ -386,7 +386,7 @@ const SpotEdit = (props) => {
                                             : <i className="relative flex h-40 justify-center align-start w-full br-4 overflow-hidden background-image block" style={{ backgroundImage: `url(${spotImageSrc})` }}></i>
                                     }
                                     <input className="common-input-file  mt-0 mb-2 overflow-hidden" id="avatar" name="avatar" type="file" placeholder="Spot image" onChange={(e) => { setSpotImageFile(e.target.files[0]); setSpotImageSrc(URL.createObjectURL(e.target.files[0])); setSpotImage(null) }} />
-                                    <label className="mt-2 text-align-center" htmlFor="avatar">Choose a file</label>
+                                    <label className="mt-2 text-align-center" htmlFor="avatar">Add picture</label>
                                     <textarea className="flex-1 common-input mt-2 mb-0 resize-0 common-outline" placeholder="Spot description" value={spotDescription} onChange={(e) => setSpotDescription(e.target.value)} />
                                 </div>
                                 <div className="flex-1 flex flex-col bg-grey-dark-light br-4 py-3 px-4 mx-3">
