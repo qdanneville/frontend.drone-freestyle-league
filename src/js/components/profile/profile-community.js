@@ -48,20 +48,14 @@ const ProfileCommunity = ({ fromModal, type, slug, name, className, avatar }) =>
                 </div>
                     : <div className="text-align-left"><h1 className="text-orange f1 font-normal">Your Followers</h1></div>
                 }
-                <div className="px-1 flex align-center overflow-hidden sticky bg-dark py-3 z-index-8 mt-6" style={{ top: '195px' }}>
-                    <div className="w-25-per text-align-center">
+                <div className="px-1 flex justify-between align-center overflow-hidden sticky bg-dark py-3 z-index-8 mt-6" style={{ top: '195px' }}>
+                    <div className="flex-1 text-align-center">
                         <span className="text-grey uppercase f6">Avatar</span>
                     </div>
-                    <div className="text-white w-25-per text-align-center">
-                        <span className="text-grey uppercase f6 font-normal ">Full name</span>
-                    </div>
-                    <div className="text-white w-25-per text-align-center">
-                        <span className="text-grey uppercase f6 font-normal">displayed name</span>
-                    </div>
-                    <div className="text-white w-25-per text-align-center">
+                    <div className="text-white flex-1 text-align-center">
                         <span className="text-grey uppercase f6 font-normal">Profile url</span>
                     </div>
-                    <div className="text-white w-25-per text-align-center">
+                    <div className="text-white flex-1 text-align-center">
                         <span className="text-grey uppercase f6 font-normal">Follow</span>
                     </div>
                 </div>
@@ -70,20 +64,14 @@ const ProfileCommunity = ({ fromModal, type, slug, name, className, avatar }) =>
                 ? <ul className={`mt-2 ${fromModal ? 'modal-scroll-content' : 'flex flex-col'}`}>
                     {profiles.map(profile => {
                         return (
-                            <NavLink onClick={handleProfileClick} to={`/profile/${profile.slug}`} key={profile.id} className="flex align-center bg-grey-dark-light my-1 py-2 px-2 flex align-center br-10 overflow-hidden shadow-material-2 w-full hover:bg-grey-black">
-                                <div className="w-25-per text-align-center flex justify-center align-center">
+                            <NavLink onClick={handleProfileClick} to={`/profile/${profile.slug}`} key={profile.id} className="justify-between flex align-center bg-grey-dark-light my-1 py-2 px-2 flex align-center br-10 overflow-hidden shadow-material-2 w-full hover:bg-grey-black">
+                                <div className="flex-1 text-align-center flex justify-center align-center">
                                     <i className="block w-8 h-8 br-50 bg-white shadow-1 overflow-hidden bs-solid bc-white bw-2 background-image bg-grey" style={{ backgroundImage: `url(${profile.avatar && (config.API_BASE_URL + profile.avatar.url)})` }}></i>
                                 </div>
-                                <div className="text-white w-25-per text-align-center">
-                                    <span className="text-white f5 font-normal">{profile.fullname}</span>
-                                </div>
-                                <div className="text-white w-25-per text-align-center">
-                                    <span className="text-white f5 font-normal">{profile.display_name}</span>
-                                </div>
-                                <div className="text-white w-25-per text-align-center">
+                                <div className="text-white flex-1 text-align-center">
                                     <span className="text-white f5 font-normal">{profile.slug}</span>
                                 </div>
-                                <div className="text-white w-25-per text-align-center">
+                                <div className="text-white flex-1 text-align-center">
                                     {currentUser.profile.profile.id !== profile.id ? <FollowProfile profile={profile} /> : <span className="f4 text-grey">you</span>}
                                 </div>
                             </NavLink>
