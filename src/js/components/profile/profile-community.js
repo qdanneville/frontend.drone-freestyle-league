@@ -4,6 +4,7 @@ import { getProfileFollowers, getProfileFollowees } from '../../utils/profile'
 import { NavLink } from 'react-router-dom';
 import FollowProfile from './follow-profile'
 import config from '../../../../config'
+import Loader from '../loader'
 
 
 const ProfileCommunity = ({ fromModal, type, slug, name, className, avatar }) => {
@@ -12,18 +13,20 @@ const ProfileCommunity = ({ fromModal, type, slug, name, className, avatar }) =>
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.auth.user)
     const [profiles, setProfiles] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
+    //Slug means we're coming from a profile page
     useEffect(() => {
         _isMounted = true;
         if (slug && type) {
             type === 'followers'
-                ? getProfileFollowers(slug).then(followees => _isMounted && setProfiles(followees))
-                : getProfileFollowees(slug).then(followees => _isMounted && setProfiles(followees))
+                ? getProfileFollowers(slug).then(followees => _isMounted && setProfiles(followees)).finally(() => _isMounted && setIsLoading(false))
+                : getProfileFollowees(slug).then(followees => _isMounted && setProfiles(followees)).finally(() => _isMounted && setIsLoading(false))
         } else {
             if (currentUser && currentUser.profile && currentUser.profile.profile && type) {
                 type === 'followers'
-                    ? getProfileFollowers(currentUser.profile.profile.slug).then(followees => _isMounted && setProfiles(followees))
-                    : getProfileFollowees(currentUser.profile.profile.slug).then(followees => _isMounted && setProfiles(followees))
+                    ? getProfileFollowers(currentUser.profile.profile.slug).then(followees => _isMounted && setProfiles(followees)).finally(() => _isMounted && setIsLoading(false))
+                    : getProfileFollowees(currentUser.profile.profile.slug).then(followees => _isMounted && setProfiles(followees)).finally(() => _isMounted && setIsLoading(false))
             }
         }
 
@@ -42,7 +45,7 @@ const ProfileCommunity = ({ fromModal, type, slug, name, className, avatar }) =>
             dispatch({ type: 'CLEAR_MODAL_OPTIONS' })
         }
     }
-
+    
     return (
         <div className={`text-align-center ${className}`}>
             <header className="flex flex-col bb-w-1 bl-w-0 br-w-0 bt-w-0 bs-solid bc-dark-light-2">
@@ -66,25 +69,27 @@ const ProfileCommunity = ({ fromModal, type, slug, name, className, avatar }) =>
                     </div>
                 </div>
             </header>
-            {profiles.length > 0
-                ? <ul className={`mt-2 ${fromModal ? 'modal-scroll-content' : 'flex flex-col'}`}>
-                    {profiles.map(profile => {
-                        return (
-                            <NavLink onClick={handleProfileClick} to={`/profile/${profile.slug}`} key={profile.id} className="justify-between flex align-center bg-grey-dark-light my-1 py-2 px-2 flex align-center br-10 overflow-hidden shadow-material-2 w-full hover:bg-grey-black">
-                                <div className="flex-1 text-align-center flex justify-center align-center">
-                                    <i className="block w-8 h-8 br-50 bg-white shadow-1 overflow-hidden bs-solid bc-white bw-2 background-image bg-grey" style={{ backgroundImage: `url(${profile.avatar && (config.API_BASE_URL + profile.avatar.url)})` }}></i>
-                                </div>
-                                <div className="text-white flex-1 text-align-center">
-                                    <span className="text-white f5 font-normal">{profile.slug}</span>
-                                </div>
-                                <div className="text-white flex-1 text-align-center">
-                                    {currentUser.profile.profile.id !== profile.id ? <FollowProfile profile={profile} /> : <span className="f4 text-grey">you</span>}
-                                </div>
-                            </NavLink>
-                        )
-                    })}
-                </ul>
-                : <span className="block mt-4 text-grey f5 font-normal px-1">{name && name} has no {type === 'followers' ? 'followers' : 'following'} for now</span>
+            { isLoading
+                ? <Loader className="relative" />
+                : profiles.length > 0
+                    ? <ul className={`mt-2 ${fromModal ? 'modal-scroll-content' : 'flex flex-col'}`}>
+                        {profiles.map(profile => {
+                            return (
+                                <NavLink onClick={handleProfileClick} to={`/profile/${profile.slug}`} key={profile.id} className="justify-between flex align-center bg-grey-dark-light my-1 py-2 px-2 flex align-center br-10 overflow-hidden shadow-material-2 w-full hover:bg-grey-black">
+                                    <div className="flex-1 text-align-center flex justify-center align-center">
+                                        <i className="block w-8 h-8 br-50 bg-white shadow-1 overflow-hidden bs-solid bc-white bw-2 background-image bg-grey" style={{ backgroundImage: `url(${profile.avatar && (config.API_BASE_URL + profile.avatar.url)})` }}></i>
+                                    </div>
+                                    <div className="text-white flex-1 text-align-center">
+                                        <span className="text-white f5 font-normal">{profile.slug}</span>
+                                    </div>
+                                    <div className="text-white flex-1 text-align-center">
+                                        {currentUser.profile.profile.id !== profile.id ? <FollowProfile profile={profile} /> : <span className="f4 text-grey">you</span>}
+                                    </div>
+                                </NavLink>
+                            )
+                        })}
+                    </ul>
+                    : <span className="block mt-4 text-grey f5 font-normal px-1">{name && name} has no {type === 'followers' ? 'followers' : 'following'} for now</span>
             }
         </div>
     );
