@@ -8,10 +8,17 @@ import HeartIcon from '../../../assets/svg/heart.svg';
 
 const SpotItemSquared = ({ spot }) => {
 
+    let _isMounted = false;
+
     const [spotLikes, setSpotLikes] = useState(0)
 
     useEffect(() => {
-        getSpotLikes(spot.id).then(likes => setSpotLikes(likes));
+        _isMounted = true;
+        getSpotLikes(spot.id).then(likes => _isMounted && setSpotLikes(likes));
+
+        return (() => {
+            _isMounted = false;
+        })
     }, [])
 
     return (

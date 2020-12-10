@@ -7,13 +7,22 @@ import HeartIcon from '../../../assets/svg/heart.svg';
 import ReportIcon from '../../../assets/svg/info.svg';
 
 const SpotUserInteraction = ({ spotId, className }) => {
+
+    let _isMounted = false;
+
     const [spotLikes, setSpotLikes] = useState(null);
     const [userHasLikedThisSpot, setUserHasLikedThisSpot] = useState(false);
     const profileId = getStorageProfile();
 
     useEffect(() => {
-        getSpotLikesUtils(spotId).then(likes => setSpotLikes(likes));
-        getUserHasLikedThisSpotUtils(spotId, profileId).then(liked => setUserHasLikedThisSpot(liked))
+        _isMounted = true;
+        getSpotLikesUtils(spotId).then(likes => _isMounted && setSpotLikes(likes));
+        getUserHasLikedThisSpotUtils(spotId, profileId).then(liked => _isMounted && setUserHasLikedThisSpot(liked))
+
+
+        return (() => {
+            _isMounted = false;
+        })
     }, [])
 
     const toggleLikeSpot = () => {

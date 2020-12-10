@@ -5,13 +5,21 @@ const UserLevel = ({ currentPoints, level, displayFirst }) => {
 
     const [currentLevel, setCurrentLevel] = useState(level)
 
+    let _isMounted = false;
+
     useEffect(() => {
+        _isMounted = true;
+
         //If the level is an id (integer)
         //We need to retrieve the whole level object
         if (currentLevel === parseInt(currentLevel, 10)) {
             api.get(`/levels/${level}`)
-                .then(response => response.data && setCurrentLevel(response.data))
+                .then(response => _isMounted && response.data && setCurrentLevel(response.data))
         }
+
+        return (() => {
+            _isMounted = false;
+        })
     }, [])
 
 

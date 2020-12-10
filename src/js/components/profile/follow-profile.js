@@ -3,16 +3,25 @@ import { toggleFollowProfile, getProfileFollowsProfile } from '../../utils/profi
 
 const FollowProfile = ({ profile, className, handleUpdate }) => {
 
+    let _isMounted = false;
     const [isFollowed, setIsFollowed] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
+    const [toggleFollowIsLoading, setToggleFollowIsLoading] = useState(false)
 
     useEffect(() => {
+        _isMounted = true;
+
         getProfileFollowsProfile(profile.id)
-            .then(response => setIsFollowed(response))
-            .finally(setIsLoading(false))
+            .then(response => _isMounted && setIsFollowed(response))
+            .finally(() => _isMounted && setIsLoading(false))
+
+        return () => {
+            _isMounted = false;
+        }
     }, [])
 
     const handleClick = () => {
+        setToggleFollowIsLoading(true);
         toggleFollowProfile(profile.slug)
             .then(response => {
                 getProfileFollowsProfile(profile.id)
@@ -20,14 +29,15 @@ const FollowProfile = ({ profile, className, handleUpdate }) => {
                         setIsFollowed(response)
                         if (handleUpdate) handleUpdate();
                     })
+                    .finally(() => setToggleFollowIsLoading(false))
             });
     }
 
-    if (isLoading) return <></>
+    // if (isLoading) return <></>
 
     return (
         <div className={`${className}`}>
-            <span onClick={handleClick} role="button" className={`follow-profile py-2 px-4 br-4 cursor-pointer outline-0 border-none ${isFollowed ? 'bg-white text-pink hover:bg-grey' : 'bg-pink text-white hover:bg-pink-dark'}`}>{isFollowed ? 'Unfollow' : 'Follow'}</span>
+            <span onClick={handleClick} role="button" className={`inline-block loading-btn ${toggleFollowIsLoading ? 'loading-follow' : 'loaded'} ${isLoading && 'loading'} follow-profile py-2 px-4 br-4 cursor-pointer outline-0 border-none ${isFollowed ? 'bg-white text-pink hover:bg-grey' : 'bg-pink text-white hover:bg-pink-dark'}`}>{isFollowed ? 'Unfollow' : 'Follow'}</span>
         </div>
     )
 }

@@ -14,6 +14,8 @@ import BackButton from '../../components/back-button';
 
 const SpotDetails = (props) => {
 
+    let _isMounted = false;
+
     const { slug } = useParams();
     const history = useHistory();
 
@@ -22,18 +24,21 @@ const SpotDetails = (props) => {
     const [spotAdvisories, setSpotAdvisories] = useState(null);
 
     useEffect(() => {
+        _isMounted = true;
         api.get(`spots/${slug}`)
             .then(response => {
-                if (response.data) setSpot(response.data)
-                setIsLoading(false);
+                if (response.data && _isMounted) setSpot(response.data)
+                if (_isMounted) setIsLoading(false);
 
                 //Once we've got the spot, we could retrieve updated airspace advisories
                 api.get(`/airspaces?lng=${response.data.longitude}&lat=${response.data.latitude}`)
-                    .then(response => {
-                        setSpotAdvisories(response.data);
-                    })
+                    .then(response => _isMounted && setSpotAdvisories(response.data))
             })
-            .catch(err => history.push('/spots/'))
+            .catch(err => _isMounted && history.push('/spots/'))
+
+        return (() => {
+            _isMounted = false;
+        })
     }, [])
 
     const profileCreationDate = spot && spot.profile ? new Date(spot.profile.created_at).toLocaleDateString('en-US') : null
@@ -56,7 +61,7 @@ const SpotDetails = (props) => {
                         <div className="relative spot-image flex justify-center align-start w-full br-10 box-shadow-1 overflow-hidden background-image block" style={{ backgroundImage: `url(${spotImage(spot.image)})` }}>
                             <h1 className="text-white good-times f2 my-0 uppercase pt-10">{spot.name}</h1>
                             <SpotUserInteraction spotId={spot.id} className="absolute b-1 r-1" />
-                            <span className="absolute b-4 l-5 br-6 text-yellow py-4 px-4 bg-dark shadow-7 underline cursor-pointer"  onClick={() => history.push({
+                            <span className="absolute b-4 l-5 br-6 text-yellow py-4 px-4 bg-dark shadow-7 underline cursor-pointer" onClick={() => history.push({
                                 pathname: "/map",
                                 search: '?spot',
                                 state: {

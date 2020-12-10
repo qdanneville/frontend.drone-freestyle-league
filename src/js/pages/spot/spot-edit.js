@@ -20,6 +20,8 @@ const privaciesData = [
 
 const SpotEdit = (props) => {
 
+    let _isMounted = false;
+
     const user = useSelector(state => state.auth.user)
     const markers = useSelector(state => state.map.markers)
     const history = useHistory();
@@ -60,13 +62,15 @@ const SpotEdit = (props) => {
 
     //Edit
     useEffect(() => {
+        _isMounted = true;
+
         if (slug) {
             api.get(`spots/${slug}`)
                 .then(response => {
 
                     const spot = response.data
 
-                    if (spot) {
+                    if (spot && _isMounted) {
                         setSpotId(spot.id)
                         setSpotName(spot.name)
                         setSpotImage(spot.image)
@@ -86,15 +90,21 @@ const SpotEdit = (props) => {
                     //Once we've got the spot, we could retrieve updated airspace advisories
                     api.get(`/airspaces?lng=${spot.longitude}&lat=${spot.latitude}`)
                         .then(response => {
-                            setSpotAdvisories(response.data);
-                            setSpotPublicCanBeCreated(response.data.color !== 'red')
-                            setSpotCantBePublic(response.data.color === 'red')
-                            setIsLoading(false);
+                            if (_isMounted) {
+                                setSpotAdvisories(response.data);
+                                setSpotPublicCanBeCreated(response.data.color !== 'red')
+                                setSpotCantBePublic(response.data.color === 'red')
+                                setIsLoading(false);
+                            }
                         })
                 })
-                .catch(err => history.push('/spots/'))
+                .catch(err => _isMounted && history.push('/spots/'))
         }
-        else setIsLoading(false);
+        else _isMonted && setIsLoading(false);
+        
+        return (() => {
+            _isMounted = false;
+        })
     }, [slug])
 
     //WE NEED TO HIGHLIGHT THE CURRENT SPOT MARKER
@@ -107,11 +117,11 @@ const SpotEdit = (props) => {
     useEffect(() => {
         api
             .get('/spot-accessibilities')
-            .then(response => (response && response.data) ? setAccessibilities(response.data) : [])
+            .then(response => (response && response.data && _isMounted) ? setAccessibilities(response.data) : [])
 
         api
             .get('/spot-types')
-            .then(response => (response && response.data) ? setTypes(response.data) : [])
+            .then(response => (response && response.data && _isMounted) ? setTypes(response.data) : [])
     }, [])
 
     const handleToggles = (getter, setter) => {

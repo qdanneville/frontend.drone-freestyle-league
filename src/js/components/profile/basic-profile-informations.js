@@ -6,6 +6,8 @@ import ProfileCommunity from './profile-community'
 
 const BasicInformations = ({ profile, className, update }) => {
 
+    let _isMounted = false;
+
     const dispatch = useDispatch();
     const modalIsShown = useSelector(state => state.modal.show)
 
@@ -16,14 +18,20 @@ const BasicInformations = ({ profile, className, update }) => {
     const [showCommunity, setShowCommunity] = useState(null);
 
     useEffect(() => {
+        _isMounted = true;
         getPilotSpotsCount(profile.type.pilot_id)
-            .then(spots => setSpotsCount(spots))
+            .then(spots => _isMounted && setSpotsCount(spots))
 
         getProfileFollowersNumber(profile.slug)
-            .then(followersNb => setFollowersCount(followersNb))
+            .then(followersNb => _isMounted && setFollowersCount(followersNb))
 
         getProfileFolloweesNumber(profile.slug)
-            .then(followeesNb => setFolloweesCount(followeesNb))
+            .then(followeesNb => _isMounted && setFolloweesCount(followeesNb))
+
+
+        return (() => {
+            _isMounted = false;
+        })
     }, [update, modalIsShown])
 
     //Reset click followers state when the modal is closed

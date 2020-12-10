@@ -46,6 +46,7 @@ const routes = [
 
 const ProfileDetails = (props) => {
 
+    let _isMounted = false;
     const { slug } = useParams();
     const history = useHistory();
 
@@ -53,14 +54,19 @@ const ProfileDetails = (props) => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        if(!isLoading) setIsLoading(true);
+        _isMounted = true;
+        if (!isLoading) setIsLoading(true);
 
         api.get(`/profiles/slug/${slug}`)
             .then(response => {
                 if (response.data) setProfile(response.data)
-                setIsLoading(false);
+                if (_isMounted) setIsLoading(false);
             })
-            .catch(err => history.push('/dashboard/'))
+            .catch(err => _isMounted && history.push('/dashboard/'))
+
+        return (() => {
+            _isMounted = false;
+        })
     }, [slug])
 
     return (
