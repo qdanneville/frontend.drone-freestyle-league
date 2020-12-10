@@ -6,6 +6,8 @@ import FollowProfile from './follow-profile'
 import config from '../../../../config'
 import Loader from '../loader'
 
+import axios from 'axios'
+import api from '../../utils/api'
 
 const ProfileCommunity = ({ fromModal, type, slug, name, className, avatar }) => {
 
@@ -18,20 +20,40 @@ const ProfileCommunity = ({ fromModal, type, slug, name, className, avatar }) =>
     //Slug means we're coming from a profile page
     useEffect(() => {
         _isMounted = true;
+
+        let source = axios.CancelToken.source();
+
         if (slug && type) {
             type === 'followers'
-                ? getProfileFollowers(slug).then(followees => _isMounted && setProfiles(followees)).finally(() => _isMounted && setIsLoading(false))
-                : getProfileFollowees(slug).then(followees => _isMounted && setProfiles(followees)).finally(() => _isMounted && setIsLoading(false))
+                ? api.get(`/profiles/slug/${slug}/followers`, { cancelToken: source.token })
+                    .then(response => _isMounted && setProfiles(response.data)).finally(() => _isMounted && setIsLoading(false))
+                    .catch(err => {
+                        console.log(err.message);
+                    })
+                : api.get(`/profiles/slug/${slug}/followees`, { cancelToken: source.token })
+                    .then(response => _isMounted && setProfiles(response.data)).finally(() => _isMounted && setIsLoading(false))
+                    .catch(err => {
+                        console.log(err.message);
+                    })
         } else {
             if (currentUser && currentUser.profile && currentUser.profile.profile && type) {
                 type === 'followers'
-                    ? getProfileFollowers(currentUser.profile.profile.slug).then(followees => _isMounted && setProfiles(followees)).finally(() => _isMounted && setIsLoading(false))
-                    : getProfileFollowees(currentUser.profile.profile.slug).then(followees => _isMounted && setProfiles(followees)).finally(() => _isMounted && setIsLoading(false))
+                    ? api.get(`/profiles/slug/${currentUser.profile.profile.slug}/followers`, { cancelToken: source.token })
+                        .then(response => _isMounted && setProfiles(response.data)).finally(() => _isMounted && setIsLoading(false))
+                        .catch(err => {
+                            console.log(err.message);
+                        })
+                    : api.get(`/profiles/slug/${currentUser.profile.profile.slug}/followees`, { cancelToken: source.token })
+                        .then(response => _isMounted && setProfiles(response.data)).finally(() => _isMounted && setIsLoading(false))
+                        .catch(err => {
+                            console.log(err.message);
+                        })
             }
         }
 
         return () => {
             _isMounted = false;
+            if (source) source.cancel('Component did unmount')
         }
     }, [])
 
@@ -45,7 +67,7 @@ const ProfileCommunity = ({ fromModal, type, slug, name, className, avatar }) =>
             dispatch({ type: 'CLEAR_MODAL_OPTIONS' })
         }
     }
-    
+
     return (
         <div className={`text-align-center ${className}`}>
             <header className="flex flex-col bb-w-1 bl-w-0 br-w-0 bt-w-0 bs-solid bc-dark-light-2">
