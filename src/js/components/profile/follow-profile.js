@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { toggleFollowProfile, getProfileFollowsProfile } from '../../utils/profile'
+import axios from 'axios'
+import api from '../../utils/api'
 
 const FollowProfile = ({ profile, className, handleUpdate }) => {
 
@@ -10,13 +12,18 @@ const FollowProfile = ({ profile, className, handleUpdate }) => {
 
     useEffect(() => {
         _isMounted = true;
+        let source = axios.CancelToken.source();
 
-        getProfileFollowsProfile(profile.id)
-            .then(response => _isMounted && setIsFollowed(response))
+        api.get(`/profiles/follows/profile?profile=${profile.id}`, { cancelToken: source.token })
+            .then(response => _isMounted && setIsFollowed(response.data > 0))
             .finally(() => _isMounted && setIsLoading(false))
+            .catch(err => {
+                console.log(err.message);
+            })
 
         return () => {
             _isMounted = false;
+            if (source) source.cancel('Component did unmount')
         }
     }, [])
 
