@@ -1,0 +1,75 @@
+.loading-btn {
+  position: relative;
+
+  &:after {
+    content: "";
+    transform-origin: center;
+    .absolute;
+    width: 20px;
+    height: 20px;
+
+    top: calc(50% - 10px);
+    left: calc(50% - 10px);
+
+    border-radius: 6px;
+
+    background-color: rgb(167 167 167);
+
+    z-index: -1;
+    opacity: 0;
+  }
+  &.loading,
+  &.loading-follow {
+    user-select: none;
+    pointer-events: none;
+    // cursor: not-allowed;
+    .cursor-disable;
+    color: transparent;
+
+    .bc-dark;
+    .bg-grey-dark-light;
+    &:before {
+      opacity: 0;
+    }
+
+    span {
+      opacity: 0;
+    }
+    &:after {
+      opacity: 1;
+      animation: loading-btn 1s cubic-bezier(0.46, 0.03, 0.52, 0.96) infinite;
+    }
+  }
+
+  &.follow-profile {
+      transition: all 0.35s cubic-bezier(0.46, 0.03, 0.52, 0.96);
+    &:not(.loading) {
+      &:not(.loaded) {
+        transform: scale(1);
+      }
+    }
+  }
+  &.follow-profile {
+    &.loading-follow {
+      transform: scale(0.5);
+    }
+  }
+}
+
+@keyframes pop-down {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.5);
+  }
+}
+
+@keyframes pop-up {
+  0% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

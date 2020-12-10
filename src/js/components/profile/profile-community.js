@@ -8,21 +8,27 @@ import config from '../../../../config'
 
 const ProfileCommunity = ({ fromModal, type, slug, name, className, avatar }) => {
 
+    let _isMounted = false;
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.auth.user)
     const [profiles, setProfiles] = useState([])
 
     useEffect(() => {
+        _isMounted = true;
         if (slug && type) {
             type === 'followers'
-                ? getProfileFollowers(slug).then(followees => setProfiles(followees))
-                : getProfileFollowees(slug).then(followees => setProfiles(followees))
+                ? getProfileFollowers(slug).then(followees => _isMounted && setProfiles(followees))
+                : getProfileFollowees(slug).then(followees => _isMounted && setProfiles(followees))
         } else {
             if (currentUser && currentUser.profile && currentUser.profile.profile && type) {
                 type === 'followers'
-                    ? getProfileFollowers(currentUser.profile.profile.slug).then(followees => setProfiles(followees))
-                    : getProfileFollowees(currentUser.profile.profile.slug).then(followees => setProfiles(followees))
+                    ? getProfileFollowers(currentUser.profile.profile.slug).then(followees => _isMounted && setProfiles(followees))
+                    : getProfileFollowees(currentUser.profile.profile.slug).then(followees => _isMounted && setProfiles(followees))
             }
+        }
+
+        return () => {
+            _isMounted = false;
         }
     }, [])
 
