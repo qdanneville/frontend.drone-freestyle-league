@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import CloseModalIcon from '../../../assets/svg/close.svg';
 
 const Modal = () => {
 
@@ -19,6 +20,7 @@ const Modal = () => {
         <div className={`absolute t-0 l-0 w-full h-full overflow-hidden z-index-9 flex justify-center align-center ${options.className ? options.className : ''}`}>
             <div onClick={closeModal} className="absolute t-0 l-0 w-full h-full z-index-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.85)' }}></div>
             <div className="py-5 px-5 br-6 shadow-material-2 bg-dark relative z-index-4 overflow-hidden" style={{ width: "50vw", height: "80vh" }}>
+                <CloseModalIcon onClick={closeModal} className="absolute t-4 r-4 w-5 h-5 stroke-white cursor-pointer"/>
                 {options && options.component && options.component}
             </div>
         </div>

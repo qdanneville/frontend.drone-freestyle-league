@@ -51,9 +51,9 @@ const App = () => {
                     <AuthRoute path="/forms/" component={MyForms} />
                     <AuthRoute path="/settings/" component={Settings} />
                     <AuthRoute path="/profile/:slug" component={ProfileDetails} />
-                    <Modal />
                 </Layout>
             </Switch>
+            <Modal />
             <ToastContainer />
         </Router>
     )
