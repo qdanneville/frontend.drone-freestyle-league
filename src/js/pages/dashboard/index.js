@@ -7,7 +7,7 @@ import Activity from './activity/'
 import Publications from './publications'
 import Drones from './drones'
 import Spots from './spots'
-import Gears from './gears'
+import Gear from './gear'
 import Community from './community/'
 
 
@@ -73,7 +73,7 @@ const Dashboard = (props) => {
             <div className="px-10 mt-10 flex">
                 <aside className="flex flex-col bg-grey-dark-light br-6 p-4">
                     <Activity />
-                    <Gears />
+                    <Gear />
                     <Drones />
                     <Spots />
                 </aside>

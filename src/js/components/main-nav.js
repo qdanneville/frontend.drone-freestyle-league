@@ -73,9 +73,9 @@ const MainNav = (props) => {
                     </NavLink>
                 </li>
                 <li className="flex my-1 w-full justify-start text-align-left">
-                    <NavLink activeClassName="active text-white bg-grey-dark-light fill-green" className="nav-link py-2 px-3 flex justify-start align-center relative w-full text-align-left text-grey-black-2" to="/gears/">
+                    <NavLink activeClassName="active text-white bg-grey-dark-light fill-green" className="nav-link py-2 px-3 flex justify-start align-center relative w-full text-align-left text-grey-black-2" to="/gear/">
                         <MyFleetIcon className="w-5 h-5" />
-                        <span className="f4 capitalize pl-3">my gears</span>
+                        <span className="f4 capitalize pl-3">my gear</span>
                     </NavLink>
                 </li>
                 <li className="flex my-1 w-full justify-start text-align-left">

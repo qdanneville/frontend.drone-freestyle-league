@@ -4,7 +4,7 @@ import GearIcon from '../../../assets/svg/gear.svg'
 import DroneIcon from '../../../assets/svg/gear-drone.svg'
 import BatteryIcon from '../../../assets/svg/gear-battery.svg'
 
-const SpotsList = (props) => {
+const GearAll = (props) => {
 
     return (
         <div className="w-full pt-5">
@@ -12,7 +12,7 @@ const SpotsList = (props) => {
                 <div className="flex-1">
                     <header className="flex align-center mb-4">
                         <GearIcon className="w-7 h-7 fill-white block" />
-                        <span className="text-white font-bold f4 mt-0 mb-0 ml-4">Pilot Gear</span>
+                        <span className="text-white font-bold f4 mt-0 mb-0 ml-4">Accessories</span>
                     </header>
                     <main>
                         <ul className="flex flex-col align-center flex-wrap w-full">
@@ -80,4 +80,4 @@ const SpotsList = (props) => {
     )
 }
 
-export default SpotsList;
+export default GearAll;

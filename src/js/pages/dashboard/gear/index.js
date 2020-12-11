@@ -1,13 +1,13 @@
 import React from 'react';
 
-const DashboardGears = () => {
+const DashboardGear = () => {
     return (
         <section className="w-full">
             <div className="common-container">
-                <h1>Gears</h1>
+                <h1>Gear</h1>
             </div>
         </section>
     );
 };
 
-export default DashboardGears
+export default DashboardGear

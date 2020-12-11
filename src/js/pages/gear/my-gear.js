@@ -8,41 +8,41 @@ import {
 
 import BreadCrumbs from '../../components/breadcrumb-nav'
 
-import GearDispatch from './gear-dispatch'
-import GearPilot from './gear-pilot'
+import GearAll from './gear-all'
+import GearAccessories from './gear-accessories'
 import GearDrones from './gear-drones'
 import GearBatteries from './gear-batteries'
 
 const routes = [
     {
-        name: 'my gears',
-        path: "/gears/",
+        name: 'my gear',
+        path: "/gear/",
         dontShow: true,
         exact: true,
     },
     {
         name: 'all',
-        path: "/gears/all/",
+        path: "/gear/all/",
         exact: true,
     },
     {
-        name: 'Pilot gear',
-        path: "/gears/pilot-gear/",
+        name: 'Accessories',
+        path: "/gear/accessories/",
         exact: true,
     },
     {
         name: 'Drones',
-        path: "/gears/drones/",
+        path: "/gear/drones/",
         exact: true,
     },
     {
         name: 'Batteries',
-        path: "/gears/batteries/",
+        path: "/gear/batteries/",
         exact: true,
     }
 ]
 
-const MyGears = (props) => {
+const MyGear = (props) => {
 
     return (
         <div className="w-full relative">
@@ -52,7 +52,7 @@ const MyGears = (props) => {
                 </div>
                 <div className="flex flex-col w-full px-10 pt-10">
                     <div className="flex justify-between align-center mb-3">
-                        <h1 className="text-green good-times f2 mt-0 mb-0">My gears</h1>
+                        <h1 className="text-green good-times f2 mt-0 mb-0">My gear</h1>
                     </div>
                     <ul className="flex align-center justify-even common-tabs center-line w-half w-full-md">
                         {
@@ -69,14 +69,14 @@ const MyGears = (props) => {
                 </div>
             </header>
             <Switch>
-                <Route path="/gears/pilot-gear/" component={GearPilot} />
-                <Route path="/gears/drones/" component={GearDrones} />
-                <Route path="/gears/batteries/" component={GearBatteries} />
-                <Route path="/gears/all/" component={GearDispatch} />
-                <Redirect exact path="/gears/" to="/gears/all/" />
+                <Route path="/gear/accessories/" component={GearAccessories} />
+                <Route path="/gear/drones/" component={GearDrones} />
+                <Route path="/gear/batteries/" component={GearBatteries} />
+                <Route path="/gear/all/" component={GearAll} />
+                <Redirect exact path="/gear/" to="/gear/all/" />
             </Switch>
         </div>
     )
 }
 
-export default MyGears;
+export default MyGear;
