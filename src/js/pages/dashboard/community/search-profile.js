@@ -53,7 +53,7 @@ const SearchProfile = () => {
                         return (
                             <Link onClick={handleProfileClick} to={`/profile/${profile.slug}`} key={profile.id} className="flex justify-center align-center bg-grey-dark-light my-1 py-2 px-2 flex align-center br-10 overflow-hidden shadow-material-2 w-full">
                                 <div className="flex-1 text-align-center">
-                                    <i className="ml-3 block w-8 h-8 br-50 bg-white shadow-1 overflow-hidden bs-solid bc-white bw-2 background-image bg-grey" style={{ backgroundImage: `url(${profile.avatar && (config.API_BASE_URL + profile.avatar.url)})` }}></i>
+                                    <i className="my-auto block w-8 h-8 br-50 bg-white shadow-1 overflow-hidden bs-solid bc-white bw-2 background-image bg-grey" style={{ backgroundImage: `url(${profile.avatar && (config.API_BASE_URL + profile.avatar.url)})` }}></i>
                                 </div>
                                 <div className="text-white flex-1 text-align-center">
                                     <span className="text-white f5 font-normal">{profile.slug}</span>

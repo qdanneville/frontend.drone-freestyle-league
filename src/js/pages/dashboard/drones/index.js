@@ -1,13 +1,13 @@
 import React from 'react';
 
-const DashboardActivity = () => {
+const DashboardDrones = () => {
     return (
         <section className="w-full">
             <div className="common-container">
-                <h1>Activity</h1>
+                <h1>Drones</h1>
             </div>
         </section>
     );
 };
 
-export default DashboardActivity;
+export default DashboardDrones;

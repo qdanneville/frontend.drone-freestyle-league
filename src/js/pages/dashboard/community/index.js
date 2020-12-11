@@ -26,25 +26,23 @@ const routes = [
 const Community = () => {
     return (
         <section className="w-full">
-            <div className="common-container">
-                <ul className="flex align-center justify-even common-tabs w-half w-full-md" style={{ transform: 'translate3d(0, -26px, 0)' }}>
-                    {
-                        routes.map((route, i) => {
-                            return (
-                                <NavLink to={route.path} key={route.path} className='common-tab flex-1 text-align-center'>
-                                    <span className="py-3 block">{route.name}</span>
-                                </NavLink>
-                            )
-                        })
-                    }
-                </ul>
-                <Switch>
-                    <Route path="/dashboard/community/followers" render={() => <Followers />} />
-                    <Route path="/dashboard/community/following" render={() => <Following />} />
-                    <Route path="/dashboard/community/search-profile" render={() => <SearchProfile />} />
-                    <Redirect path="/dashboard/community/" to="/dashboard/community/followers/" />
-                </Switch>
-            </div>
+            <ul className="flex align-center justify-even common-tabs w-full">
+                {
+                    routes.map((route, i) => {
+                        return (
+                            <NavLink to={route.path} key={route.path} className='common-tab flex-1 text-align-center'>
+                                <span className="py-3 block">{route.name}</span>
+                            </NavLink>
+                        )
+                    })
+                }
+            </ul>
+            <Switch>
+                <Route path="/dashboard/community/followers" render={() => <Followers />} />
+                <Route path="/dashboard/community/following" render={() => <Following />} />
+                <Route path="/dashboard/community/search-profile" render={() => <SearchProfile />} />
+                <Redirect path="/dashboard/community/" to="/dashboard/community/followers/" />
+            </Switch>
         </section>
     );
 };

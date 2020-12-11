@@ -15,6 +15,7 @@ import Dashboard from './pages/dashboard/index';
 import Map from './pages/map';
 import MyFleet from './pages/my-fleet';
 import MySpots from './pages/spot/my-spots';
+import MyGears from './pages/gear/my-gears';
 import MyCommunity from './pages/my-community';
 import MyForms from './pages/my-forms';
 import Settings from './pages/settings/my-settings';
@@ -47,6 +48,7 @@ const App = () => {
                     <AuthRoute path="/map/" component={Map} />
                     <AuthRoute path="/fleet/" component={MyFleet} />
                     <AuthRoute path="/spots/" component={MySpots} />
+                    <AuthRoute path="/gears/" component={MyGears} />
                     <AuthRoute path="/community/" component={MyCommunity} />
                     <AuthRoute path="/forms/" component={MyForms} />
                     <AuthRoute path="/settings/" component={Settings} />

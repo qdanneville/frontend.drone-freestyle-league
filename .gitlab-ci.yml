@@ -11,7 +11,6 @@ before_script:
   - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
   - chmod 644 ~/.ssh/known_hosts
 
-
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
@@ -32,7 +31,7 @@ build_parcel_master:
     expire_in: 20 mins
     paths:
       - dist
-  only: 
+  only:
     - master
 
 deploy_master:
@@ -48,3 +47,31 @@ deploy_master:
     - /usr/bin/rsync -r ./dist/ ${SERVEUR}:${CHEMIN}. --exclude-from="exclude.build"
   only:
     - master
+
+build_parcel_beta:
+  stage: build
+  script:
+    - npm install
+    - npm install -g parcel-bundler
+    - node -v
+    - parcel build ./src/index.html --no-source-maps
+  artifacts:
+    expire_in: 20 mins
+    paths:
+      - dist
+  only:
+    - beta
+
+deploy_beta:
+  stage: deploy
+  variables:
+    SERVEUR: "quentin@85.208.144.169"
+    CHEMIN: "/var/www/dev/dfl-dashboard/beta.dfl.qdan.io/dist"
+  script:
+    - which rsync || ( apt update -y && apt install rsync -y )
+    - ls -la
+    - /sbin/ip route|awk '/default/ { print $3 }'
+    - ls ./dist/
+    - /usr/bin/rsync -r ./dist/ ${SERVEUR}:${CHEMIN}. --exclude-from="exclude.build"
+  only:
+    - beta
