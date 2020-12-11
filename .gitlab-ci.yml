@@ -61,7 +61,7 @@ deploy_beta:
   stage: deploy
   variables:
     SERVEUR: "quentin@85.208.144.169"
-    CHEMIN: "/var/www/dev/dfl-dashboard/beta.dfl.qdan.io/dist"
+    CHEMIN: "/var/www/dev/dfl-dashboard/beta.dfl.qdan.io/dist/"
   script:
     - which rsync || ( apt update -y && apt install rsync -y )
     - ls -la
