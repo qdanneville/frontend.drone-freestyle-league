@@ -100,7 +100,7 @@ const SpotEdit = (props) => {
                 })
                 .catch(err => _isMounted && history.push('/spots/'))
         }
-        else _isMonted && setIsLoading(false);
+        else _isMounted && setIsLoading(false);
         
         return (() => {
             _isMounted = false;
