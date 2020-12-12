@@ -19,7 +19,7 @@ const GearBatteries = (props) => {
         <div className="w-full">
             <header className="flex flex-col w-full px-10 pb-4 bb-w-1 bl-w-0 br-w-0 bt-w-0 bs-solid bc-dark-light-2 sticky t-0 z-index-7 bg-dark pt-10">
                 <div className="flex justify-between align-center mb-3">
-                    <h1 className="text-white good-times f4 mt-0 mb-0">Batteries</h1>
+                    <h1 className="text-white f4 mt-0 mb-0">Batteries</h1>
                     {/* <Link to="/spots/create" className="text-dark fill-dark f4 flex justify-center align-center bg-grey-light hover:bg-grey py-2 px-4 br-4 cursor-pointer"> <AddIcon className="stroke-15 w-4 h-4 mr-3" />Create spot</Link> */}
                 </div>
                 <div className="w-full mt-4">

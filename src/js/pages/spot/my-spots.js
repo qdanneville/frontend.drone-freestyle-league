@@ -15,19 +15,18 @@ const routes = [
         path: "/spots",
         exact: true,
     },
-
     {
         name: 'spot details',
         path: "/spots/:slug/",
         exact: false,
     },
     {
-        name: 'spot edit',
+        name: 'edit',
         path: "/spots/:slug/edit",
         exact: false,
     },
     {
-        name: 'spot create',
+        name: 'create',
         path: "/spots/create",
         exact: false,
     },

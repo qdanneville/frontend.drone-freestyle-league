@@ -12,17 +12,32 @@ const Input = (props) => {
     return (
         <div className={`input w-full flex align-center ${className} ${onFocus ? 'on-focus' : ''} ${icon ? 'icon' : ''}`}>
             {iconComponent && iconComponent}
-            <input
-                value={value}
-                className="w-full"
-                type={type ? type : 'text'}
-                required={required}
-                placeholder={placeholder}
-                name={name}
-                onChange={(e) => handleChange(e.target.value)}
-                onFocus={() => setOnFocus(true)}
-                onBlur={() => setOnFocus(false)}
-            />
+            {
+                type !== "textarea"
+                    ?
+                    <input
+                        value={value}
+                        className="w-full"
+                        type={type ? type : 'text'}
+                        required={required}
+                        placeholder={placeholder}
+                        name={name}
+                        onChange={(e) => handleChange(e.target.value)}
+                        onFocus={() => setOnFocus(true)}
+                        onBlur={() => setOnFocus(false)}
+                    />
+                    :
+                    <textarea
+                        value={value}
+                        className="w-full resize-0 h-full"
+                        required={required}
+                        placeholder={placeholder}
+                        name={name}
+                        onChange={(e) => handleChange(e.target.value)}
+                        onFocus={() => setOnFocus(true)}
+                        onBlur={() => setOnFocus(false)}
+                    />
+            }
         </div>)
 }
 

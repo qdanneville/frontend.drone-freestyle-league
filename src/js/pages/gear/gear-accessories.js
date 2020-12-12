@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import api from '../../utils/api'
 
+import AccessoryItem from '../../components/gear/accessory-item'
+
 import CommonInput from '../../components/common/common-input'
 import Loader from '../../components/loader'
 
@@ -11,16 +13,28 @@ import { Link } from 'react-router-dom';
 const GearAccessories = (props) => {
 
     const dispatch = useDispatch();
-    const [isLoading, setIsLoading] = useState(false);
+    const isLoading = useSelector(state => state.gears.isLoading);
+    const accessories = useSelector(state => state.gears.accessories);
     const [filter, setFilter] = useState('')
     const [searchNameFilter, setSearchNameFilter] = useState('')
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_ACCESSORIES' })
+
+        api.get(`/pilot-gears/accessories`)
+            .then(response => {
+                const accessories = response.data
+                if (accessories) dispatch({ type: 'SET_ACCESSORIES', payload: accessories })
+            })
+            .catch(err => dispatch({ type: 'SET_ACCESSORIES', payload: [] }))
+    }, [])
 
     return (
         <div className="w-full">
             <header className="flex flex-col w-full px-10 pb-4 bb-w-1 bl-w-0 br-w-0 bt-w-0 bs-solid bc-dark-light-2 sticky t-0 z-index-7 bg-dark pt-10">
                 <div className="flex justify-between align-center mb-3">
-                    <h1 className="text-white good-times f4 mt-0 mb-0">Accessories</h1>
-                    {/* <Link to="/spots/create" className="text-dark fill-dark f4 flex justify-center align-center bg-grey-light hover:bg-grey py-2 px-4 br-4 cursor-pointer"> <AddIcon className="stroke-15 w-4 h-4 mr-3" />Create spot</Link> */}
+                    <h1 className="text-white f4 mt-0 mb-0">Accessories</h1>
+                    <Link to="/gear/accessories/create" className="text-dark fill-dark f4 flex justify-center align-center bg-grey-light hover:bg-grey py-2 px-4 br-4 cursor-pointer"> <AddIcon className="stroke-15 w-4 h-4 mr-3" />Create accessory</Link>
                 </div>
                 <div className="w-full mt-4">
                     <CommonInput value={searchNameFilter} handleChange={setSearchNameFilter} type="text" name="search" className="search" placeholder="Search pilot gear..." icon="search" />
@@ -54,11 +68,11 @@ const GearAccessories = (props) => {
                         <div className="flex align-center justify-center w-20">
                             <span className="text-grey uppercase f6 font-normal text-align-center">Constructor</span>
                         </div>
+                        <div className="flex flex-col justify-center align-center fill-grey py-2 px-2 w-20">
+                            <span className="text-grey uppercase f6 font-normal">Link to vendor</span>
+                        </div>
                         <div className="flex align-center justify-center w-20">
                             <span className="text-grey uppercase f6 font-normal mr-2">Rating</span>
-                        </div>
-                        <div className="flex flex-col justify-center align-center cursor-pointer fill-grey py-2 px-5">
-                            <span className="text-grey uppercase f6 font-normal">Link to vendor</span>
                         </div>
                         <div className="flex flex-col justify-center align-center cursor-pointer fill-grey py-2 px-5 w-10">
                             <span className="text-grey uppercase f6 font-normal">Likes</span>
@@ -74,7 +88,7 @@ const GearAccessories = (props) => {
                 <div className="mt-2">
                     {isLoading
                         ? <Loader />
-                        : <span>Accessories</span>
+                        : accessories && accessories.map(accessory => <AccessoryItem accessory={accessory} key={accessory.id} />)
                     }
                 </div>
             </div>

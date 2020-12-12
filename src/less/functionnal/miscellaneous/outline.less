@@ -15,3 +15,13 @@
       rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px;
   }
 }
+
+.outline-teal {
+  outline: none;
+  border: solid 1px transparent;
+  &:focus {
+    .bg-dark-5;
+    box-shadow: 0 2px 6px 0 rgb(0, 0, 0);
+    border: solid 1px @teal;
+  }
+}

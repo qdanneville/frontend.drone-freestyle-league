@@ -10,8 +10,10 @@ import BreadCrumbs from '../../components/breadcrumb-nav'
 
 import GearAll from './gear-all'
 import GearAccessories from './gear-accessories'
+import GearAccessoryEdit from './gear-accessory-edit'
 import GearDrones from './gear-drones'
 import GearBatteries from './gear-batteries'
+import BackButton from '../../components/back-button';
 
 const routes = [
     {
@@ -29,6 +31,18 @@ const routes = [
         name: 'Accessories',
         path: "/gear/accessories/",
         exact: true,
+    },
+    {
+        name: 'edit',
+        path: "/gear/accessories/:slug/edit",
+        exact: false,
+        dontShow: true,
+    },
+    {
+        name: 'create',
+        path: "/gear/accessories/create",
+        exact: false,
+        dontShow: true,
     },
     {
         name: 'Drones',
@@ -53,6 +67,7 @@ const MyGear = (props) => {
                 <div className="flex flex-col w-full px-10 pt-10">
                     <div className="flex justify-between align-center mb-3">
                         <h1 className="text-green good-times f2 mt-0 mb-0">My gear</h1>
+                        <BackButton />
                     </div>
                     <ul className="flex align-center justify-even common-tabs center-line w-half w-full-md">
                         {
@@ -69,7 +84,9 @@ const MyGear = (props) => {
                 </div>
             </header>
             <Switch>
-                <Route path="/gear/accessories/" component={GearAccessories} />
+                <Route exact path="/gear/accessories/" component={GearAccessories} />
+                <Route path="/gear/accessories/create" component={() => <GearAccessoryEdit create />} />
+                <Route path="/gear/accessories/:slug/edit" render={() => <GearAccessoryEdit edit />} />
                 <Route path="/gear/drones/" component={GearDrones} />
                 <Route path="/gear/batteries/" component={GearBatteries} />
                 <Route path="/gear/all/" component={GearAll} />
