@@ -114,6 +114,7 @@ const SpotsList = (props) => {
                         ? <Loader />
                         : spots && spots.map((spot) => <SpotItem key={spot.id} spot={spot} />)
                     }
+                    {spots.length === 0 && <span>No spots found</span>}
                 </div>
             </div>
 
