@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import config from '../../../../config'
 import api from '../../utils/api'
@@ -13,23 +14,25 @@ const GearAccessoryEdit = ({ edit, create }) => {
 
     const { slug } = useParams();
     const history = useHistory();
+    const user = useSelector(state => state.auth.user);
 
-    const [accessory, setAccessory] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [types, setTypes] = useState([]);
     const [manufacturers, setManufacturers] = useState([]);
     const [addManufacturer, setAddManufacturer] = useState(false);
-    const [accessorySubmitted, setAccessorySubmitted] = useState(false);
+    const [Submitted, setSubmitted] = useState(false);
+    const [deleteAsked, setDeleteAsked] = useState(false);
 
     //Accessory fields
     const [accessoryId, setAccessoryId] = useState("");
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [type, setType] = useState("");
-    const [manufacturer, setManufacturer] = useState("");
+    const [type, setType] = useState(0);
+    const [manufacturer, setManufacturer] = useState(0);
     const [customManufacturer, setCustomManufacturer] = useState("");
-    const [rating, setRating] = useState("");
+    const [rating, setRating] = useState(50);
     const [vendorLink, setVendorLink] = useState("");
+    const [creator, setCreator] = useState("");
 
     const [image, setImage] = useState(null);
     const [imageSrc, setImageSrc] = useState(null);
@@ -46,17 +49,18 @@ const GearAccessoryEdit = ({ edit, create }) => {
                     if (accessory && _isMounted) {
                         setAccessoryId(accessory.id)
                         setName(accessory.name)
-                        setType(accessory.gear_type)
-                        setManufacturer(accessory.manufacturer)
-                        setVendorLink(accessory.vendor_link)
+                        setType(accessory.gear_type.id)
+                        setManufacturer(accessory.manufacturer.id)
+                        setVendorLink(accessory.vendor_link ? accessory.vendor_link : '')
                         setRating(accessory.rating)
                         setDescription(accessory.description)
+                        setCreator(accessory.creator)
                         setImage(accessory.image)
                     }
 
                     setIsLoading(false);
                 })
-                .catch(err => _isMounted && history.push('/gears/'))
+                .catch(err => _isMounted && history.push('/gear/'))
         } else {
             if (_isMounted) setIsLoading(false);
         }
@@ -91,9 +95,10 @@ const GearAccessoryEdit = ({ edit, create }) => {
         setManufacturer(manufacturer)
     }
 
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setAccessorySubmitted(true);
+        setSubmitted(true);
 
         const body = {
             name: name,
@@ -101,49 +106,49 @@ const GearAccessoryEdit = ({ edit, create }) => {
             gear_type: type,
             manufacturer: manufacturer,
             rating: rating,
-            vendor_link: vendorLink
+            vendor_link: vendorLink,
+            creator: creator.length > 0 ? creator : user.profile.profile.id
         }
 
-        //UPDATE
-        if (slug) {
-            api
-                .put(`/gears/${accessoryId}`, body)
-                .then(response => {
-                    if (imageFile) {
-                        const data = new FormData();
+        try {
+            //Custom manufacturer added by the user
+            if (customManufacturer.length > 0) {
+                let newManufacturer = await api.post('/manufacturers', { name: customManufacturer })
 
-                        data.append('files', imageFile)
-                        data.append('refId', response.data.id);
-                        data.append('ref', 'gear');
-                        data.append('field', 'image');
+                if (newManufacturer && newManufacturer.data && newManufacturer.data.id) {
+                    body.manufacturer = newManufacturer.data.id
+                }
+            }
 
-                        api
-                            .post('/upload/', data, {
-                                headers: {
-                                    'content-type': `multipart/form-data`,
-                                },
-                            })
-                            .then(response => {
-                                history.push({ pathname: "/gear/accessories/" })
-                                toast.success("Your accessory has been successfully updated");
-                            })
-                            .catch(err => {
-                                console.log(err)
-                                console.log(err.response)
-                            })
-                    }
-                    else {
-                        history.push({ pathname: "/gear/accessories/" })
-                        toast.success("Your accessory has been successfully updated");
-                    }
-                })
-                .catch(err => {
-                    console.log(err)
-                    console.log(err.data)
-                    toast.error("Ewww, something went wrong  🤔");
-                })
-                .finally(() => _isMounted && setAccessorySubmitted(false))
+            slug
+                ? await updateCreteAccessory(accessoryId, body, imageFile, 'update')
+                : await updateCreteAccessory(accessoryId, body, imageFile, 'create')
         }
+        catch (err) {
+            setSubmitted(false);
+            toast.error("Ewww, something went wrong, please try again");
+        }
+
+        setSubmitted(false);
+        history.push({ pathname: "/gear/accessories/" })
+        toast.success(create ? "Your accessory has been successfully created" : "Your accessory has been successfully updated");
+    }
+
+    const handleDelete = async (e) => {
+        e.preventDefault();
+        setSubmitted(true);
+
+        try {
+            await api.delete(`/gears/${accessoryId}`)
+        }
+        catch (err) {
+            setSubmitted(false);
+            toast.error("Ewww, something went wrong, please try again");
+        }
+
+        setSubmitted(false);
+        history.push({ pathname: "/gear/accessories/" })
+        toast.success("Your accessory has been successfully deleted");
     }
 
     if (isLoading) return <Loader className="relative" />
@@ -165,7 +170,7 @@ const GearAccessoryEdit = ({ edit, create }) => {
                         <div className="flex flex-col mt-3">
                             <label className="text-green f4 mb-2 flex align-center">Type</label>
                             <div className="input">
-                                <select className="w-full" value={type} onChange={(e) => setType(e.target.value)}>
+                                <select className="w-full common-outline" value={type} onChange={(e) => setType(e.target.value)}>
                                     {
                                         types.map(type => (<option key={type.id} value={type.id}>{type.name}</option>))
                                     }
@@ -175,7 +180,7 @@ const GearAccessoryEdit = ({ edit, create }) => {
                         <div className="flex flex-col mt-3">
                             <label className="text-green f4 mb-2 flex align-center">Vendor</label>
                             <div className="input">
-                                <select className="w-full" value={manufacturer} onChange={(e) => handleClickManufacturer(e.target.value)}>
+                                <select className="w-full common-outline" value={manufacturer} onChange={(e) => handleClickManufacturer(e.target.value)}>
                                     {
                                         manufacturers.map(manufacturer => (<option key={manufacturer.id} value={manufacturer.id}>{manufacturer.name}</option>))
                                     }
@@ -185,7 +190,7 @@ const GearAccessoryEdit = ({ edit, create }) => {
                         </div>
                         <div className="flex flex-col mt-3">
                             <label className="text-green f4 mb-2 flex align-center">Link to vendor product</label>
-                            <CommonInput value={name} handleChange={setName} type="text" name="link-to-vendor" className="" placeholder="https://www.amazon..." />
+                            <CommonInput value={vendorLink} handleChange={setVendorLink} type="text" name="link-to-vendor" className="" placeholder="https://www.amazon..." />
                         </div>
                         <div className="flex flex-col mt-3">
                             <label className="text-green f4 mb-2 flex align-center">Rating (0-100)</label>
@@ -216,7 +221,16 @@ const GearAccessoryEdit = ({ edit, create }) => {
                     </div>
                 </div>
                 <div className="flex justify-end mt-4 w-full align-center">
-                    <button className={`btn-secondary teal ${accessorySubmitted ? 'loading' :''}`}>{create ? 'Create accessory' : 'Update accessory'}</button>
+                    {!deleteAsked
+                        ? <div className="flex align-center">
+                            {edit && <button onClick={() => setDeleteAsked(true)} type="button" className={`btn-secondary red`}><span>Delete</span></button>}
+                            <button className={`btn-secondary teal ml-4 ${Submitted ? 'loading' : ''}`}>{create ? 'Create' : 'Update'}</button>
+                        </div>
+                        : <div className="flex align-center">
+                            <button onClick={() => setDeleteAsked(false)} type="button" className={`btn-secondary red`}><span>No</span></button>
+                            <button onClick={handleDelete} type="button" className={`btn-secondary teal ml-4`}><span>Yes</span></button>
+                        </div>
+                    }
                 </div>
             </form>
         </div>
@@ -224,3 +238,25 @@ const GearAccessoryEdit = ({ edit, create }) => {
 }
 
 export default GearAccessoryEdit
+
+const updateCreteAccessory = async (accessoryId, body, imageFile, type) => {
+
+    let newAccessory = null
+
+    type === 'update'
+        ? newAccessory = await api.put(`/gears/${accessoryId}`, body)
+        : newAccessory = await api.post(`/gears/`, body)
+
+    //If the user added/update the accessory image
+    if (imageFile) {
+        const data = new FormData();
+        data.append('files', imageFile)
+        data.append('refId', newAccessory.data.id);
+        data.append('ref', 'gear');
+        data.append('field', 'image');
+
+        await api.post('/upload/', data, { headers: { 'content-type': `multipart/form-data`, }, })
+    }
+
+    return newAccessory
+}

@@ -33,6 +33,13 @@ const routes = [
         exact: true,
     },
     {
+        name: 'Accessory details',
+        path: "/gear/accessories/:slug/",
+        exact: false,
+        dontShow: true,
+        preventClick:true,
+    },
+    {
         name: 'edit',
         path: "/gear/accessories/:slug/edit",
         exact: false,

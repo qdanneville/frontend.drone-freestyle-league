@@ -31,7 +31,7 @@ const BreadcrumbNav = ({ routes }) => {
             {
                 breadCrumbs.map((route, i) => {
                     if (route.cantClick) return <span key={route.path} className={`text-grey lowercase flex align-center`}> {route.name}</span>
-                    return <NavLink to={route.url} key={route.path} exact={route.exact} className={`text-grey lowercase flex align-center ${route.url === location.pathname ? 'text-white' : ''}`}>{<RightIcon className="w-4 h-4 fill-white mx-2" />}{route.slug ? route.slug : route.name}</NavLink>
+                    return <NavLink to={route.url} style={route.preventClick && { pointerEvents: 'none' }} key={route.path} exact={route.exact} className={`text-grey lowercase flex align-center ${route.url === location.pathname ? 'text-white' : ''}`}>{<RightIcon className="w-4 h-4 fill-white mx-2" />}{route.slug ? route.slug : route.name}</NavLink>
                 })
             }
         </nav>
