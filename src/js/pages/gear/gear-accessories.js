@@ -76,22 +76,22 @@ const GearAccessories = (props) => {
                         <span className="text-grey uppercase f6 font-normal">Name</span>
                     </div>
                     <div className="flex align-center justify-between flex-1 display-none-md">
-                        <div className="flex align-center justify-between px-5 w-30">
+                        <div className="flex align-center justify-center px-2 w-30">
                             <span className="text-grey uppercase f6 font-normal">type</span>
                         </div>
                         <div className="flex align-center justify-center w-20">
                             <span className="text-grey uppercase f6 font-normal text-align-center">Constructor</span>
                         </div>
                         <div className="flex flex-col justify-center align-center fill-grey py-2 px-2 w-20">
-                            <span className="text-grey uppercase f6 font-normal">Link to vendor</span>
+                            <span className="text-grey uppercase f6 font-normal text-align-center">Link to vendor</span>
                         </div>
                         <div className="flex align-center justify-center w-20">
                             <span className="text-grey uppercase f6 font-normal mr-2">Rating</span>
                         </div>
-                        <div className="flex flex-col justify-center align-center cursor-pointer fill-grey py-2 px-5 w-10">
+                        <div className="flex flex-col justify-center align-center cursor-pointer fill-grey py-2 px-2 w-10">
                             <span className="text-grey uppercase f6 font-normal">Likes</span>
                         </div>
-                        <div className="flex flex-col justify-center align-center cursor-pointer fill-grey py-2 px-5 w-10">
+                        <div className="flex flex-col justify-center align-center cursor-pointer fill-grey py-2 px-2 w-10">
                             <span className="text-grey uppercase f6 font-normal">Modified</span>
                         </div>
                         <div className="flex align-center w-20 h-full justify-end pr-4">

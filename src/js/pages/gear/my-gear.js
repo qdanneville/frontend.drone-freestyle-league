@@ -13,6 +13,7 @@ import GearAccessories from './gear-accessories'
 import GearAccessoryEdit from './gear-accessory-edit'
 import GearDrones from './gear-drones'
 import GearBatteries from './gear-batteries'
+import GearBatteriesEdit from './gear-battery-edit'
 import BackButton from '../../components/back-button';
 
 const routes = [
@@ -37,7 +38,7 @@ const routes = [
         path: "/gear/accessories/:slug/",
         exact: false,
         dontShow: true,
-        preventClick:true,
+        preventClick: true,
     },
     {
         name: 'edit',
@@ -60,7 +61,26 @@ const routes = [
         name: 'Batteries',
         path: "/gear/batteries/",
         exact: true,
-    }
+    },
+    {
+        name: 'Batteries details',
+        path: "/gear/batteries/:slug/",
+        exact: false,
+        dontShow: true,
+        preventClick: true,
+    },
+    {
+        name: 'edit',
+        path: "/gear/batteries/:slug/edit",
+        exact: false,
+        dontShow: true,
+    },
+    {
+        name: 'create',
+        path: "/gear/batteries/create",
+        exact: false,
+        dontShow: true,
+    },
 ]
 
 const MyGear = (props) => {
@@ -94,8 +114,13 @@ const MyGear = (props) => {
                 <Route exact path="/gear/accessories/" component={GearAccessories} />
                 <Route path="/gear/accessories/create" component={() => <GearAccessoryEdit create />} />
                 <Route path="/gear/accessories/:slug/edit" render={() => <GearAccessoryEdit edit />} />
+
                 <Route path="/gear/drones/" component={GearDrones} />
-                <Route path="/gear/batteries/" component={GearBatteries} />
+
+                <Route exact path="/gear/batteries/" component={GearBatteries} />
+                <Route path="/gear/batteries/create" component={() => <GearBatteriesEdit create />} />
+                <Route path="/gear/batteries/:slug/edit" render={() => <GearBatteriesEdit edit />} />
+                
                 <Route path="/gear/all/" component={GearAll} />
                 <Redirect exact path="/gear/" to="/gear/all/" />
             </Switch>

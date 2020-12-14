@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { getSpotLikes } from '../../utils/spot'
 import { NavLink } from "react-router-dom";
 import config from '../../../../config';
 
@@ -34,7 +33,7 @@ const AccessoryItem = ({ accessory }) => {
                 <span className="text-white f4 italic text-nowrap text-overflow-ellipsis block overflow-hidden">{accessory.name}</span>
             </div>
             <div className="flex align-center justify-between flex-1">
-                <div className="flex align-center justify-between px-5 w-30">
+                <div className="flex align-center justify-center px-2 w-30">
                     <span className="text-green f6 font-normal uppercase">{accessory.gear_type ? accessory.gear_type.name : '...'}</span>
                 </div>
                 <div className="flex align-center justify-center w-20">
@@ -51,27 +50,16 @@ const AccessoryItem = ({ accessory }) => {
                         <span className="bg-pink h-2 br-50" style={{ width: difficultyProgression + '%' }}></span>
                     </div>
                 </div>
-                <div className="flex justify-center align-center fill-grey py-2 px-5">
+                <div className="flex justify-center align-center fill-grey py-2 px-2">
                     <span className="f5 text-grey-light mr-1">{accessoryLikes}</span>
                     <HeartIcon />
                 </div>
-                <div className="flex justify-center align-center fill-grey py-2 px-5 w-10">
+                <div className="flex justify-center align-center fill-grey py-2 px-2 w-10">
                     <span className="f5 text-grey-light">{date}</span>
                 </div>
-                {accessory.profile ?
-                    <div className="flex align-center w-20 h-full justify-end pr-4">
-                        < i className="w-8 h-8 br-50 bg-white shadow-1 overflow-hidden bs-solid bc-white bw-2">
-                            {
-                                accessory.profile.avatar && accessory.profile.avatar.url && <img src={config.API_BASE_URL + accessory.profile.avatar.url} />
-                            }
-                        </i>
-                    </div>
-                    :
-                    <div className="flex align-center w-20 h-full justify-end pr-4">
-                        <NavLink to={`/gear/accessories/${accessory.slug}/edit/`}><EditIcon className="fill-grey w-4 h-4 cursor-pointer" /></NavLink>
-                    </div>
-                }
-
+                <div className="flex align-center w-20 h-full justify-end pr-4">
+                    <NavLink to={`/gear/accessories/${accessory.slug}/edit/`}><EditIcon className="fill-grey w-4 h-4 cursor-pointer" /></NavLink>
+                </div>
             </div>
         </div >
     )

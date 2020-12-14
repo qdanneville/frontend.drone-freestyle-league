@@ -56,11 +56,13 @@ const GearAccessoryEdit = ({ edit, create }) => {
                         setDescription(accessory.description)
                         setCreator(accessory.creator)
                         setImage(accessory.image)
+                    } else {
+                        if (_isMounted) history.push('/gear/accessories/')
                     }
 
                     setIsLoading(false);
                 })
-                .catch(err => _isMounted && history.push('/gear/'))
+                .catch(err => _isMounted && history.push('/gear/accessories/'))
         } else {
             if (_isMounted) setIsLoading(false);
         }
@@ -205,7 +207,7 @@ const GearAccessoryEdit = ({ edit, create }) => {
                     </div>
                     <div className="flex-1">
                         <div className="flex flex-col h-full">
-                            <label className="text-green f4 mb-2 flex align-center">Description</label>
+                            <label className="text-green f4 mb-2 flex align-center">Image</label>
                             <div className="bg-dark-3 flex-1">
                                 <div className="flex flex-col h-full bg-grey-input br-4">
                                     {
