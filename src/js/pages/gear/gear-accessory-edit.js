@@ -156,7 +156,7 @@ const GearAccessoryEdit = ({ edit, create }) => {
     if (isLoading) return <Loader className="relative" />
 
     return <div className="w-full">
-        <header className="flex flex-col w-full px-10 pb-4 pt-10">
+        <header className="flex flex-col w-full px-10 pb-4">
             <div className="flex justify-between align-center mb-3">
                 <h1 className="text-white f4 mt-0 mb-0">{create ? 'Create a new accessory' : 'Update your accessory'}</h1>
             </div>
@@ -208,7 +208,7 @@ const GearAccessoryEdit = ({ edit, create }) => {
                     <div className="flex-1">
                         <div className="flex flex-col h-full">
                             <label className="text-green f4 mb-2 flex align-center">Image</label>
-                            <div className="bg-dark-3 flex-1">
+                            <div className="bg-dark-3 flex-1 br-4">
                                 <div className="flex flex-col h-full bg-grey-input br-4">
                                     {
                                         image

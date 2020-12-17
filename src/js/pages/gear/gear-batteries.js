@@ -48,7 +48,7 @@ const GearBatteries = (props) => {
 
     return (
         <div className="w-full">
-            <header className="flex flex-col w-full px-10 pb-4 bb-w-1 bl-w-0 br-w-0 bt-w-0 bs-solid bc-dark-light-2 sticky t-0 z-index-7 bg-dark pt-10">
+            <header className="flex flex-col w-full px-10 pb-4 bb-w-1 bl-w-0 br-w-0 bt-w-0 bs-solid bc-dark-light-2 sticky t-0 z-index-7 bg-dark">
                 <div className="flex justify-between align-center mb-3">
                     <h1 className="text-white f4 mt-0 mb-0">batteries</h1>
                     <Link to="/gear/batteries/create" className="text-dark fill-dark f4 flex justify-center align-center bg-grey-light hover:bg-grey py-2 px-4 br-4 cursor-pointer"> <AddIcon className="stroke-15 w-4 h-4 mr-3" />Create battery</Link>
@@ -95,7 +95,7 @@ const GearBatteries = (props) => {
                             <span className="text-grey uppercase f6 font-normal text-align-center">Constructor</span>
                         </div>
                         <div className="flex flex-col justify-center align-center fill-grey py-2 px-2 w-20">
-                            <span className="text-grey uppercase f6 font-normal text-align: center;">Link to vendor</span>
+                            <span className="text-grey uppercase f6 font-normal text-align-center">Link to vendor</span>
                         </div>
                         <div className="flex align-center justify-center w-20">
                             <span className="text-grey uppercase f6 font-normal mr-2">Rating</span>

@@ -33,7 +33,7 @@ const AccessoryItem = ({ accessory }) => {
                 <span className="text-white f4 italic text-nowrap text-overflow-ellipsis block overflow-hidden">{accessory.name}</span>
             </div>
             <div className="flex align-center justify-between flex-1">
-                <div className="flex align-center justify-center px-2 w-30">
+                <div className="flex align-center justify-center px-2 w-30 text-align-center">
                     <span className="text-green f6 font-normal uppercase">{accessory.gear_type ? accessory.gear_type.name : '...'}</span>
                 </div>
                 <div className="flex align-center justify-center w-20">

@@ -17,12 +17,13 @@ const GearAll = (props) => {
     const [isLoading, setIsLoading] = useState(true);
     const accessories = useSelector(state => state.gears.accessories);
     const batteries = useSelector(state => state.gears.batteries);
+    const drones = useSelector(state => state.gears.drones);
 
     useEffect(() => {
         _isMounted = true;
 
-        dispatch({ type: 'FETCH_BATTERIES' })
-        // dispatch({ type: 'FETCH_DRONES' })
+        dispatch({ type: 'FETCH_ACCESSORIES' })
+        dispatch({ type: 'FETCH_DRONES' })
         dispatch({ type: 'FETCH_BATTERIES' })
 
         const fetchPilotGear = async () => {
@@ -32,6 +33,7 @@ const GearAll = (props) => {
                 if (request.data) {
                     if (request.data.batteries) dispatch({ type: 'SET_BATTERIES', payload: request.data.batteries })
                     if (request.data.gears) dispatch({ type: 'SET_ACCESSORIES', payload: request.data.gears })
+                    if (request.data.drones) dispatch({ type: 'SET_DRONES', payload: request.data.drones })
                 }
             }
             catch (err) {
@@ -71,21 +73,9 @@ const GearAll = (props) => {
                     </header>
                     <main>
                         <ul className="flex flex-col align-center flex-wrap w-full">
-                            <li className="p-10 flex-1 bg-grey-dark-light my-2 mb-2 flex align-center br-10 overflow-hidden shadow-material-2 w-full mr-4 mr-0-xs">
-
-                            </li>
-                            <li className="p-10 flex-1 bg-grey-dark-light my-2 mb-2 flex align-center br-10 overflow-hidden shadow-material-2 w-full mr-4 mr-0-xs">
-
-                            </li>
-                            <li className="p-10 flex-1 bg-grey-dark-light my-2 mb-2 flex align-center br-10 overflow-hidden shadow-material-2 w-full mr-4 mr-0-xs">
-
-                            </li>
-                            <li className="p-10 flex-1 bg-grey-dark-light my-2 mb-2 flex align-center br-10 overflow-hidden shadow-material-2 w-full mr-4 mr-0-xs">
-
-                            </li>
-                            <li className="p-10 flex-1 bg-grey-dark-light my-2 mb-2 flex align-center br-10 overflow-hidden shadow-material-2 w-full mr-4 mr-0-xs">
-
-                            </li>
+                            {
+                                drones && drones.map(drone => <GearSquareItem key={drone.id} name={drone.name} type={'drones'} image={drone.image} slug={drone.slug} category={drone.type ? drone.type.name : ''} manufacturer={drone.manufacturer ? drone.manufacturer.name : ''} />)
+                            }
                         </ul>
                     </main>
                 </div>

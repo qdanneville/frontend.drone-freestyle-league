@@ -17,7 +17,7 @@ const Input = (props) => {
                     ?
                     <input
                         value={value}
-                        className="w-full"
+                        className="w-full h-full"
                         type={type ? type : 'text'}
                         required={required}
                         placeholder={placeholder}

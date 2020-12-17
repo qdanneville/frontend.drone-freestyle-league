@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import api from '../../utils/api'
 
+import DroneItem from '../../components/gear/drone-item'
+
 import CommonInput from '../../components/common/common-input'
 import Loader from '../../components/loader'
 
@@ -10,20 +12,49 @@ import { Link } from 'react-router-dom';
 
 const GearDrones = (props) => {
 
+    let _isMounted = false;
+
     const dispatch = useDispatch();
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const drones = useSelector(state => state.gears.drones);
     const [filter, setFilter] = useState('')
     const [searchNameFilter, setSearchNameFilter] = useState('')
 
+    useEffect(() => {
+        _isMounted = true;
+        dispatch({ type: 'FETCH_DRONES' })
+
+        api.get(`/pilot-gears/drones`)
+            .then(response => {
+                const drones = response.data
+                if (drones) dispatch({ type: 'SET_DRONES', payload: drones })
+                if (drones && _isMounted) setIsLoading(false)
+            })
+            .catch(err => dispatch({ type: 'SET_drones', payload: [] }))
+
+        return (() => {
+            _isMounted = false;
+        })
+    }, [])
+
+    // let filtereddrones = drones.filter(battery => {
+    //     if (battery.name.toLowerCase().includes(searchNameFilter.toLowerCase())) return battery
+    //     else if (battery.battery_type && battery.battery_type.name.toLowerCase().includes(searchNameFilter.toLowerCase())) return battery
+    //     else if (battery.manufacturer && battery.manufacturer.name.toLowerCase().includes(searchNameFilter.toLowerCase())) return battery
+    //     else if (battery.nb_cells && battery.nb_cells.toString().toLowerCase().includes(searchNameFilter.toLowerCase())) return battery
+    //     else if (battery.C && battery.C.toString().toLowerCase().includes(searchNameFilter.toLowerCase())) return battery
+    //     else if (battery.mAh && battery.mAh.toString().toLowerCase().includes(searchNameFilter.toLowerCase())) return battery
+    // })
+
     return (
         <div className="w-full">
-            <header className="flex flex-col w-full px-10 pb-4 bb-w-1 bl-w-0 br-w-0 bt-w-0 bs-solid bc-dark-light-2 sticky t-0 z-index-7 bg-dark pt-10">
+            <header className="flex flex-col w-full px-10 pb-4 bb-w-1 bl-w-0 br-w-0 bt-w-0 bs-solid bc-dark-light-2 sticky t-0 z-index-7 bg-dark">
                 <div className="flex justify-between align-center mb-3">
-                    <h1 className="text-white f4 mt-0 mb-0">Drones</h1>
-                    {/* <Link to="/spots/create" className="text-dark fill-dark f4 flex justify-center align-center bg-grey-light hover:bg-grey py-2 px-4 br-4 cursor-pointer"> <AddIcon className="stroke-15 w-4 h-4 mr-3" />Create spot</Link> */}
+                    <h1 className="text-white f4 mt-0 mb-0">drones</h1>
+                    <Link to="/gear/drones/create" className="text-dark fill-dark f4 flex justify-center align-center bg-grey-light hover:bg-grey py-2 px-4 br-4 cursor-pointer"> <AddIcon className="stroke-15 w-4 h-4 mr-3" />Create drone</Link>
                 </div>
                 <div className="w-full mt-4">
-                    <CommonInput value={searchNameFilter} handleChange={setSearchNameFilter} type="text" name="search" className="search" placeholder="Search drones ..." icon="search" />
+                    <CommonInput value={searchNameFilter} handleChange={setSearchNameFilter} type="text" name="search" className="search" placeholder="Search accessory..." icon="search" />
                 </div>
                 <ul className="flex align-center mt-2 justify-between">
                     <ul className="w-half flex align-center">
@@ -44,26 +75,32 @@ const GearDrones = (props) => {
                     <div className="w-20 mr-4">
                         <span className="text-grey uppercase f6">Image</span>
                     </div>
-                    <div className="text-white mr-4 w-40">
+                    <div className="text-white mr-4 w-30">
                         <span className="text-grey uppercase f6 font-normal">Name</span>
                     </div>
-                    <div className="flex align-center justify-between flex-1 display-none-md">
-                        <div className="flex align-center justify-between px-5 w-30">
-                            <span className="text-grey uppercase f6 font-normal">type</span>
+                    <div className="flex align-center justify-between flex-1">
+                        <div className="flex align-center justify-center px-2 w-20">
+                            <span className="text-grey uppercase f6 font-normal">size</span>
+                        </div>
+                        <div className="flex align-center justify-center w-20">
+                            <span className="text-grey uppercase f6 font-normal text-align-center">Weight</span>
+                        </div>
+                        <div className="flex align-center justify-center w-20">
+                            <span className="text-grey uppercase f6 font-normal text-align-center">Regulation</span>
                         </div>
                         <div className="flex align-center justify-center w-20">
                             <span className="text-grey uppercase f6 font-normal text-align-center">Constructor</span>
                         </div>
+                        <div className="flex flex-col justify-center align-center fill-grey py-2 px-2 w-20">
+                            <span className="text-grey uppercase f6 font-normal text-align-center">Link to vendor</span>
+                        </div>
                         <div className="flex align-center justify-center w-20">
                             <span className="text-grey uppercase f6 font-normal mr-2">Rating</span>
                         </div>
-                        <div className="flex flex-col justify-center align-center cursor-pointer fill-grey py-2 px-5">
-                            <span className="text-grey uppercase f6 font-normal">Link to vendor</span>
-                        </div>
-                        <div className="flex flex-col justify-center align-center cursor-pointer fill-grey py-2 px-5 w-10">
+                        <div className="flex flex-col justify-center align-center cursor-pointer fill-grey py-2 px-2 w-10">
                             <span className="text-grey uppercase f6 font-normal">Likes</span>
                         </div>
-                        <div className="flex flex-col justify-center align-center cursor-pointer fill-grey py-2 px-5 w-10">
+                        <div className="flex flex-col justify-center align-center cursor-pointer fill-grey py-2 px-2 w-10">
                             <span className="text-grey uppercase f6 font-normal">Modified</span>
                         </div>
                         <div className="flex align-center w-20 h-full justify-end pr-4">
@@ -74,8 +111,9 @@ const GearDrones = (props) => {
                 <div className="mt-2">
                     {isLoading
                         ? <Loader />
-                        : <span>Drones</span>
+                        : drones && drones.map(drone => <DroneItem drone={drone} key={drone.id} />)
                     }
+                    {drones.length === 0 && <span>No drones found</span>}
                 </div>
             </div>
 

@@ -5,7 +5,7 @@ import config from '../../../../config';
 import EditIcon from '../../../assets/svg/edit.svg';
 import HeartIcon from '../../../assets/svg/heart.svg';
 
-const BatteryItem = ({ battery }) => {
+const BatteryItem = ({ battery, handleClick, fromDroneBatteries, isUsed }) => {
 
     const [batteryLikes, setbatteryLikes] = useState(0)
 
@@ -26,14 +26,14 @@ const BatteryItem = ({ battery }) => {
     date = date.toLocaleDateString('en-US')
 
     return (
-        <div className="flex align-center h-12 bg-grey-dark-light br-4 mb-3 overflow-hidden hover:bg-grey-black shadow-material-2 common-outline" >
+        <div onClick={fromDroneBatteries ? () => handleClick(battery.id, isUsed) : null} className={`flex align-center h-12 bg-grey-dark-light br-4 mb-3 overflow-hidden hover:bg-grey-black shadow-material-2 common-outline ${fromDroneBatteries && 'cursor-pointer'}`} >
             <i className="h-full w-20 overflow-hidden flex relative bg-grey background-image mr-4" style={{ backgroundImage: `url('${batteryImage}` }}>
             </i>
             <div className="text-white mr-4 w-20">
                 <span className="text-white f4 italic text-nowrap text-overflow-ellipsis block overflow-hidden">{battery.name}</span>
             </div>
             <div className="flex align-center justify-between flex-1">
-                <div className="flex align-center justify-center px-2 w-20">
+                <div className="flex align-center justify-center px-2 w-20 text-align-center">
                     <span className="text-green f6 font-normal uppercase">{battery.battery_type ? battery.battery_type.name : '...'}</span>
                 </div>
                 <div className="flex align-center justify-center px-2 w-20">

@@ -12,8 +12,9 @@ import GearAll from './gear-all'
 import GearAccessories from './gear-accessories'
 import GearAccessoryEdit from './gear-accessory-edit'
 import GearDrones from './gear-drones'
+import GearDroneEdit from './gear-drone-edit'
 import GearBatteries from './gear-batteries'
-import GearBatteriesEdit from './gear-battery-edit'
+import GearBatteryEdit from './gear-battery-edit'
 import BackButton from '../../components/back-button';
 
 const routes = [
@@ -58,6 +59,24 @@ const routes = [
         exact: true,
     },
     {
+        name: 'Drone details',
+        path: "/gear/drones/:slug/",
+        exact: false,
+        dontShow: true,
+    },
+    {
+        name: 'edit',
+        path: "/gear/drones/:slug/edit",
+        exact: false,
+        dontShow: true,
+    },
+    {
+        name: 'create',
+        path: "/gear/drones/create",
+        exact: false,
+        dontShow: true,
+    },
+    {
         name: 'Batteries',
         path: "/gear/batteries/",
         exact: true,
@@ -87,16 +106,15 @@ const MyGear = (props) => {
 
     return (
         <div className="w-full relative">
-            <header className="w-full pb-4 bb-w-1 bl-w-0 br-w-0 bt-w-0 bs-solid bc-dark-light-2 mb-10">
+            <header className="relative w-full pb-4 bb-w-1 bl-w-0 br-w-0 bt-w-0 bs-solid bc-dark-light-2 mb-5">
                 <div className="flex align-center">
                     <BreadCrumbs routes={routes} />
                 </div>
-                <div className="flex flex-col w-full px-10 pt-10">
-                    <div className="flex justify-between align-center mb-3">
-                        <h1 className="text-green good-times f2 mt-0 mb-0">My gear</h1>
-                        <BackButton />
-                    </div>
-                    <ul className="flex align-center justify-even common-tabs center-line w-half w-full-md">
+                <div className="absolute h-full t-6 l-8 flex align-center">
+                    <BackButton />
+                </div>
+                <div className="flex flex-col w-full px-10 mb-5">
+                    <ul className="flex align-center justify-even common-tabs w-half w-full-md">
                         {
                             routes.map((route, i) => {
                                 if (route.dontShow) return
@@ -113,14 +131,16 @@ const MyGear = (props) => {
             <Switch>
                 <Route exact path="/gear/accessories/" component={GearAccessories} />
                 <Route path="/gear/accessories/create" component={() => <GearAccessoryEdit create />} />
-                <Route path="/gear/accessories/:slug/edit" render={() => <GearAccessoryEdit edit />} />
+                <Route path="/gear/accessories/:slug/edit" component={() => <GearAccessoryEdit edit />} />
 
-                <Route path="/gear/drones/" component={GearDrones} />
+                <Route exact path="/gear/drones/" component={GearDrones} />
+                <Route path="/gear/drones/create" component={() => <GearDroneEdit create />} />
+                <Route path="/gear/drones/:slug/edit" component={() => <GearDroneEdit edit />} />
 
                 <Route exact path="/gear/batteries/" component={GearBatteries} />
-                <Route path="/gear/batteries/create" component={() => <GearBatteriesEdit create />} />
-                <Route path="/gear/batteries/:slug/edit" render={() => <GearBatteriesEdit edit />} />
-                
+                <Route path="/gear/batteries/create" component={() => <GearBatteryEdit create />} />
+                <Route path="/gear/batteries/:slug/edit" component={() => <GearBatteryEdit edit />} />
+
                 <Route path="/gear/all/" component={GearAll} />
                 <Redirect exact path="/gear/" to="/gear/all/" />
             </Switch>
