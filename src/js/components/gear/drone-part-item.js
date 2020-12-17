@@ -161,7 +161,7 @@ const DroneItem = ({ droneId, dronePart, manufacturers, partTypes, user, create,
             <div className="flex align-center justify-between flex-1">
                 <div className="flex align-center justify-center px-2 w-30">
                     {!editMode
-                        ? <span className="text-green f6 text-align-center font-normal uppercase">{type ? partTypes.find(el => el.id === parseInt(type)).name : '...'}</span>
+                        ? <span className="text-green f6 text-align-center font-normal uppercase">{type && partTypes.find(el => el.id === parseInt(type)) ? partTypes.find(el => el.id === parseInt(type)).name : '...'}</span>
                         : <div className="flex flex-1 flex-col">
                             <div className="input">
                                 <select className="w-full common-outline" style={{ fontSize: '0.75rem' }} value={type} onClick={() => setTypeAsked(true)} onChange={(e) => setType(e.target.value)}>
