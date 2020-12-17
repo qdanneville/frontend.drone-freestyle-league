@@ -165,6 +165,7 @@ const DroneItem = ({ droneId, dronePart, manufacturers, partTypes, user, create,
                         : <div className="flex flex-1 flex-col">
                             <div className="input">
                                 <select className="w-full common-outline" style={{ fontSize: '0.75rem' }} value={type} onClick={() => setTypeAsked(true)} onChange={(e) => setType(e.target.value)}>
+                                    <option>choose type</option>
                                     {
                                         partTypes.map(partType => (<option key={partType.id} value={partType.id}>{partType.name}</option>))
                                     }
@@ -179,6 +180,7 @@ const DroneItem = ({ droneId, dronePart, manufacturers, partTypes, user, create,
                         : <div className="flex flex-1 flex-col">
                             <div className="input">
                                 <select className="w-full common-outline" style={{ fontSize: '0.75rem' }} value={manufacturer} onChange={(e) => handleClickManufacturer(e.target.value)}>
+                                    <option>choose manufacturer</option>
                                     {
                                         manufacturers.map(manufacturer => (<option key={manufacturer.id} value={manufacturer.id}>{manufacturer.name}</option>))
                                     }

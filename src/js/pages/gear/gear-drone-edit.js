@@ -206,6 +206,7 @@ const GearDroneEdit = ({ edit, create }) => {
                                     <label className="text-green f4 mb-2 flex align-center">Size</label>
                                     <div className="input">
                                         <select className="w-full common-outline" value={type} onChange={(e) => setType(e.target.value)}>
+                                            <option>choose type</option>
                                             {
                                                 types.map(type => (<option key={type.id} value={type.id}>{type.name}</option>))
                                             }
@@ -220,6 +221,7 @@ const GearDroneEdit = ({ edit, create }) => {
                                     <label className="text-green f4 mb-2 flex align-center">Prefered frequency</label>
                                     <div className="input">
                                         <select className="w-full common-outline" value={frequency} onChange={(e) => setFrequency(e.target.value)}>
+                                            <option>choose frequency</option>
                                             {
                                                 frequencies.map(frequency => (<option key={frequency.id} value={frequency.id}>{frequency.name}</option>))
                                             }
@@ -232,6 +234,7 @@ const GearDroneEdit = ({ edit, create }) => {
                                     <label className="text-green f4 mb-2 flex align-center">Vendor</label>
                                     <div className="input">
                                         <select className="w-full common-outline" value={manufacturer} onChange={(e) => handleClickManufacturer(e.target.value)}>
+                                            <option>choose manufacturer</option>
                                             {
                                                 manufacturers.map(manufacturer => (<option key={manufacturer.id} value={manufacturer.id}>{manufacturer.name}</option>))
                                             }
