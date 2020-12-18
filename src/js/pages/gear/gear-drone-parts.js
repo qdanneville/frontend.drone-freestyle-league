@@ -54,7 +54,7 @@ const GearDroneParts = ({ droneId, dronePartsIds, manufacturers, user }) => {
 
     return <div className="w-full">
         <label className="text-green f4 mb-2 flex align-center">What's inside your drone : </label>
-        <div className="flex align-center overflow-hidden sticky bg-dark py-3 z-index-8" style={{ top: '195px' }}>
+        <div className="flex align-center overflow-hidden py-3 z-index-8" style={{ top: '195px' }}>
             <div className="w-20 mr-4">
                 <span className="text-grey uppercase f6">Image</span>
             </div>

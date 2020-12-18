@@ -55,16 +55,16 @@ const DroneBattery = ({ currentBatteries, handleChangeBatteries }) => {
 
     return (
         <div>
-            <span className="text-green f4 mb-2 flex align-center">{`Current used ${currentBatteriesId.length > 1 ? 'batteries' : 'battery'}`} <strong className="ml-2">(Click to remove)</strong></span>
-            <div className="bw-1 bs-solid p-3 bc-green br-6 pt-6">
+            <span className="text-green f4 mb-2 flex align-center">{`Used ${currentBatteriesId.length > 1 ? 'batteries' : 'battery'}`} <strong className="ml-2">(Click to remove)</strong></span>
+            <div className="p-3 bg-grey-dark-light br-6 pt-6 px-6 bs-solid">
 
                 {
                     usedBatteries.length > 0 ? usedBatteries.map(battery => <BatteryItem battery={battery} key={battery.id} isUsed handleClick={handleBatteryClick} fromDroneBatteries />)
-                        : <span className="text-white font-normal f4 mb-3 block">This drone is actually not using any batteries</span>
+                        : <span className="text-white font-normal f4 mb-3 block">This drone is not using any batteries</span>
                 }
             </div>
-            <span className="text-green f4 mb-2 flex align-center mt-4">{`Other non-used ${otherBatteries.length > 1 ? 'batteries' : 'battery'}`}<strong className="ml-2">(Click to add)</strong></span>
-            <div className="bw-1 bs-solid p-3 bc-grey br-6 pt-6">
+            <span className="text-green f4 mb-2 flex align-center mt-8">{`Other ${otherBatteries.length > 1 ? 'batteries' : 'battery'}`}<strong className="ml-2">(Click to add)</strong></span>
+            <div className="pt-2">
                 {
                     otherBatteries.length > 0 ? otherBatteries.map(battery => <BatteryItem battery={battery} key={battery.id} handleClick={handleBatteryClick} fromDroneBatteries />)
                         : <span className="text-white font-normal f4 mb-3 block">You are using all your batteries</span>

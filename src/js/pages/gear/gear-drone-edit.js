@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { useHistory, useParams } from 'react-router-dom'
+import { NavLink, useHistory, useParams } from 'react-router-dom'
 import config from '../../../../config'
 import api from '../../utils/api'
 import Loader from '../../components/loader'
@@ -9,6 +9,10 @@ import { toast } from 'react-toastify'
 import CommonInput from '../../components/common/common-input'
 import GearDroneParts from './gear-drone-parts'
 import DroneBattery from '../../components/gear/drone-batteries'
+
+import DroneIcon from '../../../assets/svg/gear-drone.svg'
+import BatteryIcon from '../../../assets/svg/gear-battery.svg'
+import SettingsIcon from '../../../assets/svg/settings.svg'
 
 const GearDroneEdit = ({ edit, create }) => {
 
@@ -81,7 +85,7 @@ const GearDroneEdit = ({ edit, create }) => {
 
                     setIsLoading(false);
                 })
-                // .catch(err => _isMounted && history.push('/gear/drones/'))
+            // .catch(err => _isMounted && history.push('/gear/drones/'))
         } else {
             if (_isMounted) setIsLoading(false);
         }
@@ -186,119 +190,139 @@ const GearDroneEdit = ({ edit, create }) => {
 
     if (isLoading) return <Loader className="relative" />
 
-    return <div className="w-full mb-5">
-        <header className="flex flex-col w-full px-10 pb-4">
+    return <div className="w-full mb-5 px-6">
+        {/* <header className="flex flex-col w-full px-10 pb-4">
             <div className="flex justify-between align-center mb-3">
                 <h1 className="text-white f4 mt-0 mb-0">{create ? 'Create a new drone' : 'Update your drone'}</h1>
             </div>
-        </header>
-        <div className="w-full px-10 flex">
-            <form onSubmit={handleSubmit}>
-                <div className="flex">
-                    <div className="flex flex-col">
-                        <div className="flex-1">
-                            <div className="flex flex-col">
-                                <label className="text-green f4 mb-2 flex align-center">Name</label>
-                                <CommonInput value={name} handleChange={setName} type="text" name="name" className="" placeholder="Ministar 1500" required />
-                            </div>
-                            <div className="flex flex-col-md">
-                                <div className="flex flex-1 flex-col mt-3">
-                                    <label className="text-green f4 mb-2 flex align-center">Size</label>
-                                    <div className="input">
-                                        <select className="w-full common-outline" value={type} onChange={(e) => setType(e.target.value)}>
-                                            <option>choose type</option>
-                                            {
-                                                types.map(type => (<option key={type.id} value={type.id}>{type.name}</option>))
-                                            }
-                                        </select>
+        </header> */}
+        <div className="w-full flex flex-1 flex-col-md">
+            <div className="w-full flex-col w-40-per w-full-md">
+                <div className="br-6 flex-1 p-4 bg-grey-dark-light shadow-materiel">
+                    <div className="w-full flex justify-between item-center">
+                        <span className="block f4 text-white font-bold uppercase pb-6">Drone global settings</span>
+                        <SettingsIcon className="w-8 h-8 fill-white" />
+                    </div>
+                    <form onSubmit={handleSubmit}>
+                        <div className="flex">
+                            <div className="flex w-full flex-col">
+                                <div className="flex-1">
+                                    <div className="flex flex-col">
+                                        <label className="text-green f4 mb-2 flex align-center">Name</label>
+                                        <CommonInput value={name} handleChange={setName} type="text" name="name" className="" placeholder="Ministar 1500" required />
+                                    </div>
+                                    <div className="flex flex-col-md">
+                                        <div className="flex flex-1 flex-col mt-3">
+                                            <label className="text-green f4 mb-2 flex align-center">Size</label>
+                                            <div className="input">
+                                                <select className="w-full common-outline" value={type} onChange={(e) => setType(e.target.value)}>
+                                                    <option>choose type</option>
+                                                    {
+                                                        types.map(type => (<option key={type.id} value={type.id}>{type.name}</option>))
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-1 flex-col mt-3 mx-2 mx-0-md">
+                                            <label className="text-green f4 mb-2 flex align-center">Weight (g)</label>
+                                            <CommonInput className="h-full" value={weight} handleChange={setWeight} type="number" name="weight" placeholder="500g" />
+                                        </div>
+                                        <div className="flex flex-1 flex-col mt-3">
+                                            <label className="text-green f4 mb-2 flex align-center">Prefered frequency</label>
+                                            <div className="input">
+                                                <select className="w-full common-outline" value={frequency} onChange={(e) => setFrequency(e.target.value)}>
+                                                    <option>choose frequency</option>
+                                                    {
+                                                        frequencies.map(frequency => (<option key={frequency.id} value={frequency.id}>{frequency.name}</option>))
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="flex w-full">
+                                        <div className="flex flex-1 flex-col mt-3">
+                                            <label className="text-green f4 mb-2 flex align-center">Vendor</label>
+                                            <div className="input">
+                                                <select className="w-full common-outline" value={manufacturer} onChange={(e) => handleClickManufacturer(e.target.value)}>
+                                                    <option>choose manufacturer</option>
+                                                    {
+                                                        manufacturers.map(manufacturer => (<option key={manufacturer.id} value={manufacturer.id}>{manufacturer.name}</option>))
+                                                    }
+                                                </select>
+                                                {addManufacturer && <CommonInput value={customManufacturer} handleChange={setCustomManufacturer} type="text" name="manufacturer" placeholder="Fatshark" />}
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-1 flex-col mt-3 ml-2">
+                                            <label className="text-green f4 mb-2 flex align-center">Link to vendor product</label>
+                                            <CommonInput value={vendorLink} handleChange={setVendorLink} type="text" name="link-to-vendor" className="h-full" placeholder="https://www.amazon..." />
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col mt-3">
+                                        <label className="text-green f4 mb-2 flex align-center">Rating (0-100)</label>
+                                        <CommonInput value={rating} handleChange={setRating} type="range" name="rating" className="" placeholder="50" />
                                     </div>
                                 </div>
-                                <div className="flex flex-1 flex-col mt-3 mx-2 mx-0-md">
-                                    <label className="text-green f4 mb-2 flex align-center">Weight (g)</label>
-                                    <CommonInput className="h-full" value={weight} handleChange={setWeight} type="number" name="weight" placeholder="500g" />
-                                </div>
-                                <div className="flex flex-1 flex-col mt-3">
-                                    <label className="text-green f4 mb-2 flex align-center">Prefered frequency</label>
-                                    <div className="input">
-                                        <select className="w-full common-outline" value={frequency} onChange={(e) => setFrequency(e.target.value)}>
-                                            <option>choose frequency</option>
-                                            {
-                                                frequencies.map(frequency => (<option key={frequency.id} value={frequency.id}>{frequency.name}</option>))
-                                            }
-                                        </select>
+                                <div className="flex mt-3">
+                                    <div className="w-60-per">
+                                        <div className="flex flex-col h-full">
+                                            <label className="text-green f4 mb-2 flex align-center">Description</label>
+                                            <CommonInput value={description} handleChange={setDescription} type="textarea" name="description" className="h-40" placeholder="Description of your drone here" />
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div className="flex w-full">
-                                <div className="flex flex-1 flex-col mt-3">
-                                    <label className="text-green f4 mb-2 flex align-center">Vendor</label>
-                                    <div className="input">
-                                        <select className="w-full common-outline" value={manufacturer} onChange={(e) => handleClickManufacturer(e.target.value)}>
-                                            <option>choose manufacturer</option>
-                                            {
-                                                manufacturers.map(manufacturer => (<option key={manufacturer.id} value={manufacturer.id}>{manufacturer.name}</option>))
-                                            }
-                                        </select>
-                                        {addManufacturer && <CommonInput value={customManufacturer} handleChange={setCustomManufacturer} type="text" name="manufacturer" placeholder="Fatshark" />}
-                                    </div>
-                                </div>
-                                <div className="flex flex-1 flex-col mt-3 ml-2">
-                                    <label className="text-green f4 mb-2 flex align-center">Link to vendor product</label>
-                                    <CommonInput value={vendorLink} handleChange={setVendorLink} type="text" name="link-to-vendor" className="h-full" placeholder="https://www.amazon..." />
-                                </div>
-                            </div>
-                            <div className="flex flex-col mt-3">
-                                <label className="text-green f4 mb-2 flex align-center">Rating (0-100)</label>
-                                <CommonInput value={rating} handleChange={setRating} type="range" name="rating" className="" placeholder="50" />
-                            </div>
-                        </div>
-                        <div className="flex mt-3">
-                            <div className="w-60-per">
-                                <div className="flex flex-col h-full">
-                                    <label className="text-green f4 mb-2 flex align-center">Description</label>
-                                    <CommonInput value={description} handleChange={setDescription} type="textarea" name="description" className="h-40" placeholder="Description of your drone here" />
-                                </div>
-                            </div>
-                            <div className="w-40-per flex-1 ml-2">
-                                <div className="flex flex-col h-full">
-                                    <label className="text-green f4 mb-2 flex align-center">Image</label>
-                                    <div className="bg-dark-3 flex-1">
-                                        <div className="flex flex-col h-full bg-grey-input br-4">
-                                            {
-                                                image
-                                                    ? <i className="relative flex h-full justify-center align-start w-full br-4 overflow-hidden background-image block" style={{ backgroundImage: `url(${config.API_BASE_URL + image.url})` }}></i>
-                                                    : <i className="relative flex h-full justify-center align-start w-full br-4 overflow-hidden background-image block" style={{ backgroundImage: `url(${imageSrc})` }}></i>
-                                            }
-                                            <input className="common-input-file  mt-0 mb-2 overflow-hidden" id="avatar" name="avatar" type="file" placeholder="Spot image" onChange={(e) => { setImageFile(e.target.files[0]); setImageSrc(URL.createObjectURL(e.target.files[0])); setImage(null) }} />
-                                            <label className="mt-2 text-align-center mb-2 mx-2" htmlFor="avatar">Add picture</label>
+                                    <div className="w-40-per flex-1 ml-2">
+                                        <div className="flex flex-col h-full">
+                                            <label className="text-green f4 mb-2 flex align-center">Image</label>
+                                            <div className="bg-dark-3 flex-1">
+                                                <div className="flex flex-col h-full bg-grey-input br-4">
+                                                    {
+                                                        image
+                                                            ? <i className="relative flex h-full justify-center align-start w-full br-4 overflow-hidden background-image block" style={{ backgroundImage: `url(${config.API_BASE_URL + image.url})` }}></i>
+                                                            : <i className="relative flex h-full justify-center align-start w-full br-4 overflow-hidden background-image block" style={{ backgroundImage: `url(${imageSrc})` }}></i>
+                                                    }
+                                                    <input className="common-input-file  mt-0 mb-2 overflow-hidden" id="avatar" name="avatar" type="file" placeholder="Spot image" onChange={(e) => { setImageFile(e.target.files[0]); setImageSrc(URL.createObjectURL(e.target.files[0])); setImage(null) }} />
+                                                    <label className="mt-2 text-align-center mb-2 mx-2" htmlFor="avatar">Add picture</label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div className="flex justify-end mt-4 w-full align-center">
-                    {!deleteAsked
-                        ? <div className="flex align-center">
-                            {edit && <button onClick={() => setDeleteAsked(true)} type="button" className={`btn-secondary red`}><span>Delete</span></button>}
-                            <button className={`btn-secondary teal ml-4 ${Submitted ? 'loading' : ''}`}>{create ? 'Create' : 'Update'}</button>
+                        <div className="flex justify-end mt-4 w-full-md align-center">
+                            {!deleteAsked
+                                ? <div className="flex align-center">
+                                    {edit && <button onClick={() => setDeleteAsked(true)} type="button" className={`btn-secondary red`}><span>Delete</span></button>}
+                                    <button className={`btn-secondary teal ml-4 ${Submitted ? 'loading' : ''}`}>{create ? 'Create' : 'Update'}</button>
+                                </div>
+                                : <div className="flex align-center">
+                                    <button onClick={() => setDeleteAsked(false)} type="button" className={`btn-secondary red`}><span>No</span></button>
+                                    <button onClick={handleDelete} type="button" className={`btn-secondary teal ml-4`}><span>Yes</span></button>
+                                </div>
+                            }
                         </div>
-                        : <div className="flex align-center">
-                            <button onClick={() => setDeleteAsked(false)} type="button" className={`btn-secondary red`}><span>No</span></button>
-                            <button onClick={handleDelete} type="button" className={`btn-secondary teal ml-4`}><span>Yes</span></button>
-                        </div>
-                    }
-                </div>
-            </form>
-            <div className="flex-1 ml-2 w-full flex flex-col">
-                <div className="">
-                    <GearDroneParts dronePartsIds={droneParts} manufacturers={manufacturers} user={user} droneId={droneId} />
-                </div>
-                <div className="">
-                    <DroneBattery currentBatteries={droneBatteries} handleChangeBatteries={setNewDroneBatteries} />
+                    </form>
                 </div>
             </div>
+            <div className="br-6 flex-1 p-4 bg-grey-dark-light shadow-materiel w-half ml-6">
+                <div className="w-full flex justify-between items-center pb-6">
+                    <span className="block f4 text-white font-bold uppercase">Drone parts</span>
+                    <div className="flex items-center">
+                        <DroneIcon className="w-6 h-6 fill-white" />
+                    </div>
+                </div>
+                <GearDroneParts dronePartsIds={droneParts} manufacturers={manufacturers} user={user} droneId={droneId} />
+            </div>
+        </div>
+
+        <div className="br-6 flex-1 p-4 bg-grey-dark-light shadow-materiel w-full mt-6">
+            <div className="w-full flex justify-between items-center pb-6">
+                <span className="block f4 text-white font-bold uppercase">Drone batteries</span>
+                <div className="flex items-center">
+                    <NavLink className="text-white f5 underline mr-3" to="/gear/batteries/">manage batteries</NavLink>
+                    <BatteryIcon className="w-6 h-6 fill-white" />
+                </div>
+            </div>
+            <DroneBattery currentBatteries={droneBatteries} handleChangeBatteries={setNewDroneBatteries} />
         </div>
     </div >
 }

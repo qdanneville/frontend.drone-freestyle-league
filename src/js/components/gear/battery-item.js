@@ -48,24 +48,32 @@ const BatteryItem = ({ battery, handleClick, fromDroneBatteries, isUsed }) => {
                 <div className="flex align-center justify-center w-20">
                     <span className="text-grey-light f4 font-normal text-orange text-align-center">{battery.manufacturer ? battery.manufacturer.name : '...'}</span>
                 </div>
-                <div className="flex flex-col justify-center align-center fill-grey py-2 px-2 w-20">
-                    {battery.vendor_link
-                        ? <a href={battery.vendor_link} target="_blank" rel="no-referrer" className="bg-orange f5 text-dark px-4 py-2 br-4">visit</a>
-                        : <span className="text-grey uppercase f6 font-normal">no data</span>
-                    }
-                </div>
-                <div className="flex align-center justify-center w-20">
-                    <div className="bg-grey-dark w-full h-3 relative br-50 overflow-hidden flex align-center justify-start px-1">
-                        <span className="bg-pink h-2 br-50" style={{ width: difficultyProgression + '%' }}></span>
+                {fromDroneBatteries &&
+                    <div className="flex flex-col justify-center align-center fill-grey py-2 px-2 w-20">
+                        {battery.vendor_link
+                            ? <a href={battery.vendor_link} target="_blank" rel="no-referrer" className="bg-orange f5 text-dark px-4 py-2 br-4">visit</a>
+                            : <span className="text-grey uppercase f6 font-normal">no data</span>
+                        }
                     </div>
-                </div>
-                <div className="flex justify-center align-center fill-grey py-2 px-2">
-                    <span className="f5 text-grey-light mr-1">{batteryLikes}</span>
-                    <HeartIcon />
-                </div>
-                <div className="flex justify-center align-center fill-grey py-2 px-2 w-10">
-                    <span className="f5 text-grey-light">{date}</span>
-                </div>
+                }
+                {fromDroneBatteries &&
+                    <div className="flex align-center justify-center w-20">
+                        <div className="bg-grey-dark w-full h-3 relative br-50 overflow-hidden flex align-center justify-start px-1">
+                            <span className="bg-pink h-2 br-50" style={{ width: difficultyProgression + '%' }}></span>
+                        </div>
+                    </div>
+                }
+                {fromDroneBatteries &&
+                    <div className="flex justify-center align-center fill-grey py-2 px-2">
+                        <span className="f5 text-grey-light mr-1">{batteryLikes}</span>
+                        <HeartIcon />
+                    </div>
+                }
+                {fromDroneBatteries &&
+                    <div className="flex justify-center align-center fill-grey py-2 px-2 w-10">
+                        <span className="f5 text-grey-light">{date}</span>
+                    </div>
+                }
                 <div className="flex align-center w-20 h-full justify-end pr-4">
                     <NavLink to={`/gear/batteries/${battery.slug}/edit/`}><EditIcon className="fill-grey w-4 h-4 cursor-pointer" /></NavLink>
                 </div>

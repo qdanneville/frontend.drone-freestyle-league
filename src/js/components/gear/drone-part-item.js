@@ -143,7 +143,7 @@ const DroneItem = ({ droneId, dronePart, manufacturers, partTypes, user, create,
     return (
         <form className="relative flex align-center h-12 bg-grey-dark-light br-4 mb-3 overflow-hidden hover:bg-grey-black shadow-material-2 common-outline" onSubmit={handleSubmit}>
             <div className="w-20 mr-4 h-full flex">
-                <div className={`${editMode && 'hover:set-display'} relative h-full w-full overflow-hidden flex relative bg-grey background-image`} style={{ backgroundImage: `url(${image ? config.API_BASE_URL + image.url : imageSrc})` }}>
+                <div className={`${editMode && 'hover:set-display'} relative h-full w-20 overflow-hidden flex relative bg-grey background-image`} style={{ backgroundImage: `url(${image ? config.API_BASE_URL + image.url : imageSrc})` }}>
                     <div className="absolute transform-center hover:display">
                         <input className="common-input-file  mt-0 mb-2 overflow-hidden" id={`drone-part-image-${dronePartId}`} name={`drone-part-image-${dronePartId}`} type="file" placeholder="Spot image" onChange={(e) => { URL.revokeObjectURL(imageSrc); setImageFile(e.target.files[0]); setImageSrc(URL.createObjectURL(e.target.files[0])); setImage(null) }} />
                         <label tabIndex="0" className="common-outline text-align-center f6 flex align-center justify-center" htmlFor={`drone-part-image-${dronePartId}`}><EditIcon className="fill-grey w-4 h-4 cursor-pointer" /></label>

@@ -50,6 +50,8 @@ const GearAll = (props) => {
         })
     }, [])
 
+    if (isLoading) return <Loader className="relative"/>
+
     return (
         <div className="w-full pt-5">
             <div className="px-4 flex">

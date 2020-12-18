@@ -6,6 +6,10 @@ import api from '../../utils/api'
 import Loader from '../../components/loader'
 import { toast } from 'react-toastify'
 
+import DroneIcon from '../../../assets/svg/gear-drone.svg'
+import BatteryIcon from '../../../assets/svg/gear-battery.svg'
+import SettingsIcon from '../../../assets/svg/settings.svg'
+
 import CommonInput from '../../components/common/common-input'
 
 const GearBatteryEdit = ({ edit, create }) => {
