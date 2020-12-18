@@ -110,10 +110,10 @@ const MyGear = (props) => {
                 <div className="flex align-center">
                     <BreadCrumbs routes={routes} />
                 </div>
-                <div className="absolute h-full t-6 l-8 flex align-center">
+                <div className="absolute h-full t-6 l-8 flex align-center mt-7-md ml-2-md">
                     <BackButton />
                 </div>
-                <div className="flex flex-col w-full px-10 mb-5">
+                <div className="flex flex-col w-full px-10 mb-5 mt-5-md mb-10-md">
                     <ul className="flex align-center justify-even common-tabs w-half w-full-md">
                         {
                             routes.map((route, i) => {

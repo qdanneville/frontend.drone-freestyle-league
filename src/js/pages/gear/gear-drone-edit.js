@@ -303,7 +303,7 @@ const GearDroneEdit = ({ edit, create }) => {
                     </form>
                 </div>
             </div>
-            <div className="br-6 flex-1 p-4 bg-grey-dark-light shadow-materiel w-half ml-6">
+            <div className="br-6 flex-1 p-4 bg-grey-dark-light shadow-materiel w-half w-full-md ml-6 ml-0-md mt-6-md">
                 <div className="w-full flex justify-between items-center pb-6">
                     <span className="block f4 text-white font-bold uppercase">Drone parts</span>
                     <div className="flex items-center">

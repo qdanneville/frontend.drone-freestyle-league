@@ -12,6 +12,22 @@
   }
 }
 
+.sizing-generator-md(40);
+
+.sizing-generator-md(@counter) when (@counter >= 0) {
+  .sizing-generator-md((@counter - 1));
+
+  @media screen and (max-width: @breakpoint-md) {
+    .w-@{counter}-md {
+      width: @counter*0.25rem;
+    }
+
+    .h-@{counter}-md {
+      height: @counter*0.25rem;
+    }
+  }
+}
+
 .w-full {
   width: 100%;
 }

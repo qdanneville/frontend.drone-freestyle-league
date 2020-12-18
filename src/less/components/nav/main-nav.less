@@ -71,4 +71,13 @@
       background: linear-gradient(to bottom, @white 60%, @grey 100%);
     }
   }
+
+  @media screen and (max-width: @breakpoint-md) {
+    min-width: 65px;
+    max-width: 65px;
+
+    .logo {
+      transform: scale(0.6);
+    }
+  }
 }
