@@ -68,7 +68,6 @@ const DroneDetails = (props) => {
                             {drone && drone.creator && <div className="flex flex-col align-center mt-2">
                                 <span className="text-grey f2 uppercase mb-2"><strong className="text-white font-bold">{drone.creator ? drone.creator.display_name : 'Unknown'}</strong></span>
                                 <span className="text-grey f4 uppercase mb-4 lowercase">@{drone.creator.slug}</span>
-                                {/* <UserLevel level={drone.pilot.level} currentPoints={drone.pilot.current_points} displayFirst={'level'} /> */}
                                 <span className="text-grey f4 my-1">Member since  <strong className="text-white font-bold">{profileCreationDate ? profileCreationDate : 'Unknown'}</strong></span>
                                 {drone && drone.creator && drone.creator.slug && <Link to={`/profile/${drone.creator.slug}`} className="underline f5 font-bold text-teal-dark cursor-pointer mt-2">See profile</Link>}
                             </div>}
