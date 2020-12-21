@@ -4,7 +4,7 @@ import config from '../../../../config';
 
 import HeartIcon from '../../../assets/svg/heart.svg';
 
-const SpotItemSquared = ({ name, type, image, slug, category, manufacturer }) => {
+const SpotItemSquared = ({ name, type, image, slug, category, manufacturer, dronePublicPage, infos }) => {
 
     let _isMounted = false;
 
@@ -27,23 +27,47 @@ const SpotItemSquared = ({ name, type, image, slug, category, manufacturer }) =>
         gearImage = config.API_BASE_URL + image.url
     }
 
-    return (
-        <NavLink to={`/gear/${type}/${slug}/edit`} className="flex w-full transition">
-            <div className="flex-1 bg-grey-dark-light my-2 mb-2 flex align-center br-10 overflow-hidden shadow-material-2 w-full">
-                <div style={{ width: '40%' }} className="relative br-10 box-shadow-1 overflow-hidden background-image block h-full w-30" style={{ backgroundImage: `url(${gearImage})` }}></div>
-                <div style={{ width: '60%' }} className="flex-1 flex flex-col px-4 py-4">
-                    <div className="w-full">
-                        <span className="block f4 text-grey-light font-bold text-overflow-ellipsis overflow-hidden text-nowrap">{name}</span>
+    if (!dronePublicPage) {
+        return (
+            <NavLink to={`/gear/${type}/${slug}/edit`} className="flex w-full transition">
+                <div className="flex-1 bg-grey-dark-light my-2 mb-2 flex align-center br-10 overflow-hidden shadow-material-2 w-full">
+                    <div style={{ width: '40%' }} className="relative br-10 box-shadow-1 overflow-hidden background-image block h-full w-30" style={{ backgroundImage: `url(${gearImage})` }}></div>
+                    <div style={{ width: '60%' }} className="flex-1 flex flex-col px-4 py-4">
+                        <div className="w-full">
+                            <span className="block f4 text-grey-light font-bold text-overflow-ellipsis overflow-hidden text-nowrap">{name}</span>
+                        </div>
+                        <span className="f4 text-grey font-normal mt-2 text-green">{category}</span>
+                        <span className="f4 text-grey font-normal mt-2 text-orange">{manufacturer}</span>
+                        <div className="flex w-full justify-end">
+                            <span className="f4 text-grey font-normal flex align-center">{gearLikes} <HeartIcon className="w-4 h-4 fill-grey ml-1" /></span>
+                        </div>
                     </div>
-                    <span className="f4 text-grey font-normal mt-2 text-green">{category}</span>
-                    <span className="f4 text-grey font-normal mt-2 text-orange">{manufacturer}</span>
-                    <div className="flex w-full justify-end">
-                        <span className="f4 text-grey font-normal flex align-center">{gearLikes} <HeartIcon className="w-4 h-4 fill-grey ml-1" /></span>
+                </div>
+            </NavLink>
+        )
+    } else {
+        return (
+            <div className="flex w-full transition">
+                <div className="flex-1 bg-grey-dark-light my-2 mb-2 flex align-center br-10 overflow-hidden shadow-material-2 w-full">
+                    <div style={{ width: '40%' }} className="relative br-10 box-shadow-1 overflow-hidden background-image block h-full w-30" style={{ backgroundImage: `url(${gearImage})` }}></div>
+                    <div style={{ width: '60%' }} className="flex-1 flex flex-col px-4 py-4">
+                        <div className="w-full flex justify-between items-center">
+                            <span className="block f4 text-grey-light font-bold text-overflow-ellipsis overflow-hidden text-nowrap">{name}</span>
+                            <span className="f4 text-grey font-normal text-orange">{manufacturer}</span>
+                        </div>
+                        <span className="block f4 text-grey font-normal text-green mt-1 text-overflow-ellipsis overflow-hidden text-nowrap">{category}</span>
+                        <div className="flex flex-col w-full mt-2">
+                            {
+                                infos && infos.length > 0 && infos.map((info,i) => <div key={i} className="flex w-full text-grey f6"><span>{info.name}</span><span className="ml-1">{info.type}</span></div>)
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
-        </NavLink>
-    )
+        )
+    }
+
+
 }
 
 export default SpotItemSquared

@@ -4,6 +4,7 @@ import config from '../../../../config';
 
 import EditIcon from '../../../assets/svg/edit.svg';
 import HeartIcon from '../../../assets/svg/heart.svg';
+import ShareIcon from '../../../assets/svg/share.svg';
 
 const DroneItem = ({ drone }) => {
 
@@ -64,6 +65,7 @@ const DroneItem = ({ drone }) => {
                     <span className="f5 text-grey-light">{date}</span>
                 </div>
                 <div className="flex align-center w-20 h-full justify-end pr-4">
+                    <NavLink to={`/gear/drones/${drone.slug}/`}><ShareIcon className="fill-grey w-5 h-5 cursor-pointer mr-2" /></NavLink>
                     <NavLink to={`/gear/drones/${drone.slug}/edit/`}><EditIcon className="fill-grey w-4 h-4 cursor-pointer" /></NavLink>
                 </div>
             </div>

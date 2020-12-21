@@ -3,7 +3,8 @@ import {
     Switch,
     Route,
     NavLink,
-    Redirect
+    Redirect,
+    useHistory
 } from "react-router-dom";
 
 import BreadCrumbs from '../../components/breadcrumb-nav'
@@ -13,6 +14,7 @@ import GearAccessories from './gear-accessories'
 import GearAccessoryEdit from './gear-accessory-edit'
 import GearDrones from './gear-drones'
 import GearDroneEdit from './gear-drone-edit'
+import GearDroneDetails from './gear-drone-details'
 import GearBatteries from './gear-batteries'
 import GearBatteryEdit from './gear-battery-edit'
 import BackButton from '../../components/back-button';
@@ -104,9 +106,16 @@ const routes = [
 
 const MyGear = (props) => {
 
+    const history = useHistory();
+
+    console.log(history.location);
+
+    //Hiding the nav within a drone public page
+    let isDronePublicPage = history.location.pathname !== "/gear/drones/" && history.location.pathname.includes('/gear/drones/') && !history.location.pathname.includes('edit')
+
     return (
         <div className="w-full relative">
-            <header className="relative w-full pb-4 bb-w-1 bl-w-0 br-w-0 bt-w-0 bs-solid bc-dark-light-2 mb-5">
+            { !isDronePublicPage && <header className="relative w-full pb-4 bb-w-1 bl-w-0 br-w-0 bt-w-0 bs-solid bc-dark-light-2 mb-5">
                 <div className="flex align-center">
                     <BreadCrumbs routes={routes} />
                 </div>
@@ -127,7 +136,7 @@ const MyGear = (props) => {
                         }
                     </ul>
                 </div>
-            </header>
+            </header>}
             <Switch>
                 <Route exact path="/gear/accessories/" component={GearAccessories} />
                 <Route path="/gear/accessories/create" component={() => <GearAccessoryEdit create />} />
@@ -135,6 +144,7 @@ const MyGear = (props) => {
 
                 <Route exact path="/gear/drones/" component={GearDrones} />
                 <Route path="/gear/drones/create" component={() => <GearDroneEdit create />} />
+                <Route exact path="/gear/drones/:slug/" component={() => <GearDroneDetails />} />
                 <Route path="/gear/drones/:slug/edit" component={() => <GearDroneEdit edit />} />
 
                 <Route exact path="/gear/batteries/" component={GearBatteries} />

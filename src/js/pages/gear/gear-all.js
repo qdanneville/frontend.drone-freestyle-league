@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import api from '../../utils/api'
-import GearIcon from '../../../assets/svg/gear.svg'
+import GearIcon from '../../../assets/svg/accessories-icon.svg'
 import DroneIcon from '../../../assets/svg/gear-drone.svg'
-import BatteryIcon from '../../../assets/svg/gear-battery.svg'
+import BatteryIcon from '../../../assets/svg/battery-icon.svg'
 import { toast } from 'react-toastify'
 import Loader from '../../components/loader'
 
