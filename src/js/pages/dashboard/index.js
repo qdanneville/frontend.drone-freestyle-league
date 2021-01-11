@@ -77,7 +77,7 @@ const Dashboard = (props) => {
                     <Drones />
                     <Spots />
                 </aside>
-                <main className="flex flex-col bg-grey-dark-light br-6 p-4 mx-2">
+                <main className="flex flex-col mx-2">
                     <Publications />
                 </main>
                 <aside>

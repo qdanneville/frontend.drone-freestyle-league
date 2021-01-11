@@ -1,10 +1,11 @@
 import React from 'react';
+import CreatePublication from '../../../components/publication/create-publication'
 
 const DashboardPublications = () => {
     return (
         <section className="w-full">
             <div className="common-container">
-                <h1>Dashboard Publications</h1>
+                <CreatePublication />
             </div>
         </section>
     );
