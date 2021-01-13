@@ -237,7 +237,7 @@ const GearBatteryEdit = ({ edit, create }) => {
                         <div className="flex flex-col h-full">
                             <label className="text-green f4 mb-2 flex align-center">Image</label>
                             <div className="bg-dark-3 flex-1 br-4">
-                                <div className="flex flex-col h-full bg-grey-input br-4">
+                                <div className="flex flex-col h-full bg-grey-dark-light br-4">
                                     {
                                         image
                                             ? <i className="relative flex h-full justify-center align-start w-full br-4 overflow-hidden background-image block" style={{ backgroundImage: `url(${config.API_BASE_URL + image.url})` }}></i>

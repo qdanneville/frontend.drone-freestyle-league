@@ -1,12 +1,13 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
-import CreatePublicationSettings from './create-publication-settings'
+import CreatePublicationSettings from './settings/create-publication-settings'
 import config from '../../../../config'
 
 import GearIcon from '../../../assets/svg/my-fleet.svg'
 import SpotIcon from '../../../assets/svg/my-spots.svg'
 import ImageIcon from '../../../assets/svg/image.svg'
+import UserIcon from '../../../assets/svg/user.svg'
 
 const CreatePublication = () => {
 
@@ -57,6 +58,10 @@ const CreatePublication = () => {
                     <li className="flex flex-1 items-center justify-center cursor-pointer hover:bg-dark-3 py-3 br-10 h-full" onClick={openPublicationModal}>
                         <SpotIcon className="w-6 h-6 fill-yellow" />
                         <span className="text-grey f4 ml-4">Spot</span>
+                    </li>
+                    <li className="flex flex-1 items-center justify-center cursor-pointer hover:bg-dark-3 py-3 br-10 h-full" onClick={openPublicationModal}>
+                        <UserIcon className="w-5 h-5 fill-grey-light" />
+                        <span className="text-grey f4 ml-4">User</span>
                     </li>
                 </ul>
             </div>
