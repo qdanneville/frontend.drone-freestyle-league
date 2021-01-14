@@ -4,10 +4,6 @@ import BackIcon from '../../../../assets/svg/arrow-w.svg'
 const ItemSettingsWindow = (props) => {
     const { window, active, resetSettingsWindow } = props;
 
-    console.log(window && window.component)
-    console.log(window && window.title)
-    console.log(active)
-
     return (
         <div className={`absolute t-0 l-0 w-full h-full transition bg-dark z-index-2 ${active ? 'translate-reset-position' : 'translate-x-100-per'}`}>
             <header className="relative bb-w-1 bl-w-0 bt-w-0 br-w-0 bc-grey-dark-light w-full bs-solid flex items-center justify-center">

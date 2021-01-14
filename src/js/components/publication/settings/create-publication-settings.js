@@ -5,7 +5,6 @@ import CommonInput from '../../common/common-input'
 
 import config from '../../../../../config'
 
-import TriangleDownIcon from '../../../../assets/svg/bottom-triangle.svg'
 import GearIcon from '../../../../assets/svg/my-fleet.svg'
 import SpotIcon from '../../../../assets/svg/my-spots.svg'
 import ImageIcon from '../../../../assets/svg/image.svg'
@@ -13,6 +12,8 @@ import UserIcon from '../../../../assets/svg/user.svg'
 
 import ItemSettingsWindow from './item-settings-window';
 import ItemSpots from './window/item-spots'
+import PublicationItem from './window/publication-item'
+
 const CreatePublicationSettings = () => {
 
     //Publication settings
@@ -24,6 +25,7 @@ const CreatePublicationSettings = () => {
     const [category, setCategory] = useState('')
     const [privacy, setPrivacy] = useState('')
     const [body, setBody] = useState('');
+    const [itemList, setItemList] = useState([]);
 
     //Publication State 
     const [itemSettingsIsActive, setItemSettingsIsActive] = useState(false);
@@ -44,6 +46,24 @@ const CreatePublicationSettings = () => {
         setItemSettingsIsActive(false);
         setItemSettingsWindow(null)
     }
+
+    //Publications item(s)
+
+    const handleItemClick = (item) => {
+        let newItemList = itemList.slice();
+        newItemList.push(item);
+        setItemList(newItemList);
+        resetSettingsWindow();
+    }
+
+    const handleItemRemove = (item) => {
+        let newItemList = itemList.slice();
+        newItemList = newItemList.filter(el => el.id != item.id);
+        setItemList(newItemList);
+        resetSettingsWindow();
+    }
+
+    console.log('publications items : ', itemList);
 
     return (
         <div className="flex relative overflow-hidden" style={{ maxWidth: '500px' }}>
@@ -86,10 +106,17 @@ const CreatePublicationSettings = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="mt-4">
+                    <div className="mt-4 mb-4">
                         <CommonInput value={body} handleChange={setBody} type="textarea" name="description" className="h-40 bg-transparent br-6" placeholder="What do you want to say" />
                     </div>
-                    <div className="bc-grey-dark-light bs-solid br-4 bw-1 mt-4">
+                    <div className="">
+                        <ul className="flex flex-col">
+                            {
+                                itemList.map(item => <PublicationItem key={item.id} item={{ id: item.id, itemType: item.itemType, image: item.image || null, name: item.name, type: item.type || '', customInfo: item.customInfo || '...' }} handleRemove={handleItemRemove} />)
+                            }
+                        </ul>
+                    </div>
+                    <div className="bc-grey-dark-light bs-solid br-4 bw-1">
                         <ul className="flex items-center justify-evenly">
                             <li className="flex flex-1 items-center justify-center cursor-pointer hover:bg-dark-3 py-3 br-10 h-full" onClick={() => openSettingsWindow(<ItemSpots />, 'Identify a person')}>
                                 <ImageIcon className="w-5 h-5 fill-white" />
@@ -99,7 +126,7 @@ const CreatePublicationSettings = () => {
                                 <GearIcon className="w-6 h-6 fill-green" />
                                 <span className="text-grey f4 ml-4">Gear</span>
                             </li>
-                            <li className="flex flex-1 items-center justify-center cursor-pointer hover:bg-dark-3 py-3 br-10 h-full" onClick={() => openSettingsWindow(<ItemSpots />, 'Add a spot')}>
+                            <li className="flex flex-1 items-center justify-center cursor-pointer hover:bg-dark-3 py-3 br-10 h-full" onClick={() => openSettingsWindow(<ItemSpots handleClick={handleItemClick} />, 'Add a spot')}>
                                 <SpotIcon className="w-6 h-6 fill-yellow" />
                                 <span className="text-grey f4 ml-4">Spot</span>
                             </li>
