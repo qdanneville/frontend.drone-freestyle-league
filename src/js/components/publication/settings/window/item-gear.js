@@ -102,7 +102,7 @@ const ItemGear = ({ handleClick, itemList }) => {
                     </ul>
                 </ul>
             </div>
-            <div className="relative mt-2">
+            <div className="relative mt-2 pb-10">
                 {
                     filteredList && filteredList.map((item) => <PublicationItem key={item.id} item={{ id: item.id, itemType: filter, image: item.image || null, name: item.name, type: item.type.name || '', customInfo: item.manufacturer.name || '...' }} handleClick={handleClick} />)
                 }

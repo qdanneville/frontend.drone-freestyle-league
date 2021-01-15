@@ -45,7 +45,7 @@ const ItemSpots = ({ handleClick, itemList }) => {
             <div className="w-full sticky t-0 pt-4 pb-4 z-index-3 bg-dark">
                 <CommonInput value={searchNameFilter} handleChange={setSearchNameFilter} type="text" name="search" className="search" placeholder="Search by name..." icon="search" />
             </div>
-            <div className="relative mt-2">
+            <div className="relative mt-2 pb-10">
                 {spotsLoading
                     ? <Loader className="relative" />
                     : spots && filteredList && filteredList.map((spot) => <PublicationItem key={spot.id} item={{ id: spot.id, itemType: 'spot', image: spot.image || null, name: spot.name, type: spot.spot_type.name || '', customInfo: spot.privacy || '...' }} handleClick={handleClick} />)
