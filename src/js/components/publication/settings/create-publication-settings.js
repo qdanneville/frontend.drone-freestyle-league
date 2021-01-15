@@ -12,6 +12,7 @@ import UserIcon from '../../../../assets/svg/user.svg'
 
 import ItemSettingsWindow from './item-settings-window';
 import ItemSpots from './window/item-spots'
+import ItemGear from './window/item-gear'
 import PublicationItem from './window/publication-item'
 
 const CreatePublicationSettings = () => {
@@ -56,14 +57,12 @@ const CreatePublicationSettings = () => {
         resetSettingsWindow();
     }
 
-    const handleItemRemove = (item) => {
+    const handleItemRemove = (id) => {
         let newItemList = itemList.slice();
-        newItemList = newItemList.filter(el => el.id != item.id);
+        newItemList = newItemList.filter(el => el.id != id);
         setItemList(newItemList);
         resetSettingsWindow();
     }
-
-    console.log('publications items : ', itemList);
 
     return (
         <div className="flex relative overflow-hidden" style={{ maxWidth: '500px' }}>
@@ -122,11 +121,11 @@ const CreatePublicationSettings = () => {
                                 <ImageIcon className="w-5 h-5 fill-white" />
                                 <span className="text-grey f4 ml-4">Photo</span>
                             </li>
-                            <li className="flex flex-1 items-center justify-center cursor-pointer hover:bg-dark-3 py-3 br-10 h-full" onClick={() => openSettingsWindow(<ItemSpots />, 'Add a gear')}>
+                            <li className="flex flex-1 items-center justify-center cursor-pointer hover:bg-dark-3 py-3 br-10 h-full" onClick={() => openSettingsWindow(<ItemGear handleClick={handleItemClick} itemList={itemList.map(item => item.id)} />, 'Add a gear')}>
                                 <GearIcon className="w-6 h-6 fill-green" />
                                 <span className="text-grey f4 ml-4">Gear</span>
                             </li>
-                            <li className="flex flex-1 items-center justify-center cursor-pointer hover:bg-dark-3 py-3 br-10 h-full" onClick={() => openSettingsWindow(<ItemSpots handleClick={handleItemClick} />, 'Add a spot')}>
+                            <li className="flex flex-1 items-center justify-center cursor-pointer hover:bg-dark-3 py-3 br-10 h-full" onClick={() => openSettingsWindow(<ItemSpots handleClick={handleItemClick} itemList={itemList.map(item => item.id)} />, 'Add a spot')}>
                                 <SpotIcon className="w-6 h-6 fill-yellow" />
                                 <span className="text-grey f4 ml-4">Spot</span>
                             </li>

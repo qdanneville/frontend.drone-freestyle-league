@@ -17,8 +17,6 @@ const CreatePublication = () => {
     const user = useSelector(state => state.auth.user);
     const modalIsShown = useSelector(state => state.modal.show)
 
-    console.log(modalIsShown);
-
     const openPublicationModal = () => {
         const modalContent = {
             component: <CreatePublicationSettings />,
