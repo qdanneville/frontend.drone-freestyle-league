@@ -61,7 +61,7 @@ const GearBatteryEdit = ({ edit, create }) => {
                         setDischarge(battery.C)
                         setName(battery.name)
                         setManufacturer(battery.manufacturer.id)
-                        setType(battery.battery_type.id)
+                        setType(battery.type.id)
                         setVendorLink(battery.vendor_link ? battery.vendor_link : '')
                         setRating(battery.rating)
                         setDescription(battery.description)
@@ -119,7 +119,7 @@ const GearBatteryEdit = ({ edit, create }) => {
             nb_cells: nbCells,
             mAh: capacity,
             C: discharge,
-            battery_type: type,
+            type: type,
             manufacturer: manufacturer,
             rating: rating,
             vendor_link: vendorLink,

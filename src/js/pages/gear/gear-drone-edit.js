@@ -59,13 +59,10 @@ const GearDroneEdit = ({ edit, create }) => {
     useEffect(() => {
         _isMounted = true;
 
-        console.log(slug);
-
         if (slug) {
             api.get(`/drones?slug=${slug}`)
                 .then(response => {
                     let drone = response.data[0]
-                    console.log(drone);
                     if (drone && _isMounted) {
                         setdroneId(drone.id ? drone.id : '')
                         setName(drone.name ? drone.name : '')

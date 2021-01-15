@@ -26,7 +26,7 @@ const DroneItem = ({ droneId, dronePart, manufacturers, partTypes, user, create,
     const [dronePartId, setDronePartId] = useState(dronePart.id);
     const [name, setName] = useState(dronePart.name ? dronePart.name : '');
     const [description, setDescription] = useState(dronePart.description ? dronePart.description : '');
-    const [type, setType] = useState(dronePart.drone_parts_type ? dronePart.drone_parts_type.id : 0);
+    const [type, setType] = useState(dronePart.type ? dronePart.type.id : 0);
     const [price, setPrice] = useState(dronePart.price ? dronePart.price : '');
     const [manufacturer, setManufacturer] = useState(dronePart.manufacturer ? dronePart.manufacturer.id : 0);
     const [customManufacturer, setCustomManufacturer] = useState("");
@@ -52,7 +52,7 @@ const DroneItem = ({ droneId, dronePart, manufacturers, partTypes, user, create,
             name: name,
             description: description,
             price: price,
-            drone_parts_type: typeAsked ? (type === 0 ? 1 : type) : type,
+            type: typeAsked ? (type === 0 ? 1 : type) : type,
             manufacturer: manufacturer,
             rating: rating,
             vendor_link: vendorLink,

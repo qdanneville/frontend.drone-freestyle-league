@@ -49,7 +49,7 @@ const GearAccessoryEdit = ({ edit, create }) => {
                     if (accessory && _isMounted) {
                         setAccessoryId(accessory.id)
                         setName(accessory.name)
-                        setType(accessory.gear_type.id)
+                        setType(accessory.type.id)
                         setManufacturer(accessory.manufacturer.id)
                         setVendorLink(accessory.vendor_link ? accessory.vendor_link : '')
                         setRating(accessory.rating)
@@ -105,7 +105,7 @@ const GearAccessoryEdit = ({ edit, create }) => {
         const body = {
             name: name,
             description: description,
-            gear_type: type,
+            type: type,
             manufacturer: manufacturer,
             rating: rating,
             vendor_link: vendorLink,

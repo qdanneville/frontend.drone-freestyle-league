@@ -34,7 +34,7 @@ const BatteryItem = ({ battery, handleClick, fromDroneBatteries, isUsed }) => {
             </div>
             <div className="flex align-center justify-between flex-1">
                 <div className="flex align-center justify-center px-2 w-20 text-align-center">
-                    <span className="text-green f6 font-normal uppercase">{battery.battery_type ? battery.battery_type.name : '...'}</span>
+                    <span className="text-green f6 font-normal uppercase">{battery.type ? battery.type.name : '...'}</span>
                 </div>
                 <div className="flex align-center justify-center px-2 w-20">
                     <span className="text-green f6 font-normal uppercase">{battery.nb_cells ? battery.nb_cells + 'S' : '...'}</span>

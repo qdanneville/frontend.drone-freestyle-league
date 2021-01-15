@@ -50,7 +50,7 @@ const GearAll = (props) => {
         })
     }, [])
 
-    if (isLoading) return <Loader className="relative"/>
+    if (isLoading) return <Loader className="relative" />
 
     return (
         <div className="w-full pt-5">
@@ -63,7 +63,7 @@ const GearAll = (props) => {
                     <main>
                         <ul className="flex flex-col align-center flex-wrap w-full">
                             {
-                                accessories && accessories.map(accessory => <GearSquareItem key={accessory.id} name={accessory.name} type={'accessories'} image={accessory.image} slug={accessory.slug} category={accessory.gear_type ? accessory.gear_type.name : ''} manufacturer={accessory.manufacturer ? accessory.manufacturer.name : ''} />)
+                                accessories && accessories.map(accessory => <GearSquareItem key={accessory.id} name={accessory.name} type={'accessories'} image={accessory.image} slug={accessory.slug} category={accessory.type ? accessory.type.name : ''} manufacturer={accessory.manufacturer ? accessory.manufacturer.name : ''} />)
                             }
                         </ul>
                     </main>
@@ -89,7 +89,7 @@ const GearAll = (props) => {
                     <main>
                         <ul className="flex flex-col align-center flex-wrap w-full">
                             {
-                                batteries && batteries.map(battery => <GearSquareItem key={battery.id} name={battery.name} type={'batteries'} image={battery.image} slug={battery.slug} category={battery.battery_type ? battery.battery_type.name : ''} manufacturer={battery.manufacturer ? battery.manufacturer.name : ''} />)
+                                batteries && batteries.map(battery => <GearSquareItem key={battery.id} name={battery.name} type={'batteries'} image={battery.image} slug={battery.slug} category={battery.type ? battery.type.name : ''} manufacturer={battery.manufacturer ? battery.manufacturer.name : ''} />)
                             }
                         </ul>
                     </main>

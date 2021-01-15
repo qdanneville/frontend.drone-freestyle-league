@@ -34,7 +34,7 @@ const AccessoryItem = ({ accessory }) => {
             </div>
             <div className="flex align-center justify-between flex-1">
                 <div className="flex align-center justify-center px-2 w-30 text-align-center">
-                    <span className="text-green f6 font-normal uppercase">{accessory.gear_type ? accessory.gear_type.name : '...'}</span>
+                    <span className="text-green f6 font-normal uppercase">{accessory.type ? accessory.type.name : '...'}</span>
                 </div>
                 <div className="flex align-center justify-center w-20">
                     <span className="text-grey-light f4 font-normal text-orange text-align-center">{accessory.manufacturer ? accessory.manufacturer.name : '...'}</span>

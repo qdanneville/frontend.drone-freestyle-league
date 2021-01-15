@@ -33,8 +33,6 @@ const DroneDetails = (props) => {
         })
     }, [])
 
-    console.log(drone);
-
     const profileCreationDate = drone && drone.creator ? new Date(drone.creator.created_at).toLocaleDateString('en-US') : null
     let difficultyProgression = drone && (drone.rating / 100) * 100;
 
@@ -116,7 +114,7 @@ const DroneDetails = (props) => {
                             <div className="flex-1 w-33-per">
                                 <div className="flex flex-col bg-grey-dark-light mr-2 br-4 py-4 px-4">
                                     <h3 className="text-green f6 uppercase good-times font-normal mt-0">Drone batteries</h3>
-                                    {drone.batteries && drone.batteries.map(battery => <GearSquareItem key={battery.id} name={battery.name} infos={[battery.nb_cells && { name: battery.nb_cells, type: 'nb cells' }, battery.C && { name: battery.C, type: 'C' }, , battery.mAh && { name: battery.mAh, type: 'mAh' }]} type={'batteries'} image={battery.image} category={battery.battery_type ? battery.battery_type.name : ''} manufacturer={battery.manufacturer ? battery.manufacturer.name : ''} vendorLink={battery.vendor_link} dronePublicPage={true} />)}
+                                    {drone.batteries && drone.batteries.map(battery => <GearSquareItem key={battery.id} name={battery.name} infos={[battery.nb_cells && { name: battery.nb_cells, type: 'nb cells' }, battery.C && { name: battery.C, type: 'C' }, , battery.mAh && { name: battery.mAh, type: 'mAh' }]} type={'batteries'} image={battery.image} category={battery.type ? battery.type.name : ''} manufacturer={battery.manufacturer ? battery.manufacturer.name : ''} vendorLink={battery.vendor_link} dronePublicPage={true} />)}
                                 </div>
                             </div>
                             <div className="flex-1 w-33-per">
@@ -127,7 +125,7 @@ const DroneDetails = (props) => {
                             <div className="flex-1 w-33-per">
                                 <div className="flex flex-col bg-grey-dark-light mr-2 br-4 py-4 px-4">
                                     <h3 className="text-green f6 uppercase good-times font-normal mt-0">Drone components</h3>
-                                    {drone.drone_parts && drone.drone_parts.map(part => <GearSquareItem key={part.id} name={part.name} infos={[part.price && { name: part.price, type: '€' }]} type={'accessories'} image={part.image} category={part.drone_parts_type ? part.drone_parts_type.name : ''} manufacturer={part.manufacturer ? part.manufacturer.name : ''} vendorLink={part.vendor_link} dronePublicPage={true} />)}
+                                    {drone.drone_parts && drone.drone_parts.map(part => <GearSquareItem key={part.id} name={part.name} infos={[part.price && { name: part.price, type: '€' }]} type={'accessories'} image={part.image} category={part.type ? part.type.name : ''} manufacturer={part.manufacturer ? part.manufacturer.name : ''} vendorLink={part.vendor_link} dronePublicPage={true} />)}
                                 </div>
                             </div>
                         </div>
