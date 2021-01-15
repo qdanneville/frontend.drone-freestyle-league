@@ -17,6 +17,7 @@ const Modal = () => {
     const closeModal = (e) => {
         dispatch({ type: 'SET_HIDE_MODAL' })
         dispatch({ type: 'CLEAR_MODAL_OPTIONS' })
+        document.body.classList.remove('overflow-hidden') 
     }
 
     return (
