@@ -104,7 +104,7 @@ const ItemGear = ({ handleClick, itemList }) => {
             </div>
             <div className="relative mt-2 pb-10">
                 {
-                    filteredList && filteredList.map((item) => <PublicationItem key={item.id} item={{ id: item.id, itemType: filter, image: item.image || null, name: item.name, type: item.type.name || '', customInfo: item.manufacturer.name || '...' }} handleClick={handleClick} />)
+                    filteredList && filteredList.map((item) => <PublicationItem key={item.id} item={{ id: item.id, itemType: filter, image: item.image || null, name: item.name, type: (item && item.type && item.type.name) || '', customInfo: (item && item.manufacturer && item.manufacturer.name) || '...' }} handleClick={handleClick} />)
                 }
                 {filteredList.length === 0 && <span>No gear found</span>}
             </div>

@@ -30,7 +30,7 @@ const PublicationItem = ({ item, handleClick, handleRemove }) => {
             </i>
             <div className="flex flex-col text-white mr-4">
                 <div className="flex items-center">
-                    <span className="text-white f4 text-nowrap text-overflow-ellipsis block overflow-hidden">{item.name}</span>
+                    <span className="text-white f4 text-nowrap text-overflow-ellipsis block overflow-hidden">{item && item.name}</span>
                     <span className="mx-1">|</span>
                     <span className="text-green f5 font-normal">{item.type ? item.type : ''}</span>
                 </div>
