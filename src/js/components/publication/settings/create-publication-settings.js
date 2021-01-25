@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import api from '../../../utils/api'
 
 import CommonInput from '../../common/common-input'
 
@@ -9,6 +10,7 @@ import GearIcon from '../../../../assets/svg/my-fleet.svg'
 import SpotIcon from '../../../../assets/svg/my-spots.svg'
 import ImageIcon from '../../../../assets/svg/image.svg'
 import UserIcon from '../../../../assets/svg/user.svg'
+import CloseModalIcon from '../../../../assets/svg/close.svg';
 
 import ItemSettingsWindow from './item-settings-window';
 import ItemSpots from './window/item-spots'
@@ -18,9 +20,11 @@ import PublicationItem from './window/publication-item'
 
 const CreatePublicationSettings = () => {
 
+    let _isMounted = false;
+
     //Publication settings
     const user = useSelector(state => state.auth.user);
-    const [categories, setCategories] = useState([1, 2, 3, 4])
+    const [categories, setCategories] = useState([])
     const [privacies, setPrivacies] = useState(['public', 'private', 'followers'])
 
     //Publication body
@@ -28,6 +32,45 @@ const CreatePublicationSettings = () => {
     const [privacy, setPrivacy] = useState('')
     const [body, setBody] = useState('');
     const [itemList, setItemList] = useState([]);
+
+    //Publication photos 
+    const [images, setImages] = useState([])
+    const [imagesSrc, setImagesSrc] = useState([]);
+    const [imagesFiles, setImagesFiles] = useState([]);
+
+    const handleImages = (e) => {
+        let newImagesFiles = imagesFiles.slice();
+        let newImagesSrc = imagesSrc.slice();
+        newImagesFiles.push(e.target.files[0])
+        newImagesSrc.push(URL.createObjectURL(e.target.files[0]))
+        setImagesFiles(newImagesFiles)
+        setImagesSrc(newImagesSrc)
+    }
+
+    const handleImageRemove = (imageIndex) => {
+        let newImagesFiles = imagesFiles.slice();
+        let newImagesSrc = imagesSrc.slice();
+
+        newImagesFiles.splice(imageIndex, 1)
+        newImagesSrc.splice(imageIndex, 1)
+
+        setImagesFiles(newImagesFiles)
+        setImagesSrc(newImagesSrc)
+    }
+
+    //Fetching publication categories
+    useEffect(() => {
+        _isMounted = true;
+
+        api
+            .get('/publication-categories/')
+            .then(response => (response && response.data && _isMounted) ? setCategories(response.data) : [])
+
+        return (() => {
+            _isMounted = false;
+        })
+    }, [])
+
 
     //Publication State 
     const [itemSettingsIsActive, setItemSettingsIsActive] = useState(false);
@@ -50,7 +93,6 @@ const CreatePublicationSettings = () => {
     }
 
     //Publications item(s)
-
     const handleItemClick = (item) => {
         let newItemList = itemList.slice();
         newItemList.push(item);
@@ -99,7 +141,7 @@ const CreatePublicationSettings = () => {
                                     <select className="w-full common-outline small-font" value={category} onChange={(e) => setCategory(e.target.value)}>
                                         <option>Choose category</option>
                                         {
-                                            categories.map(category => (<option key={category} value={category}>{category}</option>))
+                                            categories.map(category => (<option key={category.id} value={category.name}>{category.name}</option>))
                                         }
                                     </select>
                                 </div>
@@ -116,11 +158,24 @@ const CreatePublicationSettings = () => {
                             }
                         </ul>
                     </div>
+                    {imagesSrc.length > 0 &&
+                        <div className="bc-grey-dark-light bs-solid br-4 bw-1 mb-4">
+                            <ul className="flex w-full py-1">
+                                {imagesSrc.map((imageSrc, i) =>
+                                    <li key={i} className="relative w-full h-40 mx-1">
+                                        <CloseModalIcon onClick={() => handleImageRemove(i)} className="z-index-2 absolute t-2 r-2 w-7 h-7 stroke-grey cursor-pointer bg-grey-dark-light p-2 br-50 hover:bg-dark-3 z-index-1" />
+                                        <i className="relative flex h-full justify-center align-start w-full br-4 overflow-hidden background-image block" style={{ backgroundImage: `url(${imageSrc})` }}></i>
+                                    </li>
+                                )}
+                            </ul>
+                        </div>
+                    }
                     <div className="bc-grey-dark-light bs-solid br-4 bw-1">
                         <ul className="flex items-center justify-evenly">
-                            <li className="flex flex-1 items-center justify-center cursor-pointer hover:bg-dark-3 py-3 br-10 h-full" onClick={() => openSettingsWindow(<ItemSpots />, 'Identify a person')}>
-                                <ImageIcon className="w-5 h-5 fill-white" />
-                                <span className="text-grey f4 ml-4">Photo</span>
+                            <li className="flex flex-1 items-center justify-center cursor-pointer hover:bg-dark-3 py-3 br-10 h-full">
+                                <input className="common-input-file text-grey f4 ml-4" id="image" name="image" type="file" onChange={handleImages} accept="image/png, image/jpeg" />
+                                <label className="flex flex-1 items-center justify-center text-grey f4 ml-4 custom cursor-pointer" htmlFor="image">
+                                    <ImageIcon className="w-5 h-5 fill-white mr-4" />Photo</label>
                             </li>
                             <li className="flex flex-1 items-center justify-center cursor-pointer hover:bg-dark-3 py-3 br-10 h-full" onClick={() => openSettingsWindow(<ItemGear handleClick={handleItemClick} itemList={itemList.map(item => item.id)} />, 'Add a gear')}>
                                 <GearIcon className="w-6 h-6 fill-green" />
@@ -142,7 +197,7 @@ const CreatePublicationSettings = () => {
                 </footer>
             </div>
             <ItemSettingsWindow active={itemSettingsIsActive} window={itemSettingsWindow} resetSettingsWindow={resetSettingsWindow} />
-        </div>
+        </div >
     )
 }
 
