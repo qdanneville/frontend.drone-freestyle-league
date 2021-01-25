@@ -13,6 +13,7 @@ import UserIcon from '../../../../assets/svg/user.svg'
 import ItemSettingsWindow from './item-settings-window';
 import ItemSpots from './window/item-spots'
 import ItemGear from './window/item-gear'
+import ItemProfiles from './window/item-profiles'
 import PublicationItem from './window/publication-item'
 
 const CreatePublicationSettings = () => {
@@ -111,7 +112,7 @@ const CreatePublicationSettings = () => {
                     <div className="">
                         <ul className="flex flex-col">
                             {
-                                itemList.map(item => <PublicationItem key={item.id} item={{ id: item.id, itemType: item.itemType, image: item.image || null, name: item.name, type: item.type || '', customInfo: item.customInfo || '...' }} handleRemove={handleItemRemove} />)
+                                itemList.map(item => <PublicationItem key={item.id} item={{ id: item.id, itemType: item.itemType, image: item.image || null, name: item.name, type: item.type || '', customInfo: item.customInfo || null }} handleRemove={handleItemRemove} />)
                             }
                         </ul>
                     </div>
@@ -129,7 +130,7 @@ const CreatePublicationSettings = () => {
                                 <SpotIcon className="w-6 h-6 fill-yellow" />
                                 <span className="text-grey f4 ml-4">Spot</span>
                             </li>
-                            <li className="flex flex-1 items-center justify-center cursor-pointer hover:bg-dark-3 py-3 br-10 h-full" onClick={() => openSettingsWindow(<ItemSpots />, 'Mention a user')}>
+                            <li className="flex flex-1 items-center justify-center cursor-pointer hover:bg-dark-3 py-3 br-10 h-full" onClick={() => openSettingsWindow(<ItemProfiles handleClick={handleItemClick} itemList={itemList.map(item => item.id)} />, 'Mention a user')}>
                                 <UserIcon className="w-5 h-5 fill-grey-light" />
                                 <span className="text-grey f4 ml-4">User</span>
                             </li>

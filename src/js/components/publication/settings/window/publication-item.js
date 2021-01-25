@@ -31,7 +31,7 @@ const PublicationItem = ({ item, handleClick, handleRemove }) => {
             <div className="flex flex-col text-white mr-4">
                 <div className="flex items-center">
                     <span className="text-white f4 text-nowrap text-overflow-ellipsis block overflow-hidden">{item && item.name}</span>
-                    <span className="mx-1">|</span>
+                    {item.type && <span className="mx-1">|</span>}
                     <span className="text-green f5 font-normal">{item.type ? item.type : ''}</span>
                 </div>
                 <span className="text-orange f5 font-normal ">{item.customInfo ? item.customInfo : ''}</span>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import SpotItem from '../../../spot/spot-item'
 import CommonInput from '../../../common/common-input'
 import PublicationItem from './publication-item'
 import api from '../../../../utils/api'
@@ -40,7 +39,7 @@ const ItemGear = ({ handleClick, itemList }) => {
                 }
             }
             catch (err) {
-                toast.error("Ewww, something went wrong, please try again");
+                //TODO err
             }
 
             if (_isMounted) setIsLoading(false);
