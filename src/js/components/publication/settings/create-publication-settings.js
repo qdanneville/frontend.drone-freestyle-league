@@ -18,6 +18,11 @@ import ItemGear from './window/item-gear'
 import ItemProfiles from './window/item-profiles'
 import PublicationItem from './window/publication-item'
 
+//LinkPreview
+import LinkPreview from './link-preview'
+import getUrls from 'get-urls';
+import { isSetEqual, getLastValue } from '../../../utils/set'
+
 const CreatePublicationSettings = () => {
 
     let _isMounted = false;
@@ -32,6 +37,9 @@ const CreatePublicationSettings = () => {
     const [privacy, setPrivacy] = useState('')
     const [body, setBody] = useState('');
     const [itemList, setItemList] = useState([]);
+    const [linkPreview, setLinkPreview] = useState(null)
+    const [bodyUrls, setBodyUrls] = useState([])
+    const [urlsSet, setUrlsSet] = useState(null)
 
     //Publication photos 
     const [images, setImages] = useState([])
@@ -107,6 +115,45 @@ const CreatePublicationSettings = () => {
         resetSettingsWindow();
     }
 
+
+    //Publication body
+    const handleBodyChange = (e) => {
+        setBody(e);
+
+        let urls = getUrls(e);
+
+        console.log(urls);
+        console.log(urlsSet);
+
+
+        if (urls && urlsSet) {
+            console.log(isSetEqual(urls, urlsSet))
+
+            if (!isSetEqual(urls, urlsSet)) {
+                console.log('render preview')
+                //Fetching url preview from our little server thanks to link-preview-js
+                api.post('/publications/preview-from-content', { content: getLastValue(urls) })
+                    .then(res => {
+                        console.log(res);
+                        if (res.data) setLinkPreview(res.data)
+                    });
+            } else {
+                console.log('do not render preview')
+            }
+        } else if (urls) {
+            api.post('/publications/preview-from-content', { content: getLastValue(urls) })
+                .then(res => {
+                    console.log(res);
+                    if (res.data) setLinkPreview(res.data)
+                });
+        }
+
+        setUrlsSet(urls);
+    }
+
+    // console.log(bodyUrls);
+    // console.log(urlsSet);
+
     return (
         <div className="flex relative overflow-hidden" style={{ maxWidth: '500px' }}>
             <div className="w-full h-full">
@@ -149,8 +196,13 @@ const CreatePublicationSettings = () => {
                         </div>
                     </div>
                     <div className="mt-4 mb-4">
-                        <CommonInput value={body} handleChange={setBody} type="textarea" name="description" className="h-40 bg-transparent br-6" placeholder="What do you want to say" />
+                        <CommonInput value={body} handleChange={handleBodyChange} type="textarea" name="description" className="h-40 bg-transparent br-6" placeholder="What do you want to say" />
                     </div>
+                    {linkPreview &&
+                        <div className="bc-grey-dark-light bs-solid br-4 bw-1 mb-4 overflow-hidden flex items-center justify-center">
+                            <LinkPreview preview={linkPreview} />
+                        </div>
+                    }
                     <div className="">
                         <ul className="flex flex-col">
                             {
