@@ -32,7 +32,7 @@ const CreatePublicationSettings = () => {
     //Publication settings
     const user = useSelector(state => state.auth.user);
     const [categories, setCategories] = useState([])
-    const [privacies, setPrivacies] = useState(['public', 'private', 'followers'])
+    const [privacies, setPrivacies] = useState([])
 
     //Publication body
     const [category, setCategory] = useState('')
@@ -77,6 +77,13 @@ const CreatePublicationSettings = () => {
             .get('/publication-categories/')
             .then(response => (response && response.data && _isMounted) ? setCategories(response.data) : [])
 
+        api
+            .get('/privacies/')
+            .then(response => {
+                (response && response.data && _isMounted) ? setPrivacies(response.data) : []
+                if (response && response.data && _isMounted) setPrivacy(response.data[0])
+            })
+
         return (() => {
             _isMounted = false;
         })
@@ -118,7 +125,6 @@ const CreatePublicationSettings = () => {
         resetSettingsWindow();
     }
 
-
     //Publication body
     const handleBodyChange = (e) => {
         setBody(e);
@@ -151,6 +157,29 @@ const CreatePublicationSettings = () => {
         setLinkPreview(null)
     }
 
+    const createPublication = async () => {
+        console.log('create publication');
+        console.log('publication category', category);
+        console.log('publication privacy', privacy);
+
+        let publicationBody = {
+            body,
+            publication_category: category,
+            privacy: privacy,
+            publisher: user.profile.profile.id,
+            items: itemList.map(item => ({ id: item.itemId, type: item.gearType ? item.gearType : item.itemType }))
+        }
+
+        console.log(publicationBody)
+
+        try {
+            await updateCreatePublication(null, publicationBody, 'create')
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+
     return (
         <div className="flex relative overflow-hidden" style={{ maxWidth: '500px' }}>
             <div className="w-full h-full">
@@ -172,7 +201,7 @@ const CreatePublicationSettings = () => {
                                 <div className="input">
                                     <select className="w-full common-outline small-font" value={privacy} onChange={(e) => setPrivacy(e.target.value)}>
                                         {
-                                            privacies.map(privacy => (<option key={privacy} value={privacy}>{privacy}</option>))
+                                            privacies && privacies.map(privacy => (<option key={privacy.id} value={privacy.id}>{privacy.name}</option>))
                                         }
                                     </select>
                                 </div>
@@ -185,7 +214,7 @@ const CreatePublicationSettings = () => {
                                     <select className="w-full common-outline small-font" value={category} onChange={(e) => setCategory(e.target.value)}>
                                         <option>Choose category</option>
                                         {
-                                            categories.map(category => (<option key={category.id} value={category.name}>{category.name}</option>))
+                                            categories && categories.map(category => (<option key={category.id} value={category.id}>{category.name}</option>))
                                         }
                                     </select>
                                 </div>
@@ -245,7 +274,7 @@ const CreatePublicationSettings = () => {
                     </div>
                 </main>
                 <footer className="flex items-center justify-center">
-                    <button className="btn w-full">Publish</button>
+                    <button onClick={createPublication} className={`btn w-full ${body.length === 0 ? 'disabled' : ''}`} >Publish</button>
                 </footer>
             </div>
             <ItemSettingsWindow active={itemSettingsIsActive} window={itemSettingsWindow} resetSettingsWindow={resetSettingsWindow} />
@@ -254,3 +283,25 @@ const CreatePublicationSettings = () => {
 }
 
 export default CreatePublicationSettings
+
+const updateCreatePublication = async (publicationId, body, type, imagesFiles) => {
+
+    let newPublication = null
+
+    type === 'update'
+        ? newPublication = await api.put(`/publications/${publicationId}`, body)
+        : newPublication = await api.post(`/publications/`, body)
+
+    //If the user added/update the publications images
+    // if (imageFile) {
+    //     const data = new FormData();
+    //     data.append('files', imageFile)
+    //     data.append('refId', newdrone.data.id);
+    //     data.append('ref', 'drone');
+    //     data.append('field', 'image');
+
+    //     await api.post('/upload/', data, { headers: { 'content-type': `multipart/form-data`, }, })
+    // }
+
+    return newPublication
+}

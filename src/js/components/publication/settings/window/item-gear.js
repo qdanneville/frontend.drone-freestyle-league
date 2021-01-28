@@ -80,6 +80,15 @@ const ItemGear = ({ handleClick, itemList }) => {
         if (item.name.toLowerCase().includes(searchNameFilter.toLowerCase())) return item
     })
 
+    // Rename item type according to the database in order to store them correclty
+    filteredList = filteredList.map(item => {
+        if (filter === 'drones') item.gearType = 'drone'
+        else if (filter === 'accessories') item.gearType = 'gear'
+        else if (filter === 'batteries') item.gearType = 'battery'
+        else if (filter === 'drone-parts') item.gearType = 'drone_part'
+        return item
+    })
+
     return (
         <div className="overflow-y-scroll h-full w-full">
             <div className="w-full sticky t-0 pt-4 pb-4 z-index-3 bg-dark">
@@ -103,7 +112,7 @@ const ItemGear = ({ handleClick, itemList }) => {
             </div>
             <div className="relative mt-2 pb-10">
                 {
-                    filteredList && filteredList.map((item) => <PublicationItem key={item.id} item={{ id: item.id, itemType: filter, image: item.image || null, name: item.name, type: (item && item.type && item.type.name) || '', customInfo: (item && item.manufacturer && item.manufacturer.name) || '...' }} handleClick={handleClick} />)
+                    filteredList && filteredList.map((item) => <PublicationItem key={item.id} item={{ id: item.id, itemType: filter, gearType: item.gearType, image: item.image || null, name: item.name, type: (item && item.type && item.type.name) || '', customInfo: (item && item.manufacturer && item.manufacturer.name) || '...' }} handleClick={handleClick} />)
                 }
                 {filteredList.length === 0 && <span>No gear found</span>}
             </div>

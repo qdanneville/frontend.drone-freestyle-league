@@ -21,8 +21,9 @@ const PublicationItem = ({ item, handleClick, handleRemove }) => {
     //TODO add UUID ...
     //We want to modify our id, because it's not unique within our system, only in its content type
     // type + id
+    //Get the real id within itemId
+    item.itemId = item.id;
     if (typeof item.id === 'number') item.id = item.itemType + '-' + item.id
-
     return (
         <div {...divProps} className={`relative w-full flex align-center h-12 bg-grey-dark-light br-4 mb-3 overflow-hidden shadow-material-2 common-outline ${handleClick ? 'hover:bg-grey-black cursor-pointer' : ''}`}>
             {handleRemove && <CloseModalIcon onClick={() => handleRemove(item.id)} className="z-index-2 absolute t-2 r-2 w-7 h-7 stroke-grey cursor-pointer bg-grey-dark-light p-2 br-50 hover:bg-dark-3 z-index-1" />}
