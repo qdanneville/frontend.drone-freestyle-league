@@ -18,6 +18,8 @@ import ItemGear from './window/item-gear'
 import ItemProfiles from './window/item-profiles'
 import PublicationItem from './window/publication-item'
 
+import Loader from '../../loader'
+
 //LinkPreview
 import LinkPreview from './link-preview'
 import getUrls from 'get-urls';
@@ -38,8 +40,8 @@ const CreatePublicationSettings = () => {
     const [body, setBody] = useState('');
     const [itemList, setItemList] = useState([]);
     const [linkPreview, setLinkPreview] = useState(null)
-    const [bodyUrls, setBodyUrls] = useState([])
     const [urlsSet, setUrlsSet] = useState(null)
+    const [previewLoading, setPreviewLoading] = useState(false)
 
     //Publication photos 
     const [images, setImages] = useState([])
@@ -122,37 +124,28 @@ const CreatePublicationSettings = () => {
 
         let urls = getUrls(e);
 
-        console.log(urls);
-        console.log(urlsSet);
-
-
-        if (urls && urlsSet) {
-            console.log(isSetEqual(urls, urlsSet))
-
-            if (!isSetEqual(urls, urlsSet)) {
+        if (urls.size == 0) {
+            setLinkPreview(null)
+        } else {
+            //If the url set is the same when the user types something, we render the last one
+            if ((urlsSet && !isSetEqual(urls, urlsSet)) || (!urlsSet)) {
                 console.log('render preview')
+                setLinkPreview(null)
+                setPreviewLoading(true);
                 //Fetching url preview from our little server thanks to link-preview-js
                 api.post('/publications/preview-from-content', { content: getLastValue(urls) })
                     .then(res => {
                         console.log(res);
+                        setPreviewLoading(false);
                         if (res.data) setLinkPreview(res.data)
                     });
-            } else {
-                console.log('do not render preview')
             }
-        } else if (urls) {
-            api.post('/publications/preview-from-content', { content: getLastValue(urls) })
-                .then(res => {
-                    console.log(res);
-                    if (res.data) setLinkPreview(res.data)
-                });
         }
 
         setUrlsSet(urls);
     }
 
-    // console.log(bodyUrls);
-    // console.log(urlsSet);
+    console.log(linkPreview && Object.keys(linkPreview).length === 0);
 
     return (
         <div className="flex relative overflow-hidden" style={{ maxWidth: '500px' }}>
@@ -198,9 +191,12 @@ const CreatePublicationSettings = () => {
                     <div className="mt-4 mb-4">
                         <CommonInput value={body} handleChange={handleBodyChange} type="textarea" name="description" className="h-40 bg-transparent br-6" placeholder="What do you want to say" />
                     </div>
-                    {linkPreview &&
+                    {((linkPreview && Object.keys(linkPreview).length !== 0) || previewLoading) &&
                         <div className="bc-grey-dark-light bs-solid br-4 bw-1 mb-4 overflow-hidden flex items-center justify-center">
-                            <LinkPreview preview={linkPreview} />
+                            {linkPreview
+                                ? <LinkPreview preview={linkPreview} />
+                                : <Loader className="relative" />
+                            }
                         </div>
                     }
                     <div className="">

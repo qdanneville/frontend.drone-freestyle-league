@@ -54,7 +54,9 @@
     }
   }
 
-  input, select, textarea {
+  input,
+  select,
+  textarea {
     .f4;
 
     .py-2;
@@ -102,18 +104,22 @@
 }
 
 .common-input-file + label {
-  .text-white;
-  .bg-dark-3;
-  .py-2;
-  .px-2;
-  .br-4;
-  .bw-1;
-  .bc-white;
-  .bs-solid;
-  .cursor-pointer;
+  &:not(.custom) {
+    .text-white;
+    .bg-dark-3;
+    .py-2;
+    .px-2;
+    .br-4;
+    .bw-1;
+    .bc-white;
+    .bs-solid;
+    .cursor-pointer;
+  }
 }
 
 .common-input-file:focus + label,
 .common-input-file + label:hover {
-  .bg-dark;
+  &:not(.custom) {
+    .bg-dark;
+  }
 }
