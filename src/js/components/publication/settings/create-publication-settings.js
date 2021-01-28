@@ -55,6 +55,7 @@ const CreatePublicationSettings = () => {
         newImagesSrc.push(URL.createObjectURL(e.target.files[0]))
         setImagesFiles(newImagesFiles)
         setImagesSrc(newImagesSrc)
+        setLinkPreview(null)
     }
 
     const handleImageRemove = (imageIndex) => {
@@ -122,30 +123,33 @@ const CreatePublicationSettings = () => {
     const handleBodyChange = (e) => {
         setBody(e);
 
-        let urls = getUrls(e);
+        //We're not previewing anything if an image is already there
+        if (!imagesSrc.length > 0) {
 
-        if (urls.size == 0) {
-            setLinkPreview(null)
-        } else {
-            //If the url set is the same when the user types something, we render the last one
-            if ((urlsSet && !isSetEqual(urls, urlsSet)) || (!urlsSet)) {
-                console.log('render preview')
+            let urls = getUrls(e);
+
+            if (urls.size == 0) {
                 setLinkPreview(null)
-                setPreviewLoading(true);
-                //Fetching url preview from our little server thanks to link-preview-js
-                api.post('/publications/preview-from-content', { content: getLastValue(urls) })
-                    .then(res => {
-                        console.log(res);
-                        setPreviewLoading(false);
-                        if (res.data) setLinkPreview(res.data)
-                    });
+            } else {
+                //If the url set is the same when the user types something, we render the last one
+                if ((urlsSet && !isSetEqual(urls, urlsSet)) || (!urlsSet)) {
+                    setLinkPreview(null)
+                    setPreviewLoading(true);
+                    //Fetching url preview from our little server thanks to link-preview-js
+                    api.post('/publications/preview-from-content', { content: getLastValue(urls) })
+                        .then(res => {
+                            setPreviewLoading(false);
+                            if (res.data) setLinkPreview(res.data)
+                        });
+                }
             }
+            setUrlsSet(urls);
         }
-
-        setUrlsSet(urls);
     }
 
-    console.log(linkPreview && Object.keys(linkPreview).length === 0);
+    const handlePreviewRemove = () => {
+        setLinkPreview(null)
+    }
 
     return (
         <div className="flex relative overflow-hidden" style={{ maxWidth: '500px' }}>
@@ -194,7 +198,7 @@ const CreatePublicationSettings = () => {
                     {((linkPreview && Object.keys(linkPreview).length !== 0) || previewLoading) &&
                         <div className="bc-grey-dark-light bs-solid br-4 bw-1 mb-4 overflow-hidden flex items-center justify-center">
                             {linkPreview
-                                ? <LinkPreview preview={linkPreview} />
+                                ? <LinkPreview preview={linkPreview} handlePreviewRemove={handlePreviewRemove} />
                                 : <Loader className="relative" />
                             }
                         </div>
