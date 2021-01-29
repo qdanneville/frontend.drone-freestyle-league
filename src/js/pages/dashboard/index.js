@@ -10,7 +10,6 @@ import Spots from './spots'
 import Gear from './gear'
 import Community from './community/'
 
-
 const routes = [
     {
         name: 'dashboard',
@@ -80,7 +79,7 @@ const Dashboard = (props) => {
                 <main className="flex flex-col mx-2">
                     <Publications />
                 </main>
-                <aside>
+                <aside style={{maxWidth:'350px'}}>
                     <Switch>
                         <Route path="/dashboard/community/" render={() => <Community />} />
                         <Redirect path="/dashboard/" to="/dashboard/community/" />

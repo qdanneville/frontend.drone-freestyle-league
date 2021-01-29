@@ -40,6 +40,7 @@ const App = () => {
     return (
         <Router>
             <Switch>
+                <Route path="/empty" component={null} key="empty" />
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
                 <Route path="/terms-of-use" component={TermsOfUse} />

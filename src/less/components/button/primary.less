@@ -22,13 +22,20 @@
   will-change: transform;
 
   &:focus {
-    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60,66,87,0.95) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    &:not(.disabled) {
+      box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+        rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+        rgba(60, 66, 87, 0.95) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+        rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    }
   }
   &:hover {
     background: rgba(3, 169, 244, 0.11);
   }
   &:active {
-    transform: scale(0.95);
+    &:not(.disabled) {
+      transform: scale(0.95);
+    }
   }
 
   &:after {
@@ -49,12 +56,22 @@
     opacity: 0;
   }
 
+  &.disabled {
+    user-select: none;
+    cursor: not-allowed;
+    opacity: 0.2;
+    .bg-grey;
+    .bc-grey;
+    box-shadow: none !important;
+  }
+
   &.loading {
     user-select: none;
     pointer-events: none;
     // cursor: not-allowed;
     .cursor-disable;
     color: transparent;
+    box-shadow:none !important;
 
     .bc-dark;
     .bg-grey-dark-light;

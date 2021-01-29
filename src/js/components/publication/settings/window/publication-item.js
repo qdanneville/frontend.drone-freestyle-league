@@ -4,6 +4,8 @@ import config from '../../../../../../config'
 import HeartIcon from '../../../../../assets/svg/heart.svg';
 import CloseModalIcon from '../../../../../assets/svg/close.svg';
 
+import { Link } from 'react-router-dom'
+
 const PublicationItem = ({ item, handleClick, handleRemove }) => {
 
     let image = null;
@@ -18,6 +20,13 @@ const PublicationItem = ({ item, handleClick, handleRemove }) => {
         onClick: handleClick ? () => handleClick(item) : null,
     }
 
+    if (item.slug) {
+        if (item.itemType === "profile") item.slug = `/profile/${item.slug}`
+        else if (item.itemType === "spot") item.slug = `/spots/${item.slug}`
+        else if (item.itemType === "drone") item.slug = `/gear/drones/${item.slug}`
+        else item.slug = null
+    }
+    
     //TODO add UUID ...
     //We want to modify our id, because it's not unique within our system, only in its content type
     // type + id
@@ -37,6 +46,11 @@ const PublicationItem = ({ item, handleClick, handleRemove }) => {
                 </div>
                 <span className="text-orange f5 font-normal ">{item.customInfo ? item.customInfo : ''}</span>
             </div>
+            {item.slug &&
+                <div className="flex flex-1 justify-end pr-2">
+                    <Link to={item.slug} className="f5 underline text-white">See more</Link>
+                </div>
+            }
         </div>
     )
 }
