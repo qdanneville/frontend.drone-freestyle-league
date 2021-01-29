@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom'
 import CommonInput from '../../common/common-input'
 
 import config from '../../../../../config'
+import { toast } from 'react-toastify'
 
 import GearIcon from '../../../../assets/svg/my-fleet.svg'
 import SpotIcon from '../../../../assets/svg/my-spots.svg'
@@ -167,11 +168,15 @@ const CreatePublicationSettings = () => {
 
         let publicationBody = {
             body,
-            publication_category: category,
             privacy: privacy,
             publisher: user.profile.profile.id,
             items: itemList.map(item => ({ id: item.itemId, type: item.gearType ? item.gearType : item.itemType }))
         }
+
+        if (category.length > 0) {
+            body.publication_category = category;
+        }
+
 
         try {
             await updateCreatePublication(null, publicationBody, 'create', imagesFiles)
@@ -183,16 +188,17 @@ const CreatePublicationSettings = () => {
             setTimeout(() => {
                 history.replace({ pathname: '/dashboard' });
             });
+            toast.success("Your publication has been successfully created");
         }
         catch (err) {
-            console.log(err);
+            toast.error("Ewww, something went wrong, please try again");
         }
     }
 
     return (
         <div className="flex relative overflow-hidden" style={{ maxWidth: '500px' }}>
             <div className="w-full h-full">
-                <div className={`${createLoading ? 'opacity-03':''}`}>
+                <div className={`${createLoading ? 'opacity-03' : ''}`}>
                     <header className="bb-w-1 bl-w-0 bt-w-0 br-w-0 bc-grey-dark-light w-full bs-solid flex items-center justify-center">
                         <h4 className="f3 text-grey-light mb-0 -mt-2 pt-3 pb-5">Create a publication</h4>
                     </header>
