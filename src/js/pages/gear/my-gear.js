@@ -108,8 +108,6 @@ const MyGear = (props) => {
 
     const history = useHistory();
 
-    console.log(history.location);
-
     //Hiding the nav within a drone public page
     let isDronePublicPage = history.location.pathname !== "/gear/drones/" && history.location.pathname.includes('/gear/drones/') && !history.location.pathname.includes('edit')
 
