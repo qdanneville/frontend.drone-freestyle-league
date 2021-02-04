@@ -77,7 +77,7 @@ const ProfileCommunity = ({ fromModal, type, slug, name, className, avatar }) =>
                     </div>
                     <h1 className="text-orange f2 font-normal"><strong className="text-white">{name && name} </strong>{type === 'followers' ? ': followers' : ': following'}</h1>
                 </div>
-                    : <div className="text-align-left"><h1 className="text-orange f1 font-normal">Your Followers</h1></div>
+                    : null
                 }
                 <div className="px-1 flex justify-between align-center overflow-hidden sticky bg-dark py-3 z-index-8 mt-6" style={{ top: '195px' }}>
                     <div className="flex-1 text-align-center">
