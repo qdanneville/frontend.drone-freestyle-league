@@ -4,7 +4,7 @@ import api from '../../utils/api'
 import PublicationDetails from './publication-details'
 import Loader from '../loader'
 
-const PublicationList = ({ currentUser }) => {
+const PublicationList = ({ profile }) => {
 
     let _isMounted = false;
 
@@ -15,7 +15,7 @@ const PublicationList = ({ currentUser }) => {
     useEffect(() => {
         _isMounted = true;
 
-        api.get(`/publications?publisher.user=${user.id}&_sort=updated_at:DESC`)
+        api.get(`/publications?publisher=${profile ? profile.id : user.profile.profile.id}&_sort=updated_at:DESC`)
             .then(response => (response && response.data && _isMounted && setPublications(response.data)))
             .finally(() => setIsLoading(false))
 

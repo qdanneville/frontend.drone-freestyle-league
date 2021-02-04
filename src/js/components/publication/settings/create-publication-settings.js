@@ -27,7 +27,7 @@ import LinkPreview from './link-preview'
 import getUrls from 'get-urls';
 import { isSetEqual, getLastValue } from '../../../utils/set'
 
-const CreatePublicationSettings = () => {
+const CreatePublicationSettings = ({ publication }) => {
 
     let _isMounted = false;
     const history = useHistory();
@@ -47,11 +47,83 @@ const CreatePublicationSettings = () => {
     const [urlsSet, setUrlsSet] = useState(null)
     const [previewLoading, setPreviewLoading] = useState(false)
     const [createLoading, setCreateLoading] = useState(false)
+    const [deleteLoading, setDeleteLoading] = useState(false)
 
     //Publication photos 
     const [images, setImages] = useState([])
     const [imagesSrc, setImagesSrc] = useState([]);
     const [imagesFiles, setImagesFiles] = useState([]);
+
+
+    //If a user is modifying the publication
+    const [updatePublicationId, setUpdatePublicationId] = useState(null)
+    const [isUpdating, setIsUpdating] = useState(false)
+    const [publicationLoading, setPublicationLoading] = useState(false)
+
+    //If a user wants to delete the publication
+    const [isDeleting, setIsDeleting] = useState(false)
+
+    useEffect(() => {
+        if (publication) {
+            setIsUpdating(true);
+            setUpdatePublicationId(publication.id);
+
+            if (publication.publication_category) setCategory(publication.publication_category.id)
+            setBody(publication.body);
+            handleBodyChange(publication.body);
+            if (publication.publication_items) {
+                let publicationItems = publication.publication_items.map(item => {
+                    let id;
+                    let itemType;
+                    let type;
+                    let customInfo;
+
+                    id = item.itemType + '-' + item.item.id;
+                    itemType = item.itemType
+
+                    if (item.itemType === 'drone') {
+                        id = 'drones-' + item.item.id;
+                        itemType = 'drones'
+                    }
+                    if (item.itemType === 'battery') {
+                        id = 'batteries-' + item.item.id;
+                        itemType = 'batteries'
+                    }
+                    if (item.itemType === 'drone_part') {
+                        id = 'drone-parts-' + item.item.id;
+                        itemType = 'drone_parts'
+                    }
+                    if (item.itemType === 'gear') {
+                        id = 'accessories-' + item.item.id;
+                        itemType = 'accessories'
+                    }
+
+                    if (item.item.type) type = item.item.type.name;
+                    if (item.item.privacy) customInfo = item.item.privacy
+                    if (item.item.manufacturer) customInfo = item.item.manufacturer.name
+
+                    return {
+                        id: id,
+                        itemType: itemType,
+                        gearType: item.itemType,
+                        itemId: item.item.id,
+                        name: item.item.name ? item.item.name : item.item.display_name,
+                        type: type,
+                        customInfo: customInfo,
+                        image: item.item.image ? item.item.image : item.item.avatar
+                    }
+                })
+
+                setItemList(publicationItems);
+            }
+
+            if (publication.media) {
+                let publicationImages = publication.media.map(image => config.API_BASE_URL + image.url);
+                setImagesSrc(publicationImages);
+                setImages(publication.media);
+            }
+        }
+    }, [publication])
 
     const handleImages = (e) => {
         let newImagesFiles = imagesFiles.slice();
@@ -66,12 +138,15 @@ const CreatePublicationSettings = () => {
     const handleImageRemove = (imageIndex) => {
         let newImagesFiles = imagesFiles.slice();
         let newImagesSrc = imagesSrc.slice();
+        let newImages = images.slice();
 
         newImagesFiles.splice(imageIndex, 1)
         newImagesSrc.splice(imageIndex, 1)
+        newImages.splice(imageIndex, 1)
 
         setImagesFiles(newImagesFiles)
         setImagesSrc(newImagesSrc)
+        setImages(newImages)
     }
 
     //Fetching publication categories
@@ -174,12 +249,15 @@ const CreatePublicationSettings = () => {
         }
 
         if (category.length > 0) {
-            body.publication_category = category;
+            publicationBody.publication_category = category;
         }
 
+        if (images) {
+            publicationBody.media = images;
+        }
 
         try {
-            await updateCreatePublication(null, publicationBody, 'create', imagesFiles)
+            await updateCreatePublication(updatePublicationId, publicationBody, isUpdating ? 'update' : 'create', imagesFiles)
             setCreateLoading(false)
             dispatch({ type: 'SET_HIDE_MODAL' })
             dispatch({ type: 'CLEAR_MODAL_OPTIONS' })
@@ -188,19 +266,43 @@ const CreatePublicationSettings = () => {
             setTimeout(() => {
                 history.replace({ pathname: '/dashboard' });
             });
-            toast.success("Your publication has been successfully created");
+            toast.success(`Your publication has been successfully ${isUpdating ? 'updated' : 'created'}`);
         }
         catch (err) {
             toast.error("Ewww, something went wrong, please try again");
         }
     }
 
+    const handleDelete = async (e) => {
+        e.preventDefault();
+
+        setDeleteLoading(true)
+
+        try {
+            await api.delete(`/publications/${updatePublicationId}`)
+        }
+        catch (err) {
+            setDeleteLoading(false);
+            toast.error("Ewww, something went wrong, please try again");
+        }
+
+        setDeleteLoading(false);
+        dispatch({ type: 'SET_HIDE_MODAL' })
+        dispatch({ type: 'CLEAR_MODAL_OPTIONS' })
+        document.body.classList.remove('overflow-hidden')
+        history.push({ pathname: "/empty" });
+        setTimeout(() => {
+            history.replace({ pathname: '/dashboard' });
+        });
+        toast.success("Your publication has been successfully deleted");
+    }
+
     return (
-        <div className="flex relative overflow-hidden" style={{ maxWidth: '500px' }}>
+        <div className="flex relative overflow-hidden pb-2 px-1" style={{ maxWidth: '500px' }}>
             <div className="w-full h-full">
                 <div className={`${createLoading ? 'opacity-03' : ''}`}>
                     <header className="bb-w-1 bl-w-0 bt-w-0 br-w-0 bc-grey-dark-light w-full bs-solid flex items-center justify-center">
-                        <h4 className="f3 text-grey-light mb-0 -mt-2 pt-3 pb-5">Create a publication</h4>
+                        <h4 className="f3 text-grey-light mb-0 -mt-2 pt-3 pb-5">{isUpdating ? 'Modify the publication' : 'Create a publication'}</h4>
                     </header>
                     <main className="py-4 flex flex-col">
                         <div className="flex items-start justify-between w-full">
@@ -290,8 +392,17 @@ const CreatePublicationSettings = () => {
                         </div>
                     </main>
                 </div>
-                <footer className="flex items-center justify-center">
-                    <button onClick={createPublication} className={`btn w-full ${body.length === 0 ? 'disabled' : ''} ${createLoading ? 'loading' : ''}`} >Publish</button>
+                <footer className="flex items-center justify-center w-full">
+                    {!isDeleting
+                        ? <div className="flex items-center w-full">
+                            {isUpdating && <button onClick={() => setIsDeleting(true)} type="button" className={`flex-1 btn-secondary red mr-2`}><span>Delete</span></button>}
+                            <button onClick={createPublication} className={`flex-1 btn w-full ${body.length === 0 ? 'disabled' : ''} ${createLoading ? 'loading' : ''}`} >{isUpdating ? 'update' : 'Publish'}</button>
+                        </div>
+                        : <div className="flex items-center w-full">
+                            <button onClick={() => setIsDeleting(false)} type="button" className={`flex-1 btn-secondary red`}><span>No</span></button>
+                            <button onClick={handleDelete} type="button" className={`flex-1 btn-secondary teal ml-4`}><span>Yes</span></button>
+                        </div>
+                    }
                 </footer>
             </div>
             <ItemSettingsWindow active={itemSettingsIsActive} window={itemSettingsWindow} resetSettingsWindow={resetSettingsWindow} />

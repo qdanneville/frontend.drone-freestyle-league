@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import config from '../../../../config'
 import api from '../../utils/api'
 
 import PublicationItem from './settings/window/publication-item'
+import CreatePublicationSettings from './settings/create-publication-settings'
 
 import LinkPreview from './settings/link-preview'
 import getUrls from 'get-urls';
 import { getLastValue } from '../../utils/set'
 
 import Loader from '../loader'
+import DotsIcon from '../../../assets/svg/dots.svg'
 
 const PublicationDetails = ({ publication }) => {
-    console.log('publication', publication);
-
     let _isMounted = false;
+
+    const dispatch = useDispatch();
+    const user = useSelector(state => state.auth.user)
 
     const [linkPreview, setLinkPreview] = useState(null)
     const [previewLoading, setPreviewLoading] = useState(false)
@@ -39,10 +43,19 @@ const PublicationDetails = ({ publication }) => {
         })
     }, [])
 
+    const openPublicationModal = () => {
+        const modalContent = {
+            component: <CreatePublicationSettings publication={publication} />,
+            width: '500px',
+            height: 'auto'
+        }
+
+        dispatch({ type: 'SET_MODAL_OPTIONS', payload: modalContent })
+        dispatch({ type: 'SET_SHOW_MODAL' })
+    }
+
     let date = new Date(publication.updated_at);
     date = date.toLocaleDateString('en-US')
-
-    console.log(linkPreview);
 
     return (
         <div className="flex relative overflow-hidden p-4 br-6 bg-grey-dark-light w-full mt-4">
@@ -65,6 +78,11 @@ const PublicationDetails = ({ publication }) => {
                                 </div>
                             </div>
                         </div>
+                        {(user.profile.profile.id === publication.publisher.id) &&
+                            <div className="justify-self-end cursor-pointer" onClick={openPublicationModal}>
+                                <DotsIcon className="w-4 h-4 fill-grey" />
+                            </div>
+                        }
                     </div>
                     <div className="mt-4 mb-4">
                         <span className="text-white pre-line w-full bg-transparent bw-0 mt-2 ml-0 pl-0 mb-0 resize-0 outline-0 h-full overflow-y-scroll" readOnly="readonly">{publication.body}</span>
