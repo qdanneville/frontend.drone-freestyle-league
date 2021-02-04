@@ -1,7 +1,14 @@
 import React from 'react'
+import PublicationList from '../../components/publication/publication-list'
 
-const ProfilePublications = (props) => {
-    return (<span className="text-white f4 font-bold">Coming soon</span>)
+const ProfilePublications = ({ profile }) => {
+    return (
+        <>
+            <div className="my-auto" style={{ width: '650px', maxWidth: '650px', minWidth: '650px' }}>
+                <PublicationList profile={profile} />
+            </div>
+        </>
+    )
 }
 
 export default ProfilePublications

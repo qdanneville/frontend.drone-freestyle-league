@@ -4,7 +4,7 @@ import config from '../../../../config';
 
 import HeartIcon from '../../../assets/svg/heart.svg';
 
-const SpotItemSquared = ({ name, type, image, slug, category, manufacturer, dronePublicPage, infos, vendorLink }) => {
+const SpotItemSquared = ({ name, type, image, slug, category, manufacturer, dronePublicPage, infos, vendorLink, fromProfile }) => {
 
     let _isMounted = false;
 
@@ -29,8 +29,8 @@ const SpotItemSquared = ({ name, type, image, slug, category, manufacturer, dron
 
     if (!dronePublicPage) {
         return (
-            <NavLink to={`/gear/${type}/${slug}/edit`} className="flex w-full transition">
-                <div className="flex-1 bg-grey-dark-light my-2 mb-2 flex align-center br-10 overflow-hidden shadow-material-2 w-full">
+            <NavLink to={`/gear/${type}/${slug}/${fromProfile ? '' : 'edit'}`} className={`flex ${fromProfile ? 'w-33-per w-half-md w-full-xs' : 'w-full'} transition`}>
+                <div className={`flex-1 bg-grey-dark-light my-2 mb-2 flex align-center br-10 overflow-hidden shadow-material-2 w-full ${fromProfile ? 'mr-4' : ''}`}>
                     <div style={{ width: '40%' }} className="relative br-10 box-shadow-1 overflow-hidden background-image block h-full w-30" style={{ backgroundImage: `url(${gearImage})` }}></div>
                     <div style={{ width: '60%' }} className="flex-1 flex flex-col px-4 py-4">
                         <div className="w-full">

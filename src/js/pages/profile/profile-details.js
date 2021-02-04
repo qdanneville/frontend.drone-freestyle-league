@@ -79,7 +79,7 @@ const ProfileDetails = (props) => {
                         </div>
                     </header>
                     <ProfileInformations profile={profile} />
-                    <div className="common-container">
+                    <div className="common-container pb-10">
                         {slug && <ul className="flex align-center justify-even common-tabs w-half w-full-md" style={{ transform: 'translate3d(0, -26px, 0)' }}>
                             {
                                 routes.map((route, i) => {
